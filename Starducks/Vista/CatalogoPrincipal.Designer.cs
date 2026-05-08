@@ -28,18 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            listBox1 = new ListBox();
             SuspendLayout();
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(237, 146);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(344, 244);
+            listBox1.TabIndex = 0;
             // 
             // CatalogoPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1166, 675);
+            ClientSize = new Size(800, 450);
+            Controls.Add(listBox1);
             Name = "CatalogoPrincipal";
             Text = "CatalogoPrincipal";
+            Load += CatalogoPrincipal_Load;
             ResumeLayout(false);
         }
 
         #endregion
+
+        private ListBox listBox1;
     }
 }

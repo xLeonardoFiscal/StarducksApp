@@ -14,5 +14,10 @@ namespace Starducks.Vista
         {
             InitializeComponent();
         }
+
+        private void CatalogoPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
