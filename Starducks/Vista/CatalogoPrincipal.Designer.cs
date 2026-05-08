@@ -50,7 +50,7 @@
             // 
             // domainUpDown1
             // 
-            domainUpDown1.Location = new Point(188, 168);
+            domainUpDown1.Location = new Point(407, 128);
             domainUpDown1.Name = "domainUpDown1";
             domainUpDown1.Size = new Size(150, 27);
             domainUpDown1.TabIndex = 2;
