@@ -6,5 +6,6 @@ namespace Starducks.Controlador
 {
     internal class LoginController
     {
+
     }
 }
