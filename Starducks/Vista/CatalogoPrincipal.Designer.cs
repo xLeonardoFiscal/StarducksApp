@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             listBox1 = new ListBox();
+            dateTimePicker1 = new DateTimePicker();
             SuspendLayout();
             // 
             // listBox1
@@ -39,11 +40,19 @@
             listBox1.Size = new Size(344, 244);
             listBox1.TabIndex = 0;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(257, 114);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(250, 27);
+            dateTimePicker1.TabIndex = 1;
+            // 
             // CatalogoPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dateTimePicker1);
             Controls.Add(listBox1);
             Name = "CatalogoPrincipal";
             Text = "CatalogoPrincipal";
@@ -54,5 +63,6 @@
         #endregion
 
         private ListBox listBox1;
+        private DateTimePicker dateTimePicker1;
     }
 }
