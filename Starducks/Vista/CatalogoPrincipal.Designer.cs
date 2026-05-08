@@ -30,6 +30,7 @@
         {
             listBox1 = new ListBox();
             dateTimePicker1 = new DateTimePicker();
+            domainUpDown1 = new DomainUpDown();
             SuspendLayout();
             // 
             // listBox1
@@ -47,11 +48,20 @@
             dateTimePicker1.Size = new Size(250, 27);
             dateTimePicker1.TabIndex = 1;
             // 
+            // domainUpDown1
+            // 
+            domainUpDown1.Location = new Point(188, 168);
+            domainUpDown1.Name = "domainUpDown1";
+            domainUpDown1.Size = new Size(150, 27);
+            domainUpDown1.TabIndex = 2;
+            domainUpDown1.Text = "domainUpDown1";
+            // 
             // CatalogoPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(domainUpDown1);
             Controls.Add(dateTimePicker1);
             Controls.Add(listBox1);
             Name = "CatalogoPrincipal";
@@ -64,5 +74,6 @@
 
         private ListBox listBox1;
         private DateTimePicker dateTimePicker1;
+        private DomainUpDown domainUpDown1;
     }
 }
