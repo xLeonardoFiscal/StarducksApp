@@ -6,18 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Starducks.Vista
+namespace Starducks.Vista.FormCatalogo
 {
-    public partial class CatalogoPrincipal : Form
+    public partial class FormPrincipal : Form
     {
-        public CatalogoPrincipal()
+        public FormPrincipal()
         {
             InitializeComponent();
-        }
-
-        private void CatalogoPrincipal_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
