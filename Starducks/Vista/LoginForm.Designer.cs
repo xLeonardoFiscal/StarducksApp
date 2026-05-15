@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             panel1 = new Panel();
             btnSalir = new Button();
             label1 = new Label();
             btnRegistrarse = new Button();
             btnSesion = new Button();
-            panel4 = new Panel();
+            pContra = new Panel();
             txtContra = new TextBox();
-            pictureBox2 = new PictureBox();
+            pbContra = new PictureBox();
             CBmostrarContra = new CheckBox();
-            panel3 = new Panel();
-            textBox1 = new TextBox();
-            pictureBox1 = new PictureBox();
+            pUsuario = new Panel();
+            txtUsuario = new TextBox();
+            pbUsuario = new PictureBox();
             panel2 = new Panel();
             label3 = new Label();
             label5 = new Label();
             label4 = new Label();
             panel1.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            pContra.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbContra).BeginInit();
+            pUsuario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbUsuario).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -59,8 +60,8 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(btnRegistrarse);
             panel1.Controls.Add(btnSesion);
-            panel1.Controls.Add(panel4);
-            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(pContra);
+            panel1.Controls.Add(pUsuario);
             panel1.Location = new Point(520, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(744, 680);
@@ -71,9 +72,9 @@
             btnSalir.BackColor = Color.DarkGreen;
             btnSalir.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSalir.ForeColor = Color.White;
-            btnSalir.Location = new Point(656, 642);
+            btnSalir.Location = new Point(650, 635);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(70, 25);
+            btnSalir.Size = new Size(76, 32);
             btnSalir.TabIndex = 5;
             btnSalir.Text = "SALIR";
             btnSalir.UseVisualStyleBackColor = false;
@@ -114,16 +115,16 @@
             btnSesion.Text = "INICIAR SESION";
             btnSesion.UseVisualStyleBackColor = false;
             // 
-            // panel4
+            // pContra
             // 
-            panel4.BackColor = Color.White;
-            panel4.Controls.Add(txtContra);
-            panel4.Controls.Add(pictureBox2);
-            panel4.Controls.Add(CBmostrarContra);
-            panel4.Location = new Point(58, 353);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(640, 102);
-            panel4.TabIndex = 1;
+            pContra.BackColor = Color.White;
+            pContra.Controls.Add(txtContra);
+            pContra.Controls.Add(pbContra);
+            pContra.Controls.Add(CBmostrarContra);
+            pContra.Location = new Point(58, 353);
+            pContra.Name = "pContra";
+            pContra.Size = new Size(640, 102);
+            pContra.TabIndex = 1;
             // 
             // txtContra
             // 
@@ -133,19 +134,20 @@
             txtContra.Location = new Point(89, 30);
             txtContra.Multiline = true;
             txtContra.Name = "txtContra";
+            txtContra.PasswordChar = '*';
             txtContra.Size = new Size(518, 47);
             txtContra.TabIndex = 4;
             txtContra.TextChanged += txtContra_TextChanged;
             // 
-            // pictureBox2
+            // pbContra
             // 
-            pictureBox2.Image = Properties.Resources.key;
-            pictureBox2.Location = new Point(17, 21);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(66, 66);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
+            pbContra.Image = (Image)resources.GetObject("pbContra.Image");
+            pbContra.Location = new Point(17, 21);
+            pbContra.Name = "pbContra";
+            pbContra.Size = new Size(66, 66);
+            pbContra.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbContra.TabIndex = 1;
+            pbContra.TabStop = false;
             // 
             // CBmostrarContra
             // 
@@ -157,39 +159,40 @@
             CBmostrarContra.Size = new Size(148, 22);
             CBmostrarContra.TabIndex = 4;
             CBmostrarContra.Text = "Mostrar contraseña";
-            CBmostrarContra.UseVisualStyleBackColor = false;
+            CBmostrarContra.UseVisualStyleBackColor = true;
             CBmostrarContra.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // panel3
+            // pUsuario
             // 
-            panel3.BackColor = Color.White;
-            panel3.Controls.Add(textBox1);
-            panel3.Controls.Add(pictureBox1);
-            panel3.Location = new Point(58, 205);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(640, 102);
-            panel3.TabIndex = 0;
+            pUsuario.BackColor = Color.White;
+            pUsuario.Controls.Add(txtUsuario);
+            pUsuario.Controls.Add(pbUsuario);
+            pUsuario.Location = new Point(58, 205);
+            pUsuario.Name = "pUsuario";
+            pUsuario.Size = new Size(640, 102);
+            pUsuario.TabIndex = 0;
             // 
-            // textBox1
+            // txtUsuario
             // 
-            textBox1.Cursor = Cursors.IBeam;
-            textBox1.Font = new Font("Comic Sans MS", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = Color.DarkGreen;
-            textBox1.Location = new Point(89, 31);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(518, 47);
-            textBox1.TabIndex = 3;
+            txtUsuario.Cursor = Cursors.IBeam;
+            txtUsuario.Font = new Font("Comic Sans MS", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtUsuario.ForeColor = Color.DarkGreen;
+            txtUsuario.Location = new Point(89, 31);
+            txtUsuario.Multiline = true;
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(518, 47);
+            txtUsuario.TabIndex = 3;
             // 
-            // pictureBox1
+            // pbUsuario
             // 
-            pictureBox1.Image = Properties.Resources.user;
-            pictureBox1.Location = new Point(17, 21);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(66, 66);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pbUsuario.BackColor = Color.Transparent;
+            pbUsuario.Image = Properties.Resources.user;
+            pbUsuario.Location = new Point(17, 21);
+            pbUsuario.Name = "pbUsuario";
+            pbUsuario.Size = new Size(66, 66);
+            pbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbUsuario.TabIndex = 0;
+            pbUsuario.TabStop = false;
             // 
             // panel2
             // 
@@ -230,7 +233,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Comic Sans MS", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Gold;
-            label4.Location = new Point(1139, 0);
+            label4.Location = new Point(1136, 80);
             label4.Name = "label4";
             label4.Size = new Size(125, 19);
             label4.TabIndex = 7;
@@ -249,12 +252,12 @@
             Load += LoginForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            pContra.ResumeLayout(false);
+            pContra.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbContra).EndInit();
+            pUsuario.ResumeLayout(false);
+            pUsuario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbUsuario).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
@@ -267,15 +270,15 @@
         private CheckBox CBmostrarContra;
         private Button btnRegistrarse;
         private Button btnSesion;
-        private Panel panel4;
-        private PictureBox pictureBox2;
-        private Panel panel3;
-        private PictureBox pictureBox1;
+        private Panel pContra;
+        private PictureBox pbContra;
+        private Panel pUsuario;
+        private PictureBox pbUsuario;
         private Label label1;
         private Label label3;
         private Label label4;
         private Label label5;
-        private TextBox textBox1;
+        private TextBox txtUsuario;
         private TextBox txtContra;
         private Button btnSalir;
     }

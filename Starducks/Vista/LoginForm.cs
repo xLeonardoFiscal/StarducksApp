@@ -20,7 +20,51 @@ namespace Starducks.Vista
         private void LoginForm_Load(object sender, EventArgs e)
         {
             CBmostrarContra.Checked = true; //Ocultar contraseña
+
+            //Hacer los paneles redondos
+            MakePanelRounded(pUsuario, txtUsuario);
+            MakePanelRounded(pContra, txtContra);
+
+            //Hacer los picture box redondos
+            MakePictureBoxCircular(pbUsuario);
+            MakePictureBoxCircular(pbContra);
+
         }
+
+
+        //METODO PARA REDONDEAR LAS PICTUREBOX
+        private void MakePictureBoxCircular(PictureBox pb)
+        {
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(0, 0, pb.Width, pb.Height);
+            pb.Region = new Region(gp);
+        }
+
+
+
+        //METODO PARA REDONDEAR LOS PANEL Y LOS TEXTUREBOX DENTRO
+        private void MakePanelRounded(Panel panel, TextBox txt)
+        {
+            txt.BorderStyle = BorderStyle.None;
+            txt.BackColor = Color.White;
+
+            GraphicsPath gpPanel = new GraphicsPath();
+            int radius = 60;
+
+            gpPanel.StartFigure();
+            //AddArc tiene 4 o 5 argumentos dependiendo la sobrecarga
+            //AddArc(int x, int y, int width, int height, float startAngle, float sweepAngle)
+
+            gpPanel.AddArc(0f, 0f, radius, radius, 180f, 90f);
+            gpPanel.AddArc(panel.Width - radius, 0f, radius, radius, 270f, 90f);
+            gpPanel.AddArc(panel.Width - radius, panel.Height - radius, radius, radius, 0f, 90f);
+            gpPanel.AddArc(0f, panel.Height - radius, radius, radius, 90f, 90f);
+            gpPanel.CloseAllFigures();
+
+            panel.Region = new Region(gpPanel);
+        }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
