@@ -90,8 +90,30 @@ namespace Starducks.Vista
             }
         }
 
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void btnSesion_Click(object sender, EventArgs e)
+        {
+            if (txtUsuario.Text == "admin" && txtContra.Text == "admin123")
+            {
+                MessageBox.Show("¡Bienvenido a Starducks!", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Creamos la instancia de tu catálogo usando su ruta completa si es necesario
+                Starducks.Vista.CatalogoForms.FormPrincipal pantallaCatálogo = new Starducks.Vista.CatalogoForms.FormPrincipal();
+
+                // Mostramos el catálogo
+                pantallaCatálogo.Show();
+
+                // Ocultamos el Login para que no se quede atrás estorbando
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }

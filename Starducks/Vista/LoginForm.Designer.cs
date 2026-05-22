@@ -115,6 +115,7 @@
             btnSesion.TabIndex = 2;
             btnSesion.Text = "INICIAR SESION";
             btnSesion.UseVisualStyleBackColor = false;
+            btnSesion.Click += btnSesion_Click;
             // 
             // pContra
             // 
