@@ -78,16 +78,21 @@ namespace Starducks.Vista
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            txtContra.UseSystemPasswordChar = ! CBmostrarContra.Checked; //Tapa la contraseña si el check esta activado
+            txtContra.UseSystemPasswordChar = !CBmostrarContra.Checked; //Tapa la contraseña si el check esta activado
 
             if (CBmostrarContra.Checked)
             {
-                CBmostrarContra.Text = "Mostrar contraseña"; 
+                CBmostrarContra.Text = "Mostrar contraseña";
             }
             else
             {
                 CBmostrarContra.Text = "Ocultar contraseña";
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

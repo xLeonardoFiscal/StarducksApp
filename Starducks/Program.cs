@@ -16,5 +16,6 @@ namespace Starducks
             ApplicationConfiguration.Initialize();
             Application.Run(new LoginForm());
         }
+
     }
 }
