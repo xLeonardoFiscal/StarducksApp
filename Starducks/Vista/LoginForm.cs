@@ -90,11 +90,6 @@ namespace Starducks.Vista
             }
         }
 
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         private void btnSesion_Click(object sender, EventArgs e)
         {
             if (txtUsuario.Text == "admin" && txtContra.Text == "admin123")
@@ -114,7 +109,6 @@ namespace Starducks.Vista
             {
                 MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }
