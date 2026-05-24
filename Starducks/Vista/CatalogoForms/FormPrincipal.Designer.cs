@@ -48,7 +48,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 80);
+            panel1.Size = new Size(988, 80);
             panel1.TabIndex = 0;
             // 
             // txtBusqueda
@@ -77,33 +77,35 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(0, 80);
             panel2.Name = "panel2";
-            panel2.Size = new Size(800, 50);
+            panel2.Size = new Size(988, 50);
             panel2.TabIndex = 1;
             // 
             // btnPostres
             // 
             btnPostres.FlatStyle = FlatStyle.Flat;
-            btnPostres.Location = new Point(511, 18);
+            btnPostres.Location = new Point(687, 18);
             btnPostres.Name = "btnPostres";
             btnPostres.Size = new Size(94, 29);
             btnPostres.TabIndex = 3;
             btnPostres.Text = "POSTRES";
             btnPostres.UseVisualStyleBackColor = true;
+            btnPostres.Click += btnPostres_Click;
             // 
             // btnCafecaliente
             // 
             btnCafecaliente.FlatStyle = FlatStyle.Flat;
-            btnCafecaliente.Location = new Point(349, 18);
+            btnCafecaliente.Location = new Point(476, 15);
             btnCafecaliente.Name = "btnCafecaliente";
             btnCafecaliente.Size = new Size(147, 29);
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = true;
+            btnCafecaliente.Click += btnCafecaliente_Click;
             // 
             // btnCafefrio
             // 
             btnCafefrio.FlatStyle = FlatStyle.Flat;
-            btnCafefrio.Location = new Point(190, 18);
+            btnCafefrio.Location = new Point(284, 15);
             btnCafefrio.Name = "btnCafefrio";
             btnCafefrio.Size = new Size(139, 29);
             btnCafefrio.TabIndex = 1;
@@ -113,7 +115,7 @@
             // btnTodos
             // 
             btnTodos.FlatStyle = FlatStyle.Flat;
-            btnTodos.Location = new Point(76, 18);
+            btnTodos.Location = new Point(157, 15);
             btnTodos.Name = "btnTodos";
             btnTodos.Size = new Size(94, 29);
             btnTodos.TabIndex = 0;
@@ -126,7 +128,7 @@
             flowLayoutPanelProductos.Dock = DockStyle.Fill;
             flowLayoutPanelProductos.Location = new Point(0, 130);
             flowLayoutPanelProductos.Name = "flowLayoutPanelProductos";
-            flowLayoutPanelProductos.Size = new Size(800, 320);
+            flowLayoutPanelProductos.Size = new Size(988, 464);
             flowLayoutPanelProductos.TabIndex = 2;
             flowLayoutPanelProductos.Paint += flowLayoutPanelProductos_Paint;
             // 
@@ -134,7 +136,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(988, 594);
             Controls.Add(flowLayoutPanelProductos);
             Controls.Add(panel2);
             Controls.Add(panel1);

@@ -14,6 +14,7 @@ namespace Starducks.Vista.CatalogoForms
         {
             InitializeComponent();
             CargarCatalogo();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -50,6 +51,16 @@ namespace Starducks.Vista.CatalogoForms
         }
 
         private void flowLayoutPanelProductos_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnCafecaliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPostres_Click(object sender, EventArgs e)
         {
 
         }
