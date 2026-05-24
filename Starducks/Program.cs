@@ -17,5 +17,6 @@ namespace Starducks
             ApplicationConfiguration.Initialize();
             Application.Run(new Starducks.Vista.CatalogoForms.FormPrincipal());
         }
+
     }
 }
