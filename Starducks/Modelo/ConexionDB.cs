@@ -1,10 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MySql.Data.MySqlClient;
+using System;
 
-namespace Starducks.Modelo
+public class Conexion
 {
-    internal class ConexionDB
+    private string cadena = "server=localhost;database=starducks;user=root;password=;";
+
+    public MySqlConnection conectar()
     {
+        MySqlConnection con = new MySqlConnection(cadena);
+
+        try
+        {
+            con.Open();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error de conexión: " + e.Message);
+        }
+
+        return con;
     }
 }
