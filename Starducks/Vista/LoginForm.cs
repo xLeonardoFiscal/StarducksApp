@@ -19,6 +19,9 @@ namespace Starducks.Vista
 
         }
 
+        int tiempoBloqueo = 10;
+        int intentos = 0;
+
         private void LoginForm_Load(object sender, EventArgs e)
         {
             CBmostrarContra.Checked = true; //Ocultar contraseña
@@ -67,7 +70,7 @@ namespace Starducks.Vista
         }
 
 
-        
+
 
 
 
@@ -103,9 +106,26 @@ namespace Starducks.Vista
                 login.IniciarSesion(
                 txtUsuario.Text,
                 txtContra.Text);
+            string contra = txtContra.Text;
 
-            if (usuario != null) 
+            if (contra == "")
             {
+                MessageBox.Show("No se permiten campos vacios"); //Evito campos vacios
+                return;
+            }
+
+            if (usuario != null)
+            {
+                intentos = 0;
+
+                btnRegistrarse.Enabled = false; //Deshabilitamos los botones
+                btnSesion.Enabled = false;
+
+                progressBar1.Value = 0;
+                timer1.Start();
+                lblPorcentaje.Text = "0%";
+
+
                 MessageBox.Show(
                     "Bienvenido " + usuario.Nombre);
 
@@ -118,9 +138,43 @@ namespace Starducks.Vista
             else
             {
                 MessageBox.Show(
-                    "Usuario no encontrado.\n"+
+                    "Usuario no encontrado.\n" +
                     "Si no tienes cuenta, regístrate");
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void timerBloqueo_Tick(object sender, EventArgs e)
+        {
+            tiempoBloqueo--; //Disminuye tiempo de bloqueo
+            lblConteo.Text = "(" + tiempoBloqueo.ToString() + "s)"; //Muestra tiempo restante
+            lblConteo2.Text = "(" + tiempoBloqueo.ToString() + "s)";
+
+            if (tiempoBloqueo <= 0)  //detecta si ya termino el timer
+            {
+                timerBloqueo.Stop(); //detiene timer
+                btnSesion.Enabled = true; //habilita el btn Ingresar
+                intentos = 0; //restablece intentos
+                tiempoBloqueo = 10;
+                MessageBox.Show("Tiempo bloqueado terminado.");
+
+                if (tiempoBloqueo > 0)
+                {
+                    lblConteo.Text = "";
+                    lblConteo2.Text = "";
+                    lblInhabilitado.Text = ""; //limpiando los lbl
+                    lblInhabilitado2.Text = "";
+                }
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

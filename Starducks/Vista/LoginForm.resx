@@ -121,7 +121,7 @@
   <data name="pbContra.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
-        MAAA6mAAADqYAAAXcJy6UTwAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAHdElNRQfqAx4UGA7y4XbKAAAC
+        MAAA6mAAADqYAAAXcJy6UTwAAAAJcEhZcwAADr0AAA69AUf7kK0AAAAHdElNRQfqAx4UGA7y4XbKAAAC
         c0lEQVRYR+2YvWsVQRTFf0SLEFEJSBoRIUQbCxMxjRaWVtYprAJWEdFakKBlkFQi/gM22qRQsFBQQYz4
         ASIiaiFqiohoBCUQ4hcHJjBc7u5zZ2c2FvnB4TUzd8+bnTtz3oNy7AXOADeB98Ay8BP4AbwFrgGTwE47
         sTS7gAvAm2DoT41WgGfAKWDQFirBUeCpY6SXfgG3gDFbMCfHgU/Ow5voFXDEFs7BMeCz80BP34EbwDRw
@@ -135,4 +135,10 @@
         BU6bf6Y6wZqKNWUHrwfWVKyTdvB6YE1tGGzCX0EtmE7C4fbfAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="timerBloqueo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>120, 17</value>
+  </metadata>
 </root>
