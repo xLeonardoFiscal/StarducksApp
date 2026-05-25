@@ -7,7 +7,7 @@ namespace Starducks.Modelo
 {
     public class ConexionDB
     {
-        private string cadena = "server=localhost;database=starducks;user=root;password=;";
+        private static string cadena = "server=localhost;database=starducks;user=root;password=Lizbethhdz26";
 
         public MySqlConnection Conectar()
         {
@@ -23,6 +23,20 @@ namespace Starducks.Modelo
             }
 
             return con;
+        }
+        public static MySqlConnection ObtenerConexion()
+        {
+            MySqlConnection conexion = new MySqlConnection(cadena);
+            try
+            {
+                conexion.Open();
+                return conexion;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Error al conectar a la base de datos: " + ex.Message);
+                return null;
+            }
         }
     }
 }

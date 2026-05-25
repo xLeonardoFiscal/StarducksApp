@@ -31,14 +31,14 @@
             panel1 = new Panel();
             txtBusqueda = new TextBox();
             lblTitulo = new Label();
-            panel2 = new Panel();
+            flowLayoutPanelPanelProductos = new Panel();
             btnPostres = new Button();
             btnCafecaliente = new Button();
             btnCafefrio = new Button();
             btnTodos = new Button();
             flowLayoutPanelProductos = new FlowLayoutPanel();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            flowLayoutPanelPanelProductos.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -68,17 +68,18 @@
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Starducks";
             // 
-            // panel2
+            // flowLayoutPanelPanelProductos
             // 
-            panel2.Controls.Add(btnPostres);
-            panel2.Controls.Add(btnCafecaliente);
-            panel2.Controls.Add(btnCafefrio);
-            panel2.Controls.Add(btnTodos);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 80);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(988, 50);
-            panel2.TabIndex = 1;
+            flowLayoutPanelPanelProductos.Controls.Add(btnPostres);
+            flowLayoutPanelPanelProductos.Controls.Add(btnCafecaliente);
+            flowLayoutPanelPanelProductos.Controls.Add(btnCafefrio);
+            flowLayoutPanelPanelProductos.Controls.Add(btnTodos);
+            flowLayoutPanelPanelProductos.Dock = DockStyle.Top;
+            flowLayoutPanelPanelProductos.Location = new Point(0, 80);
+            flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
+            flowLayoutPanelPanelProductos.Size = new Size(988, 50);
+            flowLayoutPanelPanelProductos.TabIndex = 1;
+            
             // 
             // btnPostres
             // 
@@ -100,7 +101,6 @@
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = true;
-            btnCafecaliente.Click += btnCafecaliente_Click;
             // 
             // btnCafefrio
             // 
@@ -130,7 +130,7 @@
             flowLayoutPanelProductos.Name = "flowLayoutPanelProductos";
             flowLayoutPanelProductos.Size = new Size(988, 464);
             flowLayoutPanelProductos.TabIndex = 2;
-            flowLayoutPanelProductos.Paint += flowLayoutPanelProductos_Paint;
+            
             // 
             // FormPrincipal
             // 
@@ -138,13 +138,13 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(988, 594);
             Controls.Add(flowLayoutPanelProductos);
-            Controls.Add(panel2);
+            Controls.Add(flowLayoutPanelPanelProductos);
             Controls.Add(panel1);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
+            flowLayoutPanelPanelProductos.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -153,7 +153,7 @@
         private Panel panel1;
         private Label lblTitulo;
         private TextBox txtBusqueda;
-        private Panel panel2;
+        private Panel flowLayoutPanelPanelProductos;
         private Button btnTodos;
         private Button btnCafefrio;
         private Button btnPostres;

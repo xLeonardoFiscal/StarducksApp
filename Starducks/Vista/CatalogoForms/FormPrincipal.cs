@@ -13,56 +13,91 @@ namespace Starducks.Vista.CatalogoForms
         public FormPrincipal()
         {
             InitializeComponent();
-            CargarCatalogo();
-            this.WindowState = FormWindowState.Maximized;
+            CargarCatalogo("TODOS");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CargarCatalogo();
+            CargarCatalogo("TODOS");
         }
 
-        private void CargarCatalogo()
+        private void CargarCatalogo(string categoria)
         {
-            // Limpiamos el contenedor por si acaso
-            flowLayoutPanelProductos.Controls.Clear();
+            flowLayoutPanelPanelProductos.Controls.Clear();
 
-            // Simulamos datos de ejemplo. En un caso real, esto vendría de un bucle (while o foreach) desde tu BD.
-            for (int i = 1; i <= 8; i++)
+            Starducks.Controlador.ProductoController controlador = new Starducks.Controlador.ProductoController();
+            DataTable dtProductos = controlador.ObtenerProductos(categoria);
+
+            if (dtProductos == null || dtProductos.Rows.Count == 0)
+            {
+                return;
+            }
+            foreach (DataRow fila in dtProductos.Rows)
             {
                 TarjetaProducto tarjeta = new TarjetaProducto();
 
-                // Aquí defines los datos de cada producto. 
-                // Nota: Asegúrate de tener imágenes asignadas o un recurso por defecto.
-                string nombre = i % 2 == 0 ? "Espresso Intenso" : "Latte Vainilla";
-                string desc = "Granos arábica, notas intensas y cuerpo completo.";
-                double precio = i % 2 == 0 ? 45.00 : 55.00;
-                Image imgCafe = Properties.Resources.CafePruebas;// Sustituye por tus imágenes de Resources
+                string nombre = fila["nombre"].ToString();
+                string desc = fila["descripcion"].ToString();
+                double precio = Convert.ToDouble(fila["precio"]);
+                byte[] imagenBytes = fila["imagen"] != DBNull.Value ? (byte[])fila["imagen"] : null;
 
-                // Configuramos los textos e imagen de la tarjeta
-                tarjeta.ConfigurarTarjeta(nombre, desc, precio, imgCafe);
+                tarjeta.ConfigurarTarjeta(nombre, desc, precio, imagenBytes);
 
-                // Un pequeño margen entre tarjetas para que respiren
                 tarjeta.Margin = new Padding(12);
 
-                // ¡La magia! El FlowLayoutPanel lo acomoda automáticamente en el grid
-                flowLayoutPanelProductos.Controls.Add(tarjeta);
+                flowLayoutPanelPanelProductos.Controls.Add(tarjeta);
             }
         }
 
-        private void flowLayoutPanelProductos_Paint(object sender, PaintEventArgs e)
-        {
 
+        private void btnTodos_Click(object sender, EventArgs e)
+        {
+            CargarCatalogo("TODOS");
         }
 
-        private void btnCafecaliente_Click(object sender, EventArgs e)
+        private void btnCafesFrios_Click(object sender, EventArgs e)
         {
+            CargarCatalogo("CAFES FRIOS");
+        }
 
+        private void btnCafesCalientes_Click(object sender, EventArgs e)
+        {
+            CargarCatalogo("CAFES CALIENTES");
         }
 
         private void btnPostres_Click(object sender, EventArgs e)
         {
+            CargarCatalogo("POSTRES");
+        }
+        private void BuscarCatalogo(string textoBusqueda)
+        {
+            
+            flowLayoutPanelPanelProductos.Controls.Clear();
 
+  
+            Starducks.Controlador.ProductoController controlador = new Starducks.Controlador.ProductoController();
+            DataTable dtProductos = controlador.BuscarProductos(textoBusqueda);
+
+            if (dtProductos == null || dtProductos.Rows.Count == 0)
+            {
+                return; 
+            }
+
+            
+            foreach (DataRow fila in dtProductos.Rows)
+            {
+                TarjetaProducto tarjeta = new TarjetaProducto();
+
+                string nombre = fila["nombre"].ToString();
+                string desc = fila["descripcion"].ToString();
+                double precio = Convert.ToDouble(fila["precio"]);
+                byte[] imagenBytes = fila["imagen"] != DBNull.Value ? (byte[])fila["imagen"] : null;
+
+                tarjeta.ConfigurarTarjeta(nombre, desc, precio, imagenBytes);
+                tarjeta.Margin = new Padding(12);
+
+                flowLayoutPanelPanelProductos.Controls.Add(tarjeta);
+            }
         }
     }
 }

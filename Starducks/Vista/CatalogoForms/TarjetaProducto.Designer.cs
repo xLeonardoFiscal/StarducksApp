@@ -45,7 +45,7 @@
             pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
-            pbImagen.Click += pbImagen_Click;
+          
             // 
             // lblNombre
             // 
@@ -64,7 +64,7 @@
             lblDescripcion.Size = new Size(200, 50);
             lblDescripcion.TabIndex = 2;
             lblDescripcion.Text = "Descripcion";
-            lblDescripcion.Click += lblDescripcion_Click;
+            
             // 
             // lblPrecio
             // 

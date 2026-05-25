@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Starducks.Vista.CatalogoForms
 {
@@ -14,19 +16,23 @@ namespace Starducks.Vista.CatalogoForms
         {
             InitializeComponent();
         }
-
-        // Método para cargar los datos del café en los controles de la tarjeta
-        public void ConfigurarTarjeta(string nombre, string descripcion, double precio, Image imagen)
+        public void ConfigurarTarjeta(string nombre, string descripcion, double precio, byte[] imagenBytes)
         {
             lblNombre.Text = nombre;
             lblDescripcion.Text = descripcion;
             lblPrecio.Text = $"${precio:F2} MXN";
 
-            if (imagen != null)
+            if (imagenBytes != null && imagenBytes.Length > 0)
             {
-                pbImagen.Image = imagen;
+                pbImagen.Image = BytesToImagen(imagenBytes);
+            }
+            else
+            {
+                
+                pbImagen.Image = Properties.Resources.CafePruebas;
             }
         }
+
         public Image BytesToImagen(byte[] bytes)
         {
             if (bytes == null || bytes.Length == 0) return null;
@@ -36,16 +42,5 @@ namespace Starducks.Vista.CatalogoForms
                 return Image.FromStream(ms);
             }
         }
-
-        private void lblDescripcion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pbImagen_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
-
