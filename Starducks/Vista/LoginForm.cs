@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using Starducks.Modelo;
+using Starducks.Controlador;
 
 namespace Starducks.Vista
 {
@@ -65,6 +67,9 @@ namespace Starducks.Vista
         }
 
 
+        
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -92,22 +97,29 @@ namespace Starducks.Vista
 
         private void btnSesion_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text == "admin" && txtContra.Text == "admin123")
+            LoginController login = new LoginController();
+
+            Usuario usuario =
+                login.IniciarSesion(
+                txtUsuario.Text,
+                txtContra.Text);
+
+            if (usuario != null) 
             {
-                MessageBox.Show("¡Bienvenido a Starducks!", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Bienvenido " + usuario.Nombre);
 
-                // Creamos la instancia de tu catálogo usando su ruta completa si es necesario
-                Starducks.Vista.CatalogoForms.FormPrincipal pantallaCatálogo = new Starducks.Vista.CatalogoForms.FormPrincipal();
+                BienvenidaForm frm = new BienvenidaForm();
 
-                // Mostramos el catálogo
-                pantallaCatálogo.Show();
+                frm.Show();
 
-                // Ocultamos el Login para que no se quede atrás estorbando
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Usuario no encontrado.\n"+
+                    "Si no tienes cuenta, regístrate");
             }
         }
     }
