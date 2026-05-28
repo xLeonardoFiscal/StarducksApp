@@ -31,6 +31,9 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             panel1 = new Panel();
+            lblConteo2 = new Label();
+            lblInhabilitado2 = new Label();
+            lblPorcentaje = new Label();
             lblInhabilitado = new Label();
             lblConteo = new Label();
             progressBar1 = new ProgressBar();
@@ -51,9 +54,7 @@
             label4 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             timerBloqueo = new System.Windows.Forms.Timer(components);
-            lblPorcentaje = new Label();
-            lblInhabilitado2 = new Label();
-            lblConteo2 = new Label();
+            label2 = new Label();
             panel1.SuspendLayout();
             pContra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbContra).BeginInit();
@@ -65,6 +66,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Snow;
+            panel1.Controls.Add(label2);
             panel1.Controls.Add(lblConteo2);
             panel1.Controls.Add(lblInhabilitado2);
             panel1.Controls.Add(lblPorcentaje);
@@ -83,6 +85,38 @@
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
+            // lblConteo2
+            // 
+            lblConteo2.AutoSize = true;
+            lblConteo2.Font = new Font("Candara", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblConteo2.Location = new Point(605, 603);
+            lblConteo2.Name = "lblConteo2";
+            lblConteo2.Size = new Size(0, 24);
+            lblConteo2.TabIndex = 14;
+            lblConteo2.Click += label6_Click;
+            // 
+            // lblInhabilitado2
+            // 
+            lblInhabilitado2.AutoSize = true;
+            lblInhabilitado2.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblInhabilitado2.ForeColor = Color.Red;
+            lblInhabilitado2.Location = new Point(548, 508);
+            lblInhabilitado2.Name = "lblInhabilitado2";
+            lblInhabilitado2.Size = new Size(0, 24);
+            lblInhabilitado2.TabIndex = 13;
+            // 
+            // lblPorcentaje
+            // 
+            lblPorcentaje.AutoSize = true;
+            lblPorcentaje.BackColor = Color.Snow;
+            lblPorcentaje.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPorcentaje.ForeColor = Color.ForestGreen;
+            lblPorcentaje.Location = new Point(366, 591);
+            lblPorcentaje.Name = "lblPorcentaje";
+            lblPorcentaje.Size = new Size(31, 24);
+            lblPorcentaje.TabIndex = 12;
+            lblPorcentaje.Text = "0%";
+            // 
             // lblInhabilitado
             // 
             lblInhabilitado.AutoSize = true;
@@ -90,9 +124,8 @@
             lblInhabilitado.ForeColor = Color.Red;
             lblInhabilitado.Location = new Point(70, 508);
             lblInhabilitado.Name = "lblInhabilitado";
-            lblInhabilitado.Size = new Size(140, 24);
+            lblInhabilitado.Size = new Size(0, 24);
             lblInhabilitado.TabIndex = 11;
-            lblInhabilitado.Text = "INHABILITADO";
             // 
             // lblConteo
             // 
@@ -100,9 +133,8 @@
             lblConteo.Font = new Font("Candara", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblConteo.Location = new Point(126, 603);
             lblConteo.Name = "lblConteo";
-            lblConteo.Size = new Size(36, 24);
+            lblConteo.Size = new Size(0, 24);
             lblConteo.TabIndex = 10;
-            lblConteo.Text = "10s";
             // 
             // progressBar1
             // 
@@ -146,6 +178,7 @@
             btnRegistrarse.TabIndex = 3;
             btnRegistrarse.Text = "REGISTRARSE";
             btnRegistrarse.UseVisualStyleBackColor = false;
+            btnRegistrarse.Click += btnRegistrarse_Click;
             // 
             // btnSesion
             // 
@@ -284,43 +317,23 @@
             label4.TabIndex = 7;
             label4.Text = "REYNOSA TAMPS";
             // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // timerBloqueo
             // 
             timerBloqueo.Tick += timerBloqueo_Tick;
             // 
-            // lblPorcentaje
+            // label2
             // 
-            lblPorcentaje.AutoSize = true;
-            lblPorcentaje.BackColor = Color.Snow;
-            lblPorcentaje.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPorcentaje.ForeColor = Color.ForestGreen;
-            lblPorcentaje.Location = new Point(366, 591);
-            lblPorcentaje.Name = "lblPorcentaje";
-            lblPorcentaje.Size = new Size(31, 24);
-            lblPorcentaje.TabIndex = 12;
-            lblPorcentaje.Text = "0%";
-            // 
-            // lblInhabilitado2
-            // 
-            lblInhabilitado2.AutoSize = true;
-            lblInhabilitado2.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblInhabilitado2.ForeColor = Color.Red;
-            lblInhabilitado2.Location = new Point(546, 508);
-            lblInhabilitado2.Name = "lblInhabilitado2";
-            lblInhabilitado2.Size = new Size(140, 24);
-            lblInhabilitado2.TabIndex = 13;
-            lblInhabilitado2.Text = "INHABILITADO";
-            // 
-            // lblConteo2
-            // 
-            lblConteo2.AutoSize = true;
-            lblConteo2.Font = new Font("Candara", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblConteo2.Location = new Point(605, 603);
-            lblConteo2.Name = "lblConteo2";
-            lblConteo2.Size = new Size(36, 24);
-            lblConteo2.TabIndex = 14;
-            lblConteo2.Text = "10s";
-            lblConteo2.Click += label6_Click;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(245, 479);
+            label2.Name = "label2";
+            label2.Size = new Size(239, 41);
+            label2.TabIndex = 15;
+            label2.Text = "PRUEBAAAAAAA";
             // 
             // LoginForm
             // 
@@ -372,5 +385,6 @@
         private Label lblConteo2;
         private Label lblInhabilitado2;
         private Label lblPorcentaje;
+        private Label label2;
     }
 }

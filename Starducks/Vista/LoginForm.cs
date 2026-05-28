@@ -22,6 +22,31 @@ namespace Starducks.Vista
         int tiempoBloqueo = 10;
         int intentos = 0;
 
+        public void reiniciarLogin()
+        {
+            txtUsuario.Text = ""; //Limpia label
+            txtContra.Text = "";
+
+            progressBar1.Value = 0;
+            lblPorcentaje.Text = "0"; //muestra % del progressbar
+
+            btnRegistrarse.Enabled = true;
+            btnSesion.Enabled = true;
+            btnSalir.Enabled = true; // habilita los botones
+
+            intentos = 0;
+            tiempoBloqueo = 10;         //establece intenos, tiempo del bloqueo
+            lblInhabilitado.Text = "";
+            lblInhabilitado2.Text = "";
+            lblConteo.Text = "";
+            lblConteo2.Text = "";
+
+            timer1.Stop();
+            timerBloqueo.Stop();  // para ambos timer
+        }
+
+
+
         private void LoginForm_Load(object sender, EventArgs e)
         {
             CBmostrarContra.Checked = true; //Ocultar contraseña
@@ -34,7 +59,13 @@ namespace Starducks.Vista
             MakePictureBoxCircular(pbUsuario);
             MakePictureBoxCircular(pbContra);
 
+            lblInhabilitado.Text = "";
+            lblInhabilitado2.Text = "";
+            lblConteo.Text = "";
+            lblConteo2.Text = "";
         }
+
+
 
 
         //METODO PARA REDONDEAR LAS PICTUREBOX
@@ -44,6 +75,7 @@ namespace Starducks.Vista
             gp.AddEllipse(0, 0, pb.Width, pb.Height);
             pb.Region = new Region(gp);
         }
+
 
 
 
@@ -84,6 +116,8 @@ namespace Starducks.Vista
 
         }
 
+
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             txtContra.UseSystemPasswordChar = !CBmostrarContra.Checked; //Tapa la contraseña si el check esta activado
@@ -97,6 +131,8 @@ namespace Starducks.Vista
                 CBmostrarContra.Text = "Ocultar contraseña";
             }
         }
+
+
 
         private void btnSesion_Click(object sender, EventArgs e)
         {
@@ -129,24 +165,49 @@ namespace Starducks.Vista
                 MessageBox.Show(
                     "Bienvenido " + usuario.Nombre);
 
-                BienvenidaForm frm = new BienvenidaForm();
 
-                frm.Show();
-
-                this.Hide();
             }
             else
             {
-                MessageBox.Show(
-                    "Usuario no encontrado.\n" +
-                    "Si no tienes cuenta, regístrate");
+                if (intentos < 3)
+                {
+                    intentos++;
+                    MessageBox.Show(
+                        "Usuario no encontrado.\n" +
+                        "Si no tienes cuenta, " + "\nIntento num: " + intentos);
+                    txtContra.Clear();  //Muestra intentos y limpia campos
+                    txtUsuario.Clear();
+                }
+                else
+                {
+                    btnSesion.Enabled = false; //Deshabilita btnSesion
+                    tiempoBloqueo = 10;
+                    lblInhabilitado.Text = "INHABILITADO";
+                    lblInhabilitado2.Text = "INHABILITADO";
+                    lblConteo.Text = "(10s)";
+                    lblConteo2.Text = "(10s)";
+                    MessageBox.Show("Bloqueado por 10 segundos");
+                    txtContra.Clear();
+                    txtUsuario.Clear();
+
+                    timerBloqueo.Start();
+                }
             }
         }
+
+
+
+
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
+
+
+
 
         private void timerBloqueo_Tick(object sender, EventArgs e)
         {
@@ -172,9 +233,39 @@ namespace Starducks.Vista
             }
         }
 
+
+
+
+
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            progressBar1.Value += 5; //Valor del progressbar
+
+            lblPorcentaje.Text = progressBar1.Value.ToString() + "%"; //Muestra mediante label el % del Progressbar
+
+            if (progressBar1.Value >= 100)
+            {
+                timer1.Stop();
+                BienvenidaForm bienvenida = new BienvenidaForm();
+                bienvenida.Show(); //Muestra la BienvenidaForm
+                this.Hide();
+
+            }
+        }
+
+        private void btnRegistrarse_Click(object sender, EventArgs e)
+        {
+            RegistroForm registro = new RegistroForm();
+            registro.Show(); // Muestra el registro
+            this.Hide();
         }
     }
 }
