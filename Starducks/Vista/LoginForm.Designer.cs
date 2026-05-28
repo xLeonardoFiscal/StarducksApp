@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             panel1 = new Panel();
+            label2 = new Label();
             lblConteo2 = new Label();
             lblInhabilitado2 = new Label();
             lblPorcentaje = new Label();
@@ -54,7 +55,6 @@
             label4 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             timerBloqueo = new System.Windows.Forms.Timer(components);
-            label2 = new Label();
             panel1.SuspendLayout();
             pContra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbContra).BeginInit();
@@ -84,6 +84,15 @@
             panel1.Size = new Size(744, 680);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(245, 479);
+            label2.Name = "label2";
+            label2.Size = new Size(0, 41);
+            label2.TabIndex = 15;
             // 
             // lblConteo2
             // 
@@ -131,7 +140,7 @@
             // 
             lblConteo.AutoSize = true;
             lblConteo.Font = new Font("Candara", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblConteo.Location = new Point(126, 603);
+            lblConteo.Location = new Point(122, 603);
             lblConteo.Name = "lblConteo";
             lblConteo.Size = new Size(0, 24);
             lblConteo.TabIndex = 10;
@@ -319,21 +328,13 @@
             // 
             // timer1
             // 
+            timer1.Interval = 80;
             timer1.Tick += timer1_Tick;
             // 
             // timerBloqueo
             // 
+            timerBloqueo.Interval = 1000;
             timerBloqueo.Tick += timerBloqueo_Tick;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(245, 479);
-            label2.Name = "label2";
-            label2.Size = new Size(239, 41);
-            label2.TabIndex = 15;
-            label2.Text = "PRUEBAAAAAAA";
             // 
             // LoginForm
             // 
