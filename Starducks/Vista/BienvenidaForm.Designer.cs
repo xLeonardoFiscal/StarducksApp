@@ -103,7 +103,7 @@
             // 
             panelBarraBg.BackColor = Color.FromArgb(244, 241, 234);
             panelBarraBg.Controls.Add(panelProgreso);
-            panelBarraBg.Location = new Point(143, 432);
+            panelBarraBg.Location = new Point(137, 416);
             panelBarraBg.Name = "panelBarraBg";
             panelBarraBg.Size = new Size(600, 15);
             panelBarraBg.TabIndex = 6;
