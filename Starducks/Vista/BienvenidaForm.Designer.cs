@@ -57,11 +57,12 @@
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(244, 241, 231);
-            lblTitulo.Location = new Point(417, 144);
+            lblTitulo.Location = new Point(315, 144);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(349, 47);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "¡BIENVENIDOS A ";
+            lblTitulo.Click += lblTitulo_Click;
             // 
             // timerCarg
             // 
@@ -102,10 +103,11 @@
             // 
             panelBarraBg.BackColor = Color.FromArgb(244, 241, 234);
             panelBarraBg.Controls.Add(panelProgreso);
-            panelBarraBg.Location = new Point(201, 324);
+            panelBarraBg.Location = new Point(143, 432);
             panelBarraBg.Name = "panelBarraBg";
             panelBarraBg.Size = new Size(600, 15);
             panelBarraBg.TabIndex = 6;
+            panelBarraBg.Paint += panelBarraBg_Paint;
             // 
             // BienvenidaForm
             // 

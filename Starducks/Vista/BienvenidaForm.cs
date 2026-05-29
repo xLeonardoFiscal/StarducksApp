@@ -43,7 +43,7 @@ namespace Starducks.Vista
             // 4. Encendemos el reloj
             timerCarg.Start();
         }
-        
+
 
         private void timerCarg_Tick(object sender, EventArgs e)
         {
@@ -79,8 +79,8 @@ namespace Starducks.Vista
                 this.Hide(); //
             }
         }
-    
-        
+
+
 
         private void picLogo_Click(object sender, EventArgs e)
         {
@@ -88,6 +88,16 @@ namespace Starducks.Vista
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelBarraBg_Paint(object sender, PaintEventArgs e)
         {
 
         }
