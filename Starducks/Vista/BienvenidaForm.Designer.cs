@@ -31,82 +31,100 @@
             components = new System.ComponentModel.Container();
             picLogo = new PictureBox();
             lblTitulo = new Label();
-            lblMensaje = new Label();
-            panelProgreso = new Panel();
-            panelBarraBg = new ProgressBar();
             timerCarg = new System.Windows.Forms.Timer(components);
+            label1 = new Label();
+            lblPorcentaje = new Label();
+            panelProgreso = new Panel();
+            panelBarraBg = new Panel();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
-            panelProgreso.SuspendLayout();
+            panelBarraBg.SuspendLayout();
             SuspendLayout();
             // 
             // picLogo
             // 
-            picLogo.Location = new Point(52, 109);
+            picLogo.Image = Properties.Resources.LogoPato;
+            picLogo.Location = new Point(41, 94);
             picLogo.Name = "picLogo";
-            picLogo.Size = new Size(125, 62);
+            picLogo.Size = new Size(229, 224);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             picLogo.TabIndex = 0;
             picLogo.TabStop = false;
-            
+            picLogo.Click += picLogo_Click;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(266, 93);
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(244, 241, 231);
+            lblTitulo.Location = new Point(417, 144);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(215, 46);
+            lblTitulo.Size = new Size(349, 47);
             lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "STARDUCKS";
-            // 
-            // lblMensaje
-            // 
-            lblMensaje.AutoSize = true;
-            lblMensaje.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblMensaje.Location = new Point(192, 321);
-            lblMensaje.Name = "lblMensaje";
-            lblMensaje.Size = new Size(180, 20);
-            lblMensaje.TabIndex = 2;
-            lblMensaje.Text = "Iniciando subsistemas...";
-           
-            // 
-            // panelProgreso
-            // 
-            panelProgreso.Controls.Add(panelBarraBg);
-            panelProgreso.Location = new Point(104, 239);
-            panelProgreso.Name = "panelProgreso";
-            panelProgreso.Size = new Size(377, 63);
-            panelProgreso.TabIndex = 3;
-        
-            // 
-            // panelBarraBg
-            // 
-            panelBarraBg.BackColor = SystemColors.ActiveCaption;
-            panelBarraBg.Location = new Point(3, 15);
-            panelBarraBg.Name = "panelBarraBg";
-            panelBarraBg.Size = new Size(374, 29);
-            panelBarraBg.TabIndex = 0;
-          
+            lblTitulo.Text = "¡BIENVENIDOS A ";
             // 
             // timerCarg
             // 
             timerCarg.Interval = 30;
+            timerCarg.Tick += timerCarg_Tick;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(244, 241, 231);
+            label1.Location = new Point(339, 191);
+            label1.Name = "label1";
+            label1.Size = new Size(499, 47);
+            label1.TabIndex = 4;
+            label1.Text = "CAFETERIA STARDUCKS!";
+            // 
+            // lblPorcentaje
+            // 
+            lblPorcentaje.AutoSize = true;
+            lblPorcentaje.ForeColor = Color.FromArgb(244, 241, 234);
+            lblPorcentaje.Location = new Point(352, 393);
+            lblPorcentaje.Name = "lblPorcentaje";
+            lblPorcentaje.Size = new Size(161, 20);
+            lblPorcentaje.TabIndex = 5;
+            lblPorcentaje.Text = "Cargando sistema... 0%";
+            // 
+            // panelProgreso
+            // 
+            panelProgreso.BackColor = Color.FromArgb(216, 169, 74);
+            panelProgreso.Location = new Point(0, 0);
+            panelProgreso.Name = "panelProgreso";
+            panelProgreso.Size = new Size(10, 15);
+            panelProgreso.TabIndex = 0;
+            // 
+            // panelBarraBg
+            // 
+            panelBarraBg.BackColor = Color.FromArgb(244, 241, 234);
+            panelBarraBg.Controls.Add(panelProgreso);
+            panelBarraBg.Location = new Point(201, 324);
+            panelBarraBg.Name = "panelBarraBg";
+            panelBarraBg.Size = new Size(600, 15);
+            panelBarraBg.TabIndex = 6;
             // 
             // BienvenidaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(600, 350);
-            Controls.Add(panelProgreso);
-            Controls.Add(lblMensaje);
+            BackColor = Color.FromArgb(11, 59, 46);
+            ClientSize = new Size(850, 500);
+            Controls.Add(panelBarraBg);
+            Controls.Add(lblPorcentaje);
+            Controls.Add(label1);
             Controls.Add(lblTitulo);
             Controls.Add(picLogo);
             FormBorderStyle = FormBorderStyle.None;
             Name = "BienvenidaForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "BienvenidaForm";
+            Load += BienvenidaForm_Load;
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
-            panelProgreso.ResumeLayout(false);
+            panelBarraBg.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -115,9 +133,10 @@
 
         private PictureBox picLogo;
         private Label lblTitulo;
-        private Label lblMensaje;
-        private Panel panelProgreso;
-        private ProgressBar panelBarraBg;
         private System.Windows.Forms.Timer timerCarg;
+        private Label label1;
+        private Label lblPorcentaje;
+        private Panel panelProgreso;
+        private Panel panelBarraBg;
     }
 }
