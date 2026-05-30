@@ -39,10 +39,39 @@ namespace Starducks.Vista.CatalogoForms
                 return Image.FromStream(ms);
             }
         }
-
+       
         private void lblDescripcion_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void pbImagen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TarjetaProducto_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string NombreProducto
+        {
+            get => lblNombre.Text;
+            set => lblNombre.Text = value;
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string Precio
+        {
+            get => lblPrecio.Text;
+            set => lblPrecio.Text = value;
+        }
+
     }
 }

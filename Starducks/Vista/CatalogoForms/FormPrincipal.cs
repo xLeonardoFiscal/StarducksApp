@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Starducks.Controlador;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,30 +26,31 @@ namespace Starducks.Vista.CatalogoForms
 
         private void CargarCatalogo(string categoria)
         {
-            panelMenu.Controls.Clear();
+            // 1. LIMPIEZA: Borra lo anterior para que no se encimen los productos
+            flowLayoutPanelPanelProductos.Controls.Clear();
 
-            Starducks.Controlador.ProductoController controlador = new Starducks.Controlador.ProductoController();
+            // 2. OBTENCIÓN: Trae los datos de la base de datos
+            ProductoController controlador = new ProductoController();
             DataTable dtProductos = controlador.BuscarProductos(categoria);
-            System.Windows.Forms.MessageBox.Show("Productos encontrados: " + dtProductos.Rows.Count);
-            if (dtProductos == null || dtProductos.Rows.Count == 0)
+
+            // 3. DIBUJADO: Crea cada tarjeta y agrégala al panel
+            if (dtProductos.Rows.Count > 0)
             {
-                return;
+                foreach (DataRow fila in dtProductos.Rows)
+                {
+                    TarjetaProducto tarjeta = new TarjetaProducto();
+
+                    // Asigna los valores (asegúrate de que los nombres de columnas coincidan con tu BD)
+                    tarjeta.NombreProducto = fila["nombre"].ToString();
+                    tarjeta.Precio = fila["precio"].ToString();
+
+                    // ¡ESTO ES LO QUE HACE QUE SE VEAN!
+                    flowLayoutPanelPanelProductos.Controls.Add(tarjeta);
+                }
             }
-
-            foreach (DataRow fila in dtProductos.Rows)
+            else
             {
-                TarjetaProducto tarjeta = new TarjetaProducto();
-
-                string nombre = fila["nombre"].ToString();
-                string desc = fila["descripcion"].ToString();
-                double precio = Convert.ToDouble(fila["precio_tall"]);
-                byte[] imagenBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
-                tarjeta.AsignarDatos(
-                fila["nombre"].ToString(),
-                fila["descripcion"].ToString(),
-                Convert.ToDouble(fila["precio_tall"]),
-                null// Pasamos null temporalmente a la foto para descartar errores de imagen
-                );
+                MessageBox.Show("No hay productos en esta categoría.");
             }
         }
 

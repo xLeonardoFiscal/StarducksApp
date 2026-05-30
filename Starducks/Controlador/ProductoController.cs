@@ -93,34 +93,26 @@ namespace Starducks.Controlador
                 con.Close(); // Cerramos la conexión siempre
             }
         }
-        public DataTable BuscarProductos(string texto)
+        public DataTable BuscarProductos(string categoria)
         {
             DataTable tabla = new DataTable();
-            // El 'using' abre la conexión, la usa y la CIERRA automáticamente al terminar
             using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
             {
-                try
-                {
-                    string query = "SELECT id_producto, nombre, descripcion, precio_tall, foto FROM productos";
-                    // Si no quieres filtrar todavía, deja solo esto.
+                string query = (categoria == "TODOS") ? "SELECT * FROM productos" : "SELECT * FROM productos WHERE categoria = @cat";
 
-                    conexion.Open();
-                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                {
+                    if (categoria != "TODOS") cmd.Parameters.AddWithValue("@cat", categoria);
+
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                     {
-                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
-                        {
-                            da.Fill(tabla);
-                        }
+                        da.Fill(tabla);
                     }
                 }
-                catch (Exception ex)
-                {
-                    System.Windows.Forms.MessageBox.Show("Error: " + ex.Message);
-                }
-            } // <-- Aquí la conexión se cierra sola, evitando tu error.
+            }
             return tabla;
-
         }
-    }
+    }  
+    
 }
 

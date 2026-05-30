@@ -126,6 +126,7 @@
             // flowLayoutPanelPanelProductos
             // 
             flowLayoutPanelPanelProductos.AutoScroll = true;
+            flowLayoutPanelPanelProductos.BackColor = SystemColors.ActiveCaption;
             flowLayoutPanelPanelProductos.Dock = DockStyle.Fill;
             flowLayoutPanelPanelProductos.Location = new Point(0, 126);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";

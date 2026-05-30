@@ -45,6 +45,7 @@
             pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
+            pbImagen.Click += pbImagen_Click;
             // 
             // lblNombre
             // 
@@ -57,6 +58,7 @@
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre";
             lblNombre.TextAlign = ContentAlignment.TopCenter;
+            lblNombre.Click += lblNombre_Click;
             // 
             // lblDescripcion
             // 
@@ -99,6 +101,7 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 320);
+            Load += TarjetaProducto_Load;
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -107,9 +110,9 @@
         #endregion
 
         private PictureBox pbImagen;
-        private Label lblNombre;
-        private Label lblDescripcion;
-        private Label lblPrecio;
         private Button button1;
+        public Label lblNombre;
+        public Label lblDescripcion;
+        public Label lblPrecio;
     }
 }
