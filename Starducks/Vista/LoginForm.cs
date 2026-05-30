@@ -58,6 +58,7 @@ namespace Starducks.Vista
             //Hacer los picture box redondos
             MakePictureBoxCircular(pbUsuario);
             MakePictureBoxCircular(pbContra);
+            MakePictureBoxCircular(pbStarducks);
 
             lblInhabilitado.Text = "";
             lblInhabilitado2.Text = "";

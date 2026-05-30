@@ -55,12 +55,14 @@
             label4 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             timerBloqueo = new System.Windows.Forms.Timer(components);
+            pbStarducks = new PictureBox();
             panel1.SuspendLayout();
             pContra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbContra).BeginInit();
             pUsuario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbUsuario).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbStarducks).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -307,9 +309,10 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Forte", 40F);
-            label5.ForeColor = Color.Gold;
-            label5.Location = new Point(409, 9);
+            label5.ForeColor = Color.Goldenrod;
+            label5.Location = new Point(411, 13);
             label5.Name = "label5";
             label5.Size = new Size(188, 73);
             label5.TabIndex = 8;
@@ -319,7 +322,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Comic Sans MS", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.Gold;
+            label4.ForeColor = Color.Goldenrod;
             label4.Location = new Point(1136, 80);
             label4.Name = "label4";
             label4.Size = new Size(125, 19);
@@ -336,12 +339,23 @@
             timerBloqueo.Interval = 1000;
             timerBloqueo.Tick += timerBloqueo_Tick;
             // 
+            // pbStarducks
+            // 
+            pbStarducks.Image = (Image)resources.GetObject("pbStarducks.Image");
+            pbStarducks.Location = new Point(50, 172);
+            pbStarducks.Name = "pbStarducks";
+            pbStarducks.Size = new Size(419, 416);
+            pbStarducks.SizeMode = PictureBoxSizeMode.Zoom;
+            pbStarducks.TabIndex = 2;
+            pbStarducks.TabStop = false;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGreen;
             ClientSize = new Size(1258, 679);
+            Controls.Add(pbStarducks);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "LoginForm";
@@ -357,6 +371,7 @@
             ((System.ComponentModel.ISupportInitialize)pbUsuario).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbStarducks).EndInit();
             ResumeLayout(false);
         }
 
@@ -387,5 +402,6 @@
         private Label lblInhabilitado2;
         private Label lblPorcentaje;
         private Label label2;
+        private PictureBox pbStarducks;
     }
 }
