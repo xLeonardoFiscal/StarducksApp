@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Starducks.Controlador;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,6 +33,30 @@ namespace Starducks.Vista
             {
                 rutaFoto = ofd.FileName;
                 picFoto.Image = Image.FromFile(rutaFoto);
+            }
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            RegistroController controller = new RegistroController();
+
+            bool resultado = controller.RegistrarUsuario(
+                txtNombre.Text,
+                txtUsuario.Text,
+                txtPassword.Text,
+                txtTelefono.Text,
+                txtDireccion.Text,
+                rutaFoto
+            );
+
+            if (resultado)
+            {
+                MessageBox.Show("Usuario registrado correctamente");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al registrar usuario");
             }
         }
     }

@@ -11,5 +11,11 @@ namespace Starducks.Modelo
         public string User {  get; set; }
         public string Password { get; set; }
         public string Rol {  get; set; }
+        public string Telefono { get; set; }
+
+        public string Direccion { get; set; }
+
+        public string Foto { get; set; }
+    
     }
 }

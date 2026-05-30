@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Starducks.Controlador
 {
-    internal class RegistroController
+    public class RegistroController
     {
     }
 }

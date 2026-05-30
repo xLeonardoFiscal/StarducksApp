@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistroForm));
             lblNombre = new Label();
             lblUsuario = new Label();
             lblPassword = new Label();
@@ -48,10 +49,11 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNombre.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombre.ForeColor = Color.Goldenrod;
             lblNombre.Location = new Point(62, 44);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(83, 20);
+            lblNombre.Size = new Size(69, 19);
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre:";
             lblNombre.Click += label1_Click;
@@ -59,45 +61,50 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblUsuario.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsuario.ForeColor = Color.Goldenrod;
             lblUsuario.Location = new Point(62, 89);
             lblUsuario.Name = "lblUsuario";
-            lblUsuario.Size = new Size(84, 20);
+            lblUsuario.Size = new Size(67, 19);
             lblUsuario.TabIndex = 1;
             lblUsuario.Text = "Usuario:";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPassword.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPassword.ForeColor = Color.Goldenrod;
             lblPassword.Location = new Point(62, 139);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(117, 20);
+            lblPassword.Size = new Size(92, 19);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Contraseña:";
             // 
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTelefono.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTelefono.ForeColor = Color.Goldenrod;
             lblTelefono.Location = new Point(62, 187);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(94, 20);
+            lblTelefono.Size = new Size(73, 19);
             lblTelefono.TabIndex = 3;
             lblTelefono.Text = "Teléfono:";
             // 
             // lblDireccion
             // 
             lblDireccion.AutoSize = true;
-            lblDireccion.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDireccion.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDireccion.ForeColor = Color.Goldenrod;
             lblDireccion.Location = new Point(62, 240);
             lblDireccion.Name = "lblDireccion";
-            lblDireccion.Size = new Size(101, 20);
+            lblDireccion.Size = new Size(77, 19);
             lblDireccion.TabIndex = 4;
             lblDireccion.Text = "Dirección:";
             // 
             // picFoto
             // 
+            picFoto.BackColor = SystemColors.Control;
             picFoto.Location = new Point(199, 291);
             picFoto.Name = "picFoto";
             picFoto.Size = new Size(142, 125);
@@ -107,10 +114,11 @@
             // lblFoto
             // 
             lblFoto.AutoSize = true;
-            lblFoto.Font = new Font("Showcard Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblFoto.Font = new Font("Candara", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFoto.ForeColor = Color.Goldenrod;
             lblFoto.Location = new Point(62, 291);
             lblFoto.Name = "lblFoto";
-            lblFoto.Size = new Size(57, 20);
+            lblFoto.Size = new Size(45, 19);
             lblFoto.TabIndex = 6;
             lblFoto.Text = "Foto:";
             // 
@@ -151,29 +159,35 @@
             // 
             // btnSeleccionarFoto
             // 
-            btnSeleccionarFoto.Font = new Font("Showcard Gothic", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSeleccionarFoto.BackColor = SystemColors.Control;
+            btnSeleccionarFoto.Font = new Font("Rockwell", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSeleccionarFoto.ForeColor = Color.Goldenrod;
             btnSeleccionarFoto.Location = new Point(368, 340);
             btnSeleccionarFoto.Name = "btnSeleccionarFoto";
             btnSeleccionarFoto.Size = new Size(169, 30);
             btnSeleccionarFoto.TabIndex = 12;
             btnSeleccionarFoto.Text = "Seleccionar Foto";
-            btnSeleccionarFoto.UseVisualStyleBackColor = true;
+            btnSeleccionarFoto.UseVisualStyleBackColor = false;
             btnSeleccionarFoto.Click += btnSeleccionarFoto_Click;
             // 
             // btnRegistrar
             // 
-            btnRegistrar.Font = new Font("Showcard Gothic", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRegistrar.BackColor = SystemColors.Control;
+            btnRegistrar.Font = new Font("Rockwell", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRegistrar.ForeColor = Color.Goldenrod;
             btnRegistrar.Location = new Point(612, 133);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.Size = new Size(145, 30);
             btnRegistrar.TabIndex = 13;
             btnRegistrar.Text = "Registrar";
-            btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.UseVisualStyleBackColor = false;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
             // RegistroForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.DarkGreen;
             ClientSize = new Size(800, 450);
             Controls.Add(btnRegistrar);
             Controls.Add(btnSeleccionarFoto);
@@ -189,6 +203,7 @@
             Controls.Add(lblPassword);
             Controls.Add(lblUsuario);
             Controls.Add(lblNombre);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "RegistroForm";
             Text = "FrmRegistro";
             ((System.ComponentModel.ISupportInitialize)picFoto).EndInit();
