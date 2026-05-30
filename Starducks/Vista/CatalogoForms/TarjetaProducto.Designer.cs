@@ -45,26 +45,28 @@
             pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
-          
             // 
             // lblNombre
             // 
+            lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNombre.ForeColor = SystemColors.ActiveCaptionText;
             lblNombre.Location = new Point(3, 159);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(214, 25);
+            lblNombre.Size = new Size(78, 25);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre";
             lblNombre.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblDescripcion
             // 
+            lblDescripcion.AutoSize = true;
             lblDescripcion.Location = new Point(3, 184);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(200, 50);
+            lblDescripcion.Size = new Size(87, 20);
             lblDescripcion.TabIndex = 2;
             lblDescripcion.Text = "Descripcion";
-            
+            lblDescripcion.Click += lblDescripcion_Click;
             // 
             // lblPrecio
             // 

@@ -28,32 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            panelBusqueda = new Panel();
             txtBusqueda = new TextBox();
             lblTitulo = new Label();
-            flowLayoutPanelPanelProductos = new Panel();
+            panelMenu = new Panel();
+            btnTodos = new Button();
             btnPostres = new Button();
             btnCafecaliente = new Button();
             btnCafefrio = new Button();
-            btnTodos = new Button();
-            flowLayoutPanelProductos = new FlowLayoutPanel();
-            panel1.SuspendLayout();
-            flowLayoutPanelPanelProductos.SuspendLayout();
+            flowLayoutPanelPanelProductos = new FlowLayoutPanel();
+            panelBusqueda.SuspendLayout();
+            panelMenu.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // panelBusqueda
             // 
-            panel1.Controls.Add(txtBusqueda);
-            panel1.Controls.Add(lblTitulo);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(988, 80);
-            panel1.TabIndex = 0;
+            panelBusqueda.Controls.Add(txtBusqueda);
+            panelBusqueda.Controls.Add(lblTitulo);
+            panelBusqueda.Dock = DockStyle.Top;
+            panelBusqueda.Location = new Point(0, 0);
+            panelBusqueda.Name = "panelBusqueda";
+            panelBusqueda.Size = new Size(988, 76);
+            panelBusqueda.TabIndex = 0;
+            panelBusqueda.Paint += panel1_Paint;
             // 
             // txtBusqueda
             // 
-            txtBusqueda.Location = new Point(248, 35);
+            txtBusqueda.Location = new Point(270, 33);
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(214, 27);
             txtBusqueda.TabIndex = 1;
@@ -62,24 +63,34 @@
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(33, 35);
+            lblTitulo.Location = new Point(108, 29);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(118, 31);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Starducks";
             // 
-            // flowLayoutPanelPanelProductos
+            // panelMenu
             // 
-            flowLayoutPanelPanelProductos.Controls.Add(btnPostres);
-            flowLayoutPanelPanelProductos.Controls.Add(btnCafecaliente);
-            flowLayoutPanelPanelProductos.Controls.Add(btnCafefrio);
-            flowLayoutPanelPanelProductos.Controls.Add(btnTodos);
-            flowLayoutPanelPanelProductos.Dock = DockStyle.Top;
-            flowLayoutPanelPanelProductos.Location = new Point(0, 80);
-            flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(988, 50);
-            flowLayoutPanelPanelProductos.TabIndex = 1;
-            
+            panelMenu.AutoScroll = true;
+            panelMenu.Controls.Add(btnTodos);
+            panelMenu.Controls.Add(btnPostres);
+            panelMenu.Controls.Add(btnCafecaliente);
+            panelMenu.Controls.Add(btnCafefrio);
+            panelMenu.Dock = DockStyle.Top;
+            panelMenu.Location = new Point(0, 76);
+            panelMenu.Name = "panelMenu";
+            panelMenu.Size = new Size(988, 50);
+            panelMenu.TabIndex = 1;
+            // 
+            // btnTodos
+            // 
+            btnTodos.FlatStyle = FlatStyle.Flat;
+            btnTodos.Location = new Point(123, 15);
+            btnTodos.Name = "btnTodos";
+            btnTodos.Size = new Size(94, 29);
+            btnTodos.TabIndex = 0;
+            btnTodos.Text = "TODOS";
+            btnTodos.UseVisualStyleBackColor = true;
             // 
             // btnPostres
             // 
@@ -112,52 +123,42 @@
             btnCafefrio.Text = "CAFES FRIOS";
             btnCafefrio.UseVisualStyleBackColor = true;
             // 
-            // btnTodos
+            // flowLayoutPanelPanelProductos
             // 
-            btnTodos.FlatStyle = FlatStyle.Flat;
-            btnTodos.Location = new Point(157, 15);
-            btnTodos.Name = "btnTodos";
-            btnTodos.Size = new Size(94, 29);
-            btnTodos.TabIndex = 0;
-            btnTodos.Text = "TODOS";
-            btnTodos.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanelProductos
-            // 
-            flowLayoutPanelProductos.AutoScroll = true;
-            flowLayoutPanelProductos.Dock = DockStyle.Fill;
-            flowLayoutPanelProductos.Location = new Point(0, 130);
-            flowLayoutPanelProductos.Name = "flowLayoutPanelProductos";
-            flowLayoutPanelProductos.Size = new Size(988, 464);
-            flowLayoutPanelProductos.TabIndex = 2;
-            
+            flowLayoutPanelPanelProductos.AutoScroll = true;
+            flowLayoutPanelPanelProductos.Dock = DockStyle.Fill;
+            flowLayoutPanelPanelProductos.Location = new Point(0, 126);
+            flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
+            flowLayoutPanelPanelProductos.Size = new Size(988, 468);
+            flowLayoutPanelPanelProductos.TabIndex = 2;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(988, 594);
-            Controls.Add(flowLayoutPanelProductos);
             Controls.Add(flowLayoutPanelPanelProductos);
-            Controls.Add(panel1);
+            Controls.Add(panelMenu);
+            Controls.Add(panelBusqueda);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            flowLayoutPanelPanelProductos.ResumeLayout(false);
+            Load += FormPrincipal_Load;
+            panelBusqueda.ResumeLayout(false);
+            panelBusqueda.PerformLayout();
+            panelMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel panelBusqueda;
         private Label lblTitulo;
         private TextBox txtBusqueda;
-        private Panel flowLayoutPanelPanelProductos;
+        private Panel panelMenu;
         private Button btnTodos;
         private Button btnCafefrio;
         private Button btnPostres;
         private Button btnCafecaliente;
-        private FlowLayoutPanel flowLayoutPanelProductos;
+        private FlowLayoutPanel flowLayoutPanelPanelProductos;
     }
 }

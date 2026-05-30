@@ -10,7 +10,7 @@ namespace Starducks.Controlador
 {
     public class ProductoController
     {
-       
+
         public DataTable ObtenerProductos(string categoria)
         {
             DataTable tabla = new DataTable();
@@ -22,12 +22,12 @@ namespace Starducks.Controlador
 
                 if (categoria.ToUpper() == "TODOS")
                 {
-                    query = "SELECT nombre, descripcion, precio, imagen FROM productos";
+                    query = "SELECT nombre, descripcion, precio_tall, foto FROM productos";
                 }
                 else
                 {
-                    
-                    query = "SELECT nombre, descripcion, precio, imagen FROM productos WHERE categoria = @categoria";
+
+                    query = "SELECT nombre, descripcion, precio_tall, foto FROM productos WHERE categoria = @categoria";
                 }
 
                 try
@@ -61,8 +61,8 @@ namespace Starducks.Controlador
             MySqlConnection con = ConexionDB.ObtenerConexion();
             if (con == null) return false;
 
-           
-            string query = "INSERT INTO productos (nombre, descripcion, precio, categoria, imagen) VALUES (@nombre, @descripcion, @precio, @categoria, @imagen)";
+
+            string query = "INSERT INTO productos (nombre, descripcion, precio_tall, categoria, foto) VALUES (@nombre, @descripcion, @precio, @categoria, @imagen)";
 
             try
             {
@@ -70,14 +70,14 @@ namespace Starducks.Controlador
                 {
                     cmd.Parameters.AddWithValue("@nombre", nombre);
                     cmd.Parameters.AddWithValue("@descripcion", descripcion);
-                    cmd.Parameters.AddWithValue("@precio", precio);
+                    cmd.Parameters.AddWithValue("@precio_tall", precio);
                     cmd.Parameters.AddWithValue("@categoria", categoria);
 
                     // Si el usuario no seleccionó imagen, guardamos un valor nulo en la BD
                     if (imagenBytes != null)
-                        cmd.Parameters.AddWithValue("@imagen", imagenBytes);
+                        cmd.Parameters.AddWithValue("@foto", imagenBytes);
                     else
-                        cmd.Parameters.AddWithValue("@imagen", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@foto", DBNull.Value);
 
                     int filasAfectadas = cmd.ExecuteNonQuery();
                     return filasAfectadas > 0; // Retorna true si se guardó con éxito
@@ -96,36 +96,31 @@ namespace Starducks.Controlador
         public DataTable BuscarProductos(string texto)
         {
             DataTable tabla = new DataTable();
-            MySqlConnection con = ConexionDB.ObtenerConexion();
-
-            if (con != null)
+            // El 'using' abre la conexión, la usa y la CIERRA automáticamente al terminar
+            using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
             {
-             
-                string query = "SELECT nombre, descripcion, precio, imagen FROM productos WHERE nombre LIKE @texto";
-
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        // El '%' sirve para que busque la palabra en cualquier parte del nombre
-                        cmd.Parameters.AddWithValue("@texto", "%" + texto + "%");
+                    string query = "SELECT id_producto, nombre, descripcion, precio_tall, foto FROM productos";
+                    // Si no quieres filtrar todavía, deja solo esto.
 
-                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    conexion.Open();
+                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
+                    {
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                         {
-                            adapter.Fill(tabla);
+                            da.Fill(tabla);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.Forms.MessageBox.Show("Error al buscar: " + ex.Message);
+                    System.Windows.Forms.MessageBox.Show("Error: " + ex.Message);
                 }
-                finally
-                {
-                    con.Close();
-                }
-            }
+            } // <-- Aquí la conexión se cierra sola, evitando tu error.
             return tabla;
+
         }
     }
 }
+

@@ -16,21 +16,18 @@ namespace Starducks.Vista.CatalogoForms
         {
             InitializeComponent();
         }
-        public void ConfigurarTarjeta(string nombre, string descripcion, double precio, byte[] imagenBytes)
+
+        public void AsignarDatos(string nombre, string desc, double precio, byte[] imagenBytes)
         {
             lblNombre.Text = nombre;
-            lblDescripcion.Text = descripcion;
-            lblPrecio.Text = $"${precio:F2} MXN";
+            lblDescripcion.Text = desc;
+            lblPrecio.Text = "$" + precio.ToString("F2");
 
-            if (imagenBytes != null && imagenBytes.Length > 0)
-            {
-                pbImagen.Image = BytesToImagen(imagenBytes);
-            }
-            else
-            {
-                
-                pbImagen.Image = Properties.Resources.CafePruebas;
-            }
+            // FORZAR VISIBILIDAD (Crucial si antes no se veía nada)
+            this.Visible = true;
+            lblNombre.Visible = true;
+            lblDescripcion.Visible = true;
+            lblPrecio.Visible = true;
         }
 
         public Image BytesToImagen(byte[] bytes)
@@ -41,6 +38,11 @@ namespace Starducks.Vista.CatalogoForms
             {
                 return Image.FromStream(ms);
             }
+        }
+
+        private void lblDescripcion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
