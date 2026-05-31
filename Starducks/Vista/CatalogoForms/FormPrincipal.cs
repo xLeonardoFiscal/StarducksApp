@@ -95,17 +95,17 @@ namespace Starducks.Vista.CatalogoForms
 
         private void ActualizarCarritoUI()
         {
-            MessageBox.Show("Tamaño de listaCarrito: " + listaCarrito.Count);
-            dgvCarrito.Rows.Clear();
+            dgvCarrito.Rows.Clear(); // Limpia la vista actual
+            double total = 0;
 
             foreach (var item in listaCarrito)
             {
                 dgvCarrito.Rows.Add(item.Nombre, item.Tamano, "$" + item.Precio.ToString("F2"));
+                total += item.Precio;
             }
 
-            // Aquí llamamos al "Contador" para que nos diga cuánto sumar
-            double total = CalcularTotal();
-            lblTotalCarrito.Text = "Total a pagar: $" + total.ToString("F2");
+            lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
+            dgvCarrito.Refresh(); // Fuerza el refresco visual
         }
 
         // Este método "Contador" solo hace matemáticas
@@ -121,9 +121,22 @@ namespace Starducks.Vista.CatalogoForms
 
         private void ActualizarTotal()
         {
-            double total = 0;
-            foreach (var item in listaCarrito) { total += item.Precio; }
+            dgvCarrito.Rows.Clear();
+
+            // Recorremos la lista y añadimos cada fila al DataGridView
+            foreach (var item in listaCarrito)
+            {
+                // IMPORTANTE: Asegúrate de que el orden de columnas coincida
+                // con lo que definiste en el diseñador o por código.
+                dgvCarrito.Rows.Add(item.Nombre, item.Tamano, item.Precio.ToString("C2"));
+            }
+
+            // Actualizamos total en el label
+            double total = listaCarrito.Sum(x => x.Precio);
             lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
+
+            // Forzamos el refresco visual
+            dgvCarrito.Refresh();
         }
 
         private void btnTodos_Click(object sender, EventArgs e)

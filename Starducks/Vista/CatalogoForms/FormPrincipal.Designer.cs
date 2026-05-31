@@ -41,6 +41,9 @@
             lblTituloPedido = new Label();
             btnPagar = new Button();
             lblTotalCarrito = new Label();
+            colNombre = new DataGridViewTextBoxColumn();
+            colTamano = new DataGridViewTextBoxColumn();
+            colPrecio = new DataGridViewTextBoxColumn();
             panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
             SuspendLayout();
@@ -80,7 +83,6 @@
             btnCafefrio.TabIndex = 1;
             btnCafefrio.Text = "CAFES FRIOS";
             btnCafefrio.UseVisualStyleBackColor = true;
-            
             // 
             // btnCafecaliente
             // 
@@ -91,7 +93,6 @@
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = true;
-            
             // 
             // btnTodos
             // 
@@ -144,10 +145,11 @@
             dgvCarrito.BackgroundColor = SystemColors.AppWorkspace;
             dgvCarrito.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCarrito.Location = new Point(829, 201);
+            dgvCarrito.Columns.AddRange(new DataGridViewColumn[] { colNombre, colTamano, colPrecio });
+            dgvCarrito.Location = new Point(829, 184);
             dgvCarrito.Name = "dgvCarrito";
             dgvCarrito.RowHeadersWidth = 51;
-            dgvCarrito.Size = new Size(159, 302);
+            dgvCarrito.Size = new Size(159, 319);
             dgvCarrito.TabIndex = 1;
             // 
             // lblTituloPedido
@@ -181,6 +183,27 @@
             lblTotalCarrito.Size = new Size(84, 20);
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
+            // 
+            // colNombre
+            // 
+            colNombre.HeaderText = "Producto";
+            colNombre.MinimumWidth = 6;
+            colNombre.Name = "colNombre";
+            colNombre.Width = 125;
+            // 
+            // colTamano
+            // 
+            colTamano.HeaderText = "Tamaño";
+            colTamano.MinimumWidth = 6;
+            colTamano.Name = "colTamano";
+            colTamano.Width = 125;
+            // 
+            // colPrecio
+            // 
+            colPrecio.HeaderText = "Precio";
+            colPrecio.MinimumWidth = 6;
+            colPrecio.Name = "colPrecio";
+            colPrecio.Width = 125;
             // 
             // FormPrincipal
             // 
@@ -219,5 +242,8 @@
         private Label lblTituloPedido;
         private Button btnPagar;
         private Label lblTotalCarrito;
+        private DataGridViewTextBoxColumn colNombre;
+        private DataGridViewTextBoxColumn colTamano;
+        private DataGridViewTextBoxColumn colPrecio;
     }
 }
