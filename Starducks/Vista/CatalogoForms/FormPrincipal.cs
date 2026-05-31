@@ -11,7 +11,9 @@ using System.Windows.Forms;
 namespace Starducks.Vista.CatalogoForms
 {
     public partial class FormPrincipal : Form
+
     {
+        public List<Starducks.Vista.CatalogoForms.ItemCarrito> listaCarrito = new List<Starducks.Vista.CatalogoForms.ItemCarrito>();
         public FormPrincipal()
         {
             InitializeComponent();
@@ -20,40 +22,108 @@ namespace Starducks.Vista.CatalogoForms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             BuscarCatalogo("TODOS");
         }
 
         private void CargarCatalogo(string categoria)
         {
-            // 1. LIMPIEZA: Borra lo anterior para que no se encimen los productos
+            MessageBox.Show("Cargando categoría: " + categoria);
+            // 1. LIMPIEZA
             flowLayoutPanelPanelProductos.Controls.Clear();
 
-            // 2. OBTENCIÓN: Trae los datos de la base de datos
+            // 2. OBTENCIÓN
             ProductoController controlador = new ProductoController();
             DataTable dtProductos = controlador.BuscarProductos(categoria);
-
-            // 3. DIBUJADO: Crea cada tarjeta y agrégala al panel
-            if (dtProductos.Rows.Count > 0)
+            MessageBox.Show("Filas encontradas en BD: " + (dtProductos != null ? dtProductos.Rows.Count.ToString() : "NULL"));
+            // 3. DIBUJADO
+            if (dtProductos != null && dtProductos.Rows.Count > 0)
             {
                 foreach (DataRow fila in dtProductos.Rows)
                 {
+                    // Creamos la tarjeta y le asignamos los datos de la fila
                     TarjetaProducto tarjeta = new TarjetaProducto();
 
-                    // Asigna los valores (asegúrate de que los nombres de columnas coincidan con tu BD)
-                    tarjeta.NombreProducto = fila["nombre"].ToString();
-                    tarjeta.Precio = fila["precio"].ToString();
+                    double pChico = Convert.ToDouble(fila["precio_tall"]);
+                    double pMed = Convert.ToDouble(fila["precio_grande"]);
+                    double pGra = Convert.ToDouble(fila["precio_venti"]);
+                    byte[] imagen = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
 
-                    // ¡ESTO ES LO QUE HACE QUE SE VEAN!
+                    tarjeta.AsignarDatos(fila["nombre"].ToString(), fila["descripcion"].ToString(), pChico, pMed, pGra, imagen);
+
+                    // AÑADIMOS LA LÓGICA DEL CARRITO
+                    tarjeta.OnAgregarAlCarrito += (s, e) =>
+                    {
+                        MessageBox.Show("¡Botón presionado!");
+                        TarjetaProducto t = (TarjetaProducto)s;
+
+                        double precioSeleccionado = 0;
+
+                        if (t.cmbTamano.Text == "Chico")
+                            precioSeleccionado = t.PrecioChico;
+                        else if (t.cmbTamano.Text == "Mediano")
+                            precioSeleccionado = t.PrecioMediano;
+                        else
+                            precioSeleccionado = t.PrecioGrande;
+
+                        var nuevoItem = new Starducks.Vista.CatalogoForms.ItemCarrito();
+                        nuevoItem.Nombre = t.NombreProducto;
+                        nuevoItem.Tamano = t.cmbTamano.Text; // Asegúrate de guardar el tamaño
+                        nuevoItem.Precio = precioSeleccionado;
+
+                        listaCarrito.Add(nuevoItem);
+
+                        MessageBox.Show($"{t.NombreProducto} ({t.cmbTamano.Text}) añadido al carrito!");
+                        ActualizarTotal();
+                    };
+
+                    // Agregamos la tarjeta al panel principal
                     flowLayoutPanelPanelProductos.Controls.Add(tarjeta);
+                    flowLayoutPanelPanelProductos.Refresh();
                 }
             }
             else
             {
                 MessageBox.Show("No hay productos en esta categoría.");
             }
+            panelMenu.Invalidate();
+            panelMenu.Update();
         }
 
+
+
+        private void ActualizarCarritoUI()
+        {
+            MessageBox.Show("Tamaño de listaCarrito: " + listaCarrito.Count);
+            dgvCarrito.Rows.Clear();
+
+            foreach (var item in listaCarrito)
+            {
+                dgvCarrito.Rows.Add(item.Nombre, item.Tamano, "$" + item.Precio.ToString("F2"));
+            }
+
+            // Aquí llamamos al "Contador" para que nos diga cuánto sumar
+            double total = CalcularTotal();
+            lblTotalCarrito.Text = "Total a pagar: $" + total.ToString("F2");
+        }
+
+        // Este método "Contador" solo hace matemáticas
+        private double CalcularTotal()
+        {
+            double suma = 0;
+            foreach (var item in listaCarrito)
+            {
+                suma += item.Precio;
+            }
+            return suma;
+        }
+
+        private void ActualizarTotal()
+        {
+            double total = 0;
+            foreach (var item in listaCarrito) { total += item.Precio; }
+            lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
+        }
 
         private void btnTodos_Click(object sender, EventArgs e)
         {
@@ -62,7 +132,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnCafesFrios_Click(object sender, EventArgs e)
         {
-            CargarCatalogo("CAFES FRIOS");
+            CargarCatalogo("Cafés fríos");
         }
 
         private void btnCafesCalientes_Click(object sender, EventArgs e)
@@ -97,7 +167,14 @@ namespace Starducks.Vista.CatalogoForms
                 double precio = Convert.ToDouble(fila["precio_tall"]);
                 byte[] imagenBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
 
-                tarjeta.AsignarDatos(nombre, desc, precio, imagenBytes);
+                tarjeta.AsignarDatos(
+                nombre,
+                desc,
+                Convert.ToDouble(fila["precio_tall"]),    // Precio chico
+                Convert.ToDouble(fila["precio_grande"]),  // Precio mediano
+                Convert.ToDouble(fila["precio_venti"]),   // Precio grande
+                imagenBytes
+                 );
                 tarjeta.Margin = new Padding(12);
 
                 panelMenu.Controls.Add(tarjeta);

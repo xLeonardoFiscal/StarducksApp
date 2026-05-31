@@ -40,7 +40,7 @@ namespace Starducks.Vista
         {
             RegistroController controller = new RegistroController();
 
-            bool resultado = controller.RegistrarUsuario(
+            bool resultado = controller.RegistroUsuario(
                 txtNombre.Text,
                 txtUsuario.Text,
                 txtPassword.Text,

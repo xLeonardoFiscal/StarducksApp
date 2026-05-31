@@ -32,7 +32,9 @@
             lblNombre = new Label();
             lblDescripcion = new Label();
             lblPrecio = new Label();
-            button1 = new Button();
+            cmbTamano = new ComboBox();
+            lblTamaño = new Label();
+            btnAgregar = new Button();
             ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
             // 
@@ -45,7 +47,7 @@
             pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
-            pbImagen.Click += pbImagen_Click;
+           
             // 
             // lblNombre
             // 
@@ -58,50 +60,73 @@
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre";
             lblNombre.TextAlign = ContentAlignment.TopCenter;
-            lblNombre.Click += lblNombre_Click;
+           
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
-            lblDescripcion.Location = new Point(3, 184);
+            lblDescripcion.Location = new Point(3, 193);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(87, 20);
             lblDescripcion.TabIndex = 2;
             lblDescripcion.Text = "Descripcion";
-            lblDescripcion.Click += lblDescripcion_Click;
+          
             // 
             // lblPrecio
             // 
             lblPrecio.AutoSize = true;
             lblPrecio.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblPrecio.Location = new Point(77, 234);
+            lblPrecio.Location = new Point(151, 247);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(57, 23);
             lblPrecio.TabIndex = 3;
             lblPrecio.Text = "Precio";
+            
             // 
-            // button1
+            // cmbTamano
             // 
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(21, 273);
-            button1.Name = "button1";
-            button1.Size = new Size(175, 29);
-            button1.TabIndex = 4;
-            button1.Text = "ver detalle";
-            button1.UseVisualStyleBackColor = true;
+            cmbTamano.FormattingEnabled = true;
+            cmbTamano.Location = new Point(84, 216);
+            cmbTamano.Name = "cmbTamano";
+            cmbTamano.Size = new Size(133, 28);
+            cmbTamano.TabIndex = 4;
+            // 
+            // lblTamaño
+            // 
+            lblTamaño.AutoSize = true;
+            lblTamaño.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTamaño.ForeColor = SystemColors.ActiveCaptionText;
+            lblTamaño.Location = new Point(0, 219);
+            lblTamaño.Name = "lblTamaño";
+            lblTamaño.Size = new Size(74, 25);
+            lblTamaño.TabIndex = 5;
+            lblTamaño.Text = "Tamaño";
+            lblTamaño.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // btnAgregar
+            // 
+            btnAgregar.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregar.Location = new Point(3, 274);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(94, 29);
+            btnAgregar.TabIndex = 6;
+            btnAgregar.Text = "Añadir";
+            btnAgregar.UseVisualStyleBackColor = true;
             // 
             // TarjetaProducto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(btnAgregar);
+            Controls.Add(lblTamaño);
+            Controls.Add(cmbTamano);
             Controls.Add(lblNombre);
-            Controls.Add(button1);
             Controls.Add(lblPrecio);
             Controls.Add(lblDescripcion);
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 320);
-            Load += TarjetaProducto_Load;
+            
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -110,9 +135,11 @@
         #endregion
 
         private PictureBox pbImagen;
-        private Button button1;
         public Label lblNombre;
         public Label lblDescripcion;
         public Label lblPrecio;
+        public ComboBox cmbTamano;
+        public Label lblTamaño;
+        private Button btnAgregar;
     }
 }

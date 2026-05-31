@@ -98,11 +98,25 @@ namespace Starducks.Controlador
             DataTable tabla = new DataTable();
             using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
             {
-                string query = (categoria == "TODOS") ? "SELECT * FROM productos" : "SELECT * FROM productos WHERE categoria = @cat";
+                string query = "";
+
+                if (categoria == "TODOS")
+                {
+                    query = "SELECT * FROM productos";
+                }
+                else
+                {
+                    // Usamos un JOIN para conectar la tabla productos con categorias_producto
+                    // Filtramos por el nombre de la categoría, no por una columna inexistente
+                    query = @"SELECT p.* FROM productos p 
+                      INNER JOIN categorias_producto c ON p.id_categoria = c.id_categoria 
+                      WHERE c.nombre = @cat";
+                }
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                 {
-                    if (categoria != "TODOS") cmd.Parameters.AddWithValue("@cat", categoria);
+                    if (categoria != "TODOS")
+                        cmd.Parameters.AddWithValue("@cat", categoria);
 
                     using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                     {
