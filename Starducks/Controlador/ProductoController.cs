@@ -126,6 +126,46 @@ namespace Starducks.Controlador
             }
             return tabla; // <--- ESTO DEBE ESTAR SIEMPRE AQUÍ, FUERA DEL TRY/CATCH
         }
+        public bool GuardarPedido(double total, List<Starducks.Vista.CatalogoForms.ItemCarrito> carrito)
+        {
+            using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
+            {
+                
+                using (MySqlTransaction transaccion = conexion.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Guardar Pedido
+                        string queryPedido = "INSERT INTO pedidos (total, fecha) VALUES (@total, NOW());";
+                        MySqlCommand cmdPedido = new MySqlCommand(queryPedido, conexion, transaccion);
+                        cmdPedido.Parameters.AddWithValue("@total", total);
+                        cmdPedido.ExecuteNonQuery();
+
+                        long idPedido = cmdPedido.LastInsertedId; // Obtenemos el ID del pedido recién creado
+
+                        // 2. Guardar Detalles
+                        foreach (var item in carrito)
+                        {
+                            string queryDetalle = "INSERT INTO detalle_pedido (id_pedido, nombre_producto, tamano, precio) VALUES (@id, @nom, @tam, @pre);";
+                            MySqlCommand cmdDetalle = new MySqlCommand(queryDetalle, conexion, transaccion);
+                            cmdDetalle.Parameters.AddWithValue("@id", idPedido);
+                            cmdDetalle.Parameters.AddWithValue("@nom", item.Nombre);
+                            cmdDetalle.Parameters.AddWithValue("@tam", item.Tamano);
+                            cmdDetalle.Parameters.AddWithValue("@pre", item.Precio);
+                            cmdDetalle.ExecuteNonQuery();
+                        }
+
+                        transaccion.Commit(); // Todo salió bien
+                        return true;
+                    }
+                    catch
+                    {
+                        transaccion.Rollback(); // Algo falló, cancelamos todo
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }
 

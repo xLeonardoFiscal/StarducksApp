@@ -214,5 +214,75 @@ namespace Starducks.Vista.CatalogoForms
         {
 
         }
+
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            if (listaCarrito.Count == 0)
+            {
+                MessageBox.Show("El carrito está vacío.", "Starducks", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Confirmación
+            DialogResult confirmacion = MessageBox.Show("¿Finalizar pedido?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmacion == DialogResult.Yes)
+            {
+                // --- AQUÍ LLAMAS A TU GUARDADO EN BD ---
+                ProductoController controller = new ProductoController();
+                double total = listaCarrito.Sum(item => item.Precio);
+                controller.GuardarPedido(total, listaCarrito);
+
+                // 3. AHORA MOSTRAMOS EL TICKET (La lista aún tiene los datos)
+                PrintPreviewDialog vistaPrevia = new PrintPreviewDialog();
+                vistaPrevia.Document = printDocument1;
+                vistaPrevia.ShowDialog();
+
+                // 4. LIMPIEZA TOTAL (Solo después de mostrar el ticket)
+                listaCarrito.Clear();
+                ActualizarTotal();
+
+                MessageBox.Show("Pedido finalizado con éxito.");
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            // 1. Configuraciones iniciales
+            float y = 50; // Margen superior
+            float anchoHoja = e.PageBounds.Width;
+
+            // Objeto para centrar texto
+            StringFormat formatoCentro = new StringFormat();
+            formatoCentro.Alignment = StringAlignment.Center;
+
+            // 2. Título (Centrado en el ancho de la hoja)
+            e.Graphics.DrawString("STARDUCKS", new Font("Arial", 20, FontStyle.Bold), Brushes.Black, anchoHoja / 2, y, formatoCentro);
+            y += 50;
+
+            // 3. Fecha
+            e.Graphics.DrawString("Fecha: " + DateTime.Now.ToString(), new Font("Arial", 10), Brushes.Black, anchoHoja / 2, y, formatoCentro);
+            y += 40;
+
+            // 4. Línea divisoria (dibujada desde el 10% hasta el 90% del ancho)
+            e.Graphics.DrawLine(Pens.Black, anchoHoja * 0.1f, y, anchoHoja * 0.9f, y);
+            y += 30;
+
+            // 5. Productos (Alineados a la izquierda pero con margen)
+            float xIzquierda = anchoHoja * 0.15f; // Margen izquierdo
+            foreach (var item in listaCarrito)
+            {
+                string linea = $"{item.Nombre} ({item.Tamano}) - ${item.Precio:F2}";
+                e.Graphics.DrawString(linea, new Font("Arial", 12), Brushes.Black, xIzquierda, y);
+                y += 30;
+            }
+
+            // 6. Total
+            y += 20;
+            e.Graphics.DrawLine(Pens.Black, anchoHoja * 0.1f, y, anchoHoja * 0.9f, y);
+            y += 30;
+            e.Graphics.DrawString("TOTAL A PAGAR: $" + listaCarrito.Sum(i => i.Precio).ToString("F2"),
+                                  new Font("Arial", 14, FontStyle.Bold), Brushes.Black, anchoHoja / 2, y, formatoCentro);
+        }
     }
 }
