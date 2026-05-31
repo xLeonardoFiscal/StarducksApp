@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panelBusqueda = new Panel();
+            pcbLogoCatalogo = new PictureBox();
             btnPostres = new Button();
             btnCafefrio = new Button();
             btnCafecaliente = new Button();
@@ -46,11 +48,14 @@
             lblTotalCarrito = new Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             panelBusqueda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
             SuspendLayout();
             // 
             // panelBusqueda
             // 
+            panelBusqueda.BackColor = Color.White;
+            panelBusqueda.Controls.Add(pcbLogoCatalogo);
             panelBusqueda.Controls.Add(btnPostres);
             panelBusqueda.Controls.Add(btnCafefrio);
             panelBusqueda.Controls.Add(btnCafecaliente);
@@ -58,99 +63,132 @@
             panelBusqueda.Controls.Add(txtBusqueda);
             panelBusqueda.Controls.Add(lblTitulo);
             panelBusqueda.Dock = DockStyle.Top;
+            panelBusqueda.ForeColor = SystemColors.ControlText;
             panelBusqueda.Location = new Point(0, 0);
             panelBusqueda.Name = "panelBusqueda";
             panelBusqueda.Size = new Size(988, 81);
             panelBusqueda.TabIndex = 0;
             panelBusqueda.Paint += panel1_Paint;
             // 
+            // pcbLogoCatalogo
+            // 
+            pcbLogoCatalogo.Image = Properties.Resources.logopato2;
+            pcbLogoCatalogo.Location = new Point(12, 6);
+            pcbLogoCatalogo.Name = "pcbLogoCatalogo";
+            pcbLogoCatalogo.Size = new Size(65, 69);
+            pcbLogoCatalogo.SizeMode = PictureBoxSizeMode.Zoom;
+            pcbLogoCatalogo.TabIndex = 4;
+            pcbLogoCatalogo.TabStop = false;
+            // 
             // btnPostres
             // 
+            btnPostres.BackColor = Color.FromArgb(0, 98, 65);
             btnPostres.FlatStyle = FlatStyle.Flat;
-            btnPostres.Location = new Point(882, 34);
+            btnPostres.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPostres.ForeColor = Color.White;
+            btnPostres.Location = new Point(850, 29);
             btnPostres.Name = "btnPostres";
             btnPostres.Size = new Size(94, 29);
             btnPostres.TabIndex = 3;
             btnPostres.Text = "POSTRES";
-            btnPostres.UseVisualStyleBackColor = true;
+            btnPostres.UseVisualStyleBackColor = false;
             btnPostres.Click += btnPostres_Click;
             // 
             // btnCafefrio
             // 
+            btnCafefrio.BackColor = Color.FromArgb(0, 98, 65);
             btnCafefrio.FlatStyle = FlatStyle.Flat;
-            btnCafefrio.Location = new Point(552, 31);
+            btnCafefrio.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCafefrio.ForeColor = Color.White;
+            btnCafefrio.Location = new Point(544, 29);
             btnCafefrio.Name = "btnCafefrio";
-            btnCafefrio.Size = new Size(139, 29);
+            btnCafefrio.Size = new Size(124, 29);
             btnCafefrio.TabIndex = 1;
             btnCafefrio.Text = "CAFES FRIOS";
-            btnCafefrio.UseVisualStyleBackColor = true;
+            btnCafefrio.UseVisualStyleBackColor = false;
             // 
             // btnCafecaliente
             // 
+            btnCafecaliente.BackColor = Color.FromArgb(0, 98, 65);
             btnCafecaliente.FlatStyle = FlatStyle.Flat;
-            btnCafecaliente.Location = new Point(713, 34);
+            btnCafecaliente.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCafecaliente.ForeColor = Color.White;
+            btnCafecaliente.Location = new Point(689, 29);
             btnCafecaliente.Name = "btnCafecaliente";
-            btnCafecaliente.Size = new Size(147, 29);
+            btnCafecaliente.Size = new Size(155, 29);
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
-            btnCafecaliente.UseVisualStyleBackColor = true;
+            btnCafecaliente.UseVisualStyleBackColor = false;
             // 
             // btnTodos
             // 
+            btnTodos.BackColor = Color.FromArgb(0, 98, 65);
             btnTodos.FlatStyle = FlatStyle.Flat;
-            btnTodos.Location = new Point(452, 33);
+            btnTodos.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTodos.ForeColor = Color.White;
+            btnTodos.Location = new Point(432, 29);
             btnTodos.Name = "btnTodos";
-            btnTodos.Size = new Size(94, 29);
+            btnTodos.Size = new Size(94, 30);
             btnTodos.TabIndex = 0;
             btnTodos.Text = "TODOS";
-            btnTodos.UseVisualStyleBackColor = true;
+            btnTodos.UseVisualStyleBackColor = false;
             // 
             // txtBusqueda
             // 
-            txtBusqueda.Location = new Point(232, 33);
+            txtBusqueda.Location = new Point(207, 31);
             txtBusqueda.Name = "txtBusqueda";
-            txtBusqueda.Size = new Size(214, 27);
+            txtBusqueda.Size = new Size(203, 27);
             txtBusqueda.TabIndex = 1;
             // 
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
-            lblTitulo.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.Location = new Point(108, 29);
+            lblTitulo.Font = new Font("Rockwell", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.Location = new Point(83, 27);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(118, 31);
+            lblTitulo.Size = new Size(123, 28);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Starducks";
             // 
             // panelMenu
             // 
             panelMenu.AutoScroll = true;
+            panelMenu.BackColor = Color.FromArgb(225, 232, 228);
             panelMenu.Dock = DockStyle.Top;
             panelMenu.Location = new Point(0, 81);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(988, 64);
+            panelMenu.Size = new Size(988, 10);
             panelMenu.TabIndex = 1;
             // 
             // flowLayoutPanelPanelProductos
             // 
             flowLayoutPanelPanelProductos.AutoScroll = true;
-            flowLayoutPanelPanelProductos.BackColor = Color.FromArgb(229, 231, 235);
+            flowLayoutPanelPanelProductos.BackColor = Color.FromArgb(225, 232, 228);
             flowLayoutPanelPanelProductos.Dock = DockStyle.Left;
-            flowLayoutPanelPanelProductos.Location = new Point(0, 145);
+            flowLayoutPanelPanelProductos.ForeColor = Color.White;
+            flowLayoutPanelPanelProductos.Location = new Point(0, 91);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(828, 449);
+            flowLayoutPanelPanelProductos.Size = new Size(828, 503);
             flowLayoutPanelPanelProductos.TabIndex = 2;
             // 
             // dgvCarrito
             // 
-            dgvCarrito.BackgroundColor = SystemColors.AppWorkspace;
+            dgvCarrito.BackgroundColor = Color.FromArgb(242, 242, 242);
             dgvCarrito.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarrito.Columns.AddRange(new DataGridViewColumn[] { colNombre, colTamano, colPrecio });
-            dgvCarrito.Location = new Point(829, 184);
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 98, 65);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvCarrito.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvCarrito.Location = new Point(834, 121);
             dgvCarrito.Name = "dgvCarrito";
             dgvCarrito.RowHeadersWidth = 51;
-            dgvCarrito.Size = new Size(159, 319);
+            dgvCarrito.Size = new Size(154, 382);
             dgvCarrito.TabIndex = 1;
             // 
             // colNombre
@@ -178,7 +216,7 @@
             // 
             lblTituloPedido.AutoSize = true;
             lblTituloPedido.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloPedido.Location = new Point(850, 157);
+            lblTituloPedido.Location = new Point(850, 94);
             lblTituloPedido.Name = "lblTituloPedido";
             lblTituloPedido.Size = new Size(126, 24);
             lblTituloPedido.TabIndex = 0;
@@ -186,9 +224,9 @@
             // 
             // btnPagar
             // 
-            btnPagar.BackColor = Color.FromArgb(0, 31, 63);
+            btnPagar.BackColor = Color.FromArgb(0, 98, 65);
             btnPagar.FlatStyle = FlatStyle.Flat;
-            btnPagar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnPagar.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPagar.ForeColor = Color.Gold;
             btnPagar.Location = new Point(860, 544);
             btnPagar.Name = "btnPagar";
@@ -215,6 +253,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(117, 159, 137);
             ClientSize = new Size(988, 594);
             Controls.Add(lblTotalCarrito);
             Controls.Add(dgvCarrito);
@@ -228,6 +267,7 @@
             Load += FormPrincipal_Load;
             panelBusqueda.ResumeLayout(false);
             panelBusqueda.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -252,5 +292,6 @@
         private DataGridViewTextBoxColumn colTamano;
         private DataGridViewTextBoxColumn colPrecio;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private PictureBox pcbLogoCatalogo;
     }
 }

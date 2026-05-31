@@ -47,41 +47,39 @@
             pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
-           
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNombre.ForeColor = SystemColors.ActiveCaptionText;
+            lblNombre.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombre.ForeColor = Color.Black;
             lblNombre.Location = new Point(3, 159);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(78, 25);
+            lblNombre.Size = new Size(81, 25);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre";
             lblNombre.TextAlign = ContentAlignment.TopCenter;
-           
             // 
             // lblDescripcion
             // 
             lblDescripcion.AutoSize = true;
+            lblDescripcion.ForeColor = Color.FromArgb(102, 102, 102);
             lblDescripcion.Location = new Point(3, 193);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(87, 20);
             lblDescripcion.TabIndex = 2;
             lblDescripcion.Text = "Descripcion";
-          
             // 
             // lblPrecio
             // 
             lblPrecio.AutoSize = true;
-            lblPrecio.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblPrecio.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrecio.ForeColor = Color.FromArgb(0, 98, 65);
             lblPrecio.Location = new Point(151, 247);
             lblPrecio.Name = "lblPrecio";
-            lblPrecio.Size = new Size(57, 23);
+            lblPrecio.Size = new Size(59, 23);
             lblPrecio.TabIndex = 3;
             lblPrecio.Text = "Precio";
-            
             // 
             // cmbTamano
             // 
@@ -94,29 +92,33 @@
             // lblTamaño
             // 
             lblTamaño.AutoSize = true;
-            lblTamaño.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTamaño.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTamaño.ForeColor = SystemColors.ActiveCaptionText;
             lblTamaño.Location = new Point(0, 219);
             lblTamaño.Name = "lblTamaño";
-            lblTamaño.Size = new Size(74, 25);
+            lblTamaño.Size = new Size(79, 25);
             lblTamaño.TabIndex = 5;
             lblTamaño.Text = "Tamaño";
             lblTamaño.TextAlign = ContentAlignment.TopCenter;
             // 
             // btnAgregar
             // 
-            btnAgregar.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregar.BackColor = Color.Transparent;
+            btnAgregar.FlatStyle = FlatStyle.Flat;
+            btnAgregar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregar.ForeColor = Color.FromArgb(0, 98, 65);
             btnAgregar.Location = new Point(3, 274);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(94, 29);
             btnAgregar.TabIndex = 6;
             btnAgregar.Text = "Añadir";
-            btnAgregar.UseVisualStyleBackColor = true;
+            btnAgregar.UseVisualStyleBackColor = false;
             // 
             // TarjetaProducto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             Controls.Add(btnAgregar);
             Controls.Add(lblTamaño);
             Controls.Add(cmbTamano);
@@ -126,7 +128,6 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 320);
-            
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

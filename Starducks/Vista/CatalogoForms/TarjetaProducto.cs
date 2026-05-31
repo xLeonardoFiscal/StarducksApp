@@ -86,6 +86,20 @@ namespace Starducks.Vista.CatalogoForms
             // Disparar evento para que el Form principal capture la acción
             OnAgregarAlCarrito?.Invoke(this, EventArgs.Empty);
         }
+        private void TarjetaProducto_Load(object sender, EventArgs e)
+        {
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            int radio = 20; // Ajusta el número para más o menos redondeo
+
+            // Crear el recorte
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(this.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(this.Width - radio, this.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, this.Height - radio, radio, radio, 90, 90);
+
+            // Aplicar el recorte al control
+            this.Region = new System.Drawing.Region(path);
+        }
 
         private Image BytesToImagen(byte[] bytes)
         {
@@ -104,5 +118,6 @@ namespace Starducks.Vista.CatalogoForms
         public double PrecioChicoVal => PrecioChico; // Cambia el nombre si es necesario
         public double PrecioMedianoVal => PrecioMediano;
         public double PrecioGrandeVal => PrecioGrande;
+
     }
 }

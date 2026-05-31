@@ -36,13 +36,13 @@ namespace Starducks.Vista.CatalogoForms
             // 2. OBTENCIÓN
             ProductoController controlador = new ProductoController();
             DataTable dtProductos = controlador.BuscarProductos(categoria);
-            MessageBox.Show("Filas encontradas en BD: " + (dtProductos != null ? dtProductos.Rows.Count.ToString() : "NULL"));
+            
             // 3. DIBUJADO
             if (dtProductos != null && dtProductos.Rows.Count > 0)
             {
                 foreach (DataRow fila in dtProductos.Rows)
                 {
-                    // Creamos la tarjeta y le asignamos los datos de la fila
+                    
                     TarjetaProducto tarjeta = new TarjetaProducto();
 
                     double pChico = Convert.ToDouble(fila["precio_tall"]);
@@ -55,7 +55,7 @@ namespace Starducks.Vista.CatalogoForms
                     // AÑADIMOS LA LÓGICA DEL CARRITO
                     tarjeta.OnAgregarAlCarrito += (s, e) =>
                     {
-                        MessageBox.Show("¡Botón presionado!");
+                        
                         TarjetaProducto t = (TarjetaProducto)s;
 
                         double precioSeleccionado = 0;
@@ -69,7 +69,7 @@ namespace Starducks.Vista.CatalogoForms
 
                         var nuevoItem = new Starducks.Vista.CatalogoForms.ItemCarrito();
                         nuevoItem.Nombre = t.NombreProducto;
-                        nuevoItem.Tamano = t.cmbTamano.Text; // Asegúrate de guardar el tamaño
+                        nuevoItem.Tamano = t.cmbTamano.Text; 
                         nuevoItem.Precio = precioSeleccionado;
 
                         listaCarrito.Add(nuevoItem);
@@ -95,7 +95,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void ActualizarCarritoUI()
         {
-            dgvCarrito.Rows.Clear(); // Limpia la vista actual
+            dgvCarrito.Rows.Clear(); 
             double total = 0;
 
             foreach (var item in listaCarrito)
@@ -105,10 +105,10 @@ namespace Starducks.Vista.CatalogoForms
             }
 
             lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
-            dgvCarrito.Refresh(); // Fuerza el refresco visual
+            dgvCarrito.Refresh(); 
         }
 
-        // Este método "Contador" solo hace matemáticas
+        
         private double CalcularTotal()
         {
             double suma = 0;
@@ -123,19 +123,18 @@ namespace Starducks.Vista.CatalogoForms
         {
             dgvCarrito.Rows.Clear();
 
-            // Recorremos la lista y añadimos cada fila al DataGridView
+            
             foreach (var item in listaCarrito)
             {
-                // IMPORTANTE: Asegúrate de que el orden de columnas coincida
-                // con lo que definiste en el diseñador o por código.
+                
                 dgvCarrito.Rows.Add(item.Nombre, item.Tamano, item.Precio.ToString("C2"));
             }
 
-            // Actualizamos total en el label
+            
             double total = listaCarrito.Sum(x => x.Precio);
             lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
 
-            // Forzamos el refresco visual
+           
             dgvCarrito.Refresh();
         }
 
@@ -206,7 +205,6 @@ namespace Starducks.Vista.CatalogoForms
         {
             panelMenu.Controls.Clear();
 
-            // Llamamos a tu catálogo pasándole "TODOS"
             CargarCatalogo("TODOS");
         }
 
@@ -223,22 +221,22 @@ namespace Starducks.Vista.CatalogoForms
                 return;
             }
 
-            // 2. Confirmación
+            
             DialogResult confirmacion = MessageBox.Show("¿Finalizar pedido?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirmacion == DialogResult.Yes)
             {
-                // --- AQUÍ LLAMAS A TU GUARDADO EN BD ---
+                
                 ProductoController controller = new ProductoController();
                 double total = listaCarrito.Sum(item => item.Precio);
                 controller.GuardarPedido(total, listaCarrito);
 
-                // 3. AHORA MOSTRAMOS EL TICKET (La lista aún tiene los datos)
+                // MOSTRAMOS EL TICKET 
                 PrintPreviewDialog vistaPrevia = new PrintPreviewDialog();
                 vistaPrevia.Document = printDocument1;
                 vistaPrevia.ShowDialog();
 
-                // 4. LIMPIEZA TOTAL (Solo después de mostrar el ticket)
+                // LIMPIEZA TOTAL 
                 listaCarrito.Clear();
                 ActualizarTotal();
 
@@ -248,28 +246,23 @@ namespace Starducks.Vista.CatalogoForms
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            // 1. Configuraciones iniciales
-            float y = 50; // Margen superior
+            
+            float y = 50; 
             float anchoHoja = e.PageBounds.Width;
 
-            // Objeto para centrar texto
             StringFormat formatoCentro = new StringFormat();
             formatoCentro.Alignment = StringAlignment.Center;
 
-            // 2. Título (Centrado en el ancho de la hoja)
             e.Graphics.DrawString("STARDUCKS", new Font("Arial", 20, FontStyle.Bold), Brushes.Black, anchoHoja / 2, y, formatoCentro);
             y += 50;
 
-            // 3. Fecha
             e.Graphics.DrawString("Fecha: " + DateTime.Now.ToString(), new Font("Arial", 10), Brushes.Black, anchoHoja / 2, y, formatoCentro);
             y += 40;
 
-            // 4. Línea divisoria (dibujada desde el 10% hasta el 90% del ancho)
             e.Graphics.DrawLine(Pens.Black, anchoHoja * 0.1f, y, anchoHoja * 0.9f, y);
             y += 30;
 
-            // 5. Productos (Alineados a la izquierda pero con margen)
-            float xIzquierda = anchoHoja * 0.15f; // Margen izquierdo
+            float xIzquierda = anchoHoja * 0.15f; 
             foreach (var item in listaCarrito)
             {
                 string linea = $"{item.Nombre} ({item.Tamano}) - ${item.Precio:F2}";
@@ -277,7 +270,7 @@ namespace Starducks.Vista.CatalogoForms
                 y += 30;
             }
 
-            // 6. Total
+            // Total
             y += 20;
             e.Graphics.DrawLine(Pens.Black, anchoHoja * 0.1f, y, anchoHoja * 0.9f, y);
             y += 30;
