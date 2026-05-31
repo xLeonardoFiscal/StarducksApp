@@ -31,7 +31,7 @@ namespace Starducks.Vista.CatalogoForms
             btnAgregar.Click += btnAgregar_Click;
         }
 
-        public void AsignarDatos(string nombre, string desc, double pChico, double pMed, double pGra, byte[] imagenBytes)
+        public void AsignarDatos(string nombre, string desc, double pChico, double pMed, double pGra, byte[] imagenBytes, string archivo)
         {
             lblNombre.Text = nombre;
             lblDescripcion.Text = desc;
@@ -44,12 +44,14 @@ namespace Starducks.Vista.CatalogoForms
             // 3. Mostrar el precio inicial (por ejemplo, el mediano)
             lblPrecio.Text = "$" + pMed.ToString("F2");
 
-            // 4. Convertir los bytes a imagen para el PictureBox
-            if (imagenBytes != null)
+            string rutaCompleta = Path.Combine(Application.StartupPath, "imagenes", archivo);
+
+            if (File.Exists(rutaCompleta))
             {
-                using (MemoryStream ms = new MemoryStream(imagenBytes))
+                using (FileStream fs = new FileStream(rutaCompleta, FileMode.Open, FileAccess.Read))
                 {
-                    pbImagen.Image = Image.FromStream(ms);
+                    pbImagen.Image = Image.FromStream(fs);
+                    pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
                 }
             }
         }

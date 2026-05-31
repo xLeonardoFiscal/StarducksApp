@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Starducks.Controlador;
+using Starducks.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Windows.Forms;
 namespace Starducks.Vista.CatalogoForms
 {
     public partial class FormPrincipal : Form
+
 
     {
         private Starducks.Controlador.ProductoController controlador = new Starducks.Controlador.ProductoController();
@@ -27,35 +29,47 @@ namespace Starducks.Vista.CatalogoForms
             BuscarCatalogo("TODOS");
         }
 
-        private void CargarCatalogo(string categoria)
+        private void CargarCatalogo(string filtro = "")
         {
-            MessageBox.Show("Cargando categoría: " + categoria);
+            
             // 1. LIMPIEZA
             flowLayoutPanelPanelProductos.Controls.Clear();
 
             // 2. OBTENCIÓN
             ProductoController controlador = new ProductoController();
-            DataTable dtProductos = controlador.BuscarProductos(categoria);
-            
+            DataTable dtProductos = controlador.BuscarProductos(filtro);
+
+
+
             // 3. DIBUJADO
             if (dtProductos != null && dtProductos.Rows.Count > 0)
             {
                 foreach (DataRow fila in dtProductos.Rows)
                 {
-                    
                     TarjetaProducto tarjeta = new TarjetaProducto();
 
                     double pChico = Convert.ToDouble(fila["precio_tall"]);
                     double pMed = Convert.ToDouble(fila["precio_grande"]);
                     double pGra = Convert.ToDouble(fila["precio_venti"]);
-                    byte[] imagen = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
 
-                    tarjeta.AsignarDatos(fila["nombre"].ToString(), fila["descripcion"].ToString(), pChico, pMed, pGra, imagen);
+                    // AQUÍ ESTÁ EL CAMBIO:
+                    // 1. Obtenemos el nombre del archivo como string
+                    string nombreFoto = fila["foto"].ToString();
+
+                    // 2. Pasamos el nombreFoto en lugar de la variable 'imagen' (que era byte[])
+                    tarjeta.AsignarDatos(
+                    fila["nombre"].ToString(),
+                    fila["descripcion"].ToString(),
+                    Convert.ToDouble(fila["precio_tall"]),    // pChico
+                    Convert.ToDouble(fila["precio_mediano"]), // pMed
+                    Convert.ToDouble(fila["precio_grande"]),  // pGra
+                     nombreFoto
+                    );
 
                     // AÑADIMOS LA LÓGICA DEL CARRITO
                     tarjeta.OnAgregarAlCarrito += (s, e) =>
                     {
-                        
+
                         TarjetaProducto t = (TarjetaProducto)s;
 
                         double precioSeleccionado = 0;
@@ -69,7 +83,7 @@ namespace Starducks.Vista.CatalogoForms
 
                         var nuevoItem = new Starducks.Vista.CatalogoForms.ItemCarrito();
                         nuevoItem.Nombre = t.NombreProducto;
-                        nuevoItem.Tamano = t.cmbTamano.Text; 
+                        nuevoItem.Tamano = t.cmbTamano.Text;
                         nuevoItem.Precio = precioSeleccionado;
 
                         listaCarrito.Add(nuevoItem);
@@ -95,7 +109,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void ActualizarCarritoUI()
         {
-            dgvCarrito.Rows.Clear(); 
+            dgvCarrito.Rows.Clear();
             double total = 0;
 
             foreach (var item in listaCarrito)
@@ -105,10 +119,10 @@ namespace Starducks.Vista.CatalogoForms
             }
 
             lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
-            dgvCarrito.Refresh(); 
+            dgvCarrito.Refresh();
         }
 
-        
+
         private double CalcularTotal()
         {
             double suma = 0;
@@ -123,18 +137,18 @@ namespace Starducks.Vista.CatalogoForms
         {
             dgvCarrito.Rows.Clear();
 
-            
+
             foreach (var item in listaCarrito)
             {
-                
+
                 dgvCarrito.Rows.Add(item.Nombre, item.Tamano, item.Precio.ToString("C2"));
             }
 
-            
+
             double total = listaCarrito.Sum(x => x.Precio);
             lblTotalCarrito.Text = "Total: $" + total.ToString("F2");
 
-           
+
             dgvCarrito.Refresh();
         }
 
@@ -145,13 +159,13 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnCafesFrios_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Botón presionado, intentando cargar: Cafés fríos");
-            CargarCatalogo("Cafés fríos");
+
+            CargarCatalogo("Cafes frios");
         }
 
         private void btnCafesCalientes_Click(object sender, EventArgs e)
         {
-            CargarCatalogo("Cafés calientes");
+            CargarCatalogo("Cafes calientes");
         }
 
         private void btnPostres_Click(object sender, EventArgs e)
@@ -178,19 +192,19 @@ namespace Starducks.Vista.CatalogoForms
 
                 string nombre = fila["nombre"].ToString();
                 string desc = fila["descripcion"].ToString();
-                double precio = Convert.ToDouble(fila["precio_tall"]);
-                byte[] imagenBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
+                // Obtenemos el nombre del archivo de la base de datos
+                string nombreArchivo = fila["foto"].ToString();
 
                 tarjeta.AsignarDatos(
-                nombre,
-                desc,
-                Convert.ToDouble(fila["precio_tall"]),    // Precio chico
-                Convert.ToDouble(fila["precio_grande"]),  // Precio mediano
-                Convert.ToDouble(fila["precio_venti"]),   // Precio grande
-                imagenBytes
-                 );
-                tarjeta.Margin = new Padding(12);
+                    nombre,
+                    desc,
+                    Convert.ToDouble(fila["precio_tall"]),    // Precio chico
+                    Convert.ToDouble(fila["precio_mediano"]),  // Precio mediano (corregido)
+                    Convert.ToDouble(fila["precio_grande"]),   // Precio grande
+                    nombreArchivo 
+                );
 
+                tarjeta.Margin = new Padding(12);
                 panelMenu.Controls.Add(tarjeta);
             }
         }
@@ -221,12 +235,12 @@ namespace Starducks.Vista.CatalogoForms
                 return;
             }
 
-            
+
             DialogResult confirmacion = MessageBox.Show("¿Finalizar pedido?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirmacion == DialogResult.Yes)
             {
-                
+
                 ProductoController controller = new ProductoController();
                 double total = listaCarrito.Sum(item => item.Precio);
                 controller.GuardarPedido(total, listaCarrito);
@@ -246,8 +260,8 @@ namespace Starducks.Vista.CatalogoForms
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            
-            float y = 50; 
+
+            float y = 50;
             float anchoHoja = e.PageBounds.Width;
 
             StringFormat formatoCentro = new StringFormat();
@@ -262,7 +276,7 @@ namespace Starducks.Vista.CatalogoForms
             e.Graphics.DrawLine(Pens.Black, anchoHoja * 0.1f, y, anchoHoja * 0.9f, y);
             y += 30;
 
-            float xIzquierda = anchoHoja * 0.15f; 
+            float xIzquierda = anchoHoja * 0.15f;
             foreach (var item in listaCarrito)
             {
                 string linea = $"{item.Nombre} ({item.Tamano}) - ${item.Precio:F2}";
@@ -276,6 +290,44 @@ namespace Starducks.Vista.CatalogoForms
             y += 30;
             e.Graphics.DrawString("TOTAL A PAGAR: $" + listaCarrito.Sum(i => i.Precio).ToString("F2"),
                                   new Font("Arial", 14, FontStyle.Bold), Brushes.Black, anchoHoja / 2, y, formatoCentro);
+        }
+
+        private void flowLayoutPanelPanelProductos_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnCafefrio_Click(object sender, EventArgs e)
+        {
+
+            CargarCatalogo("Cafes frios");
+        }
+
+        private void btnCafecaliente_Click(object sender, EventArgs e)
+        {
+            CargarCatalogo("Cafes calientes");
+        }
+
+        private void btnTodos_Click_1(object sender, EventArgs e)
+        {
+            CargarCatalogo("TODOS");
+        }
+
+        private void txtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            flowLayoutPanelPanelProductos.Controls.Clear();
+
+            string busqueda = txtBusqueda.Text;
+
+            // Si la barra está vacía, cargamos el catálogo completo normalmente
+            if (string.IsNullOrWhiteSpace(busqueda))
+            {
+                CargarCatalogo();
+            }
+            else
+            {
+                CargarCatalogo(txtBusqueda.Text);
+            }
         }
     }
 }

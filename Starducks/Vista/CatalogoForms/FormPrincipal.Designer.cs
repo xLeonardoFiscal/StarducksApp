@@ -106,6 +106,7 @@
             btnCafefrio.TabIndex = 1;
             btnCafefrio.Text = "CAFES FRIOS";
             btnCafefrio.UseVisualStyleBackColor = false;
+            btnCafefrio.Click += btnCafefrio_Click;
             // 
             // btnCafecaliente
             // 
@@ -119,6 +120,7 @@
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = false;
+            btnCafecaliente.Click += btnCafecaliente_Click;
             // 
             // btnTodos
             // 
@@ -132,6 +134,7 @@
             btnTodos.TabIndex = 0;
             btnTodos.Text = "TODOS";
             btnTodos.UseVisualStyleBackColor = false;
+            btnTodos.Click += btnTodos_Click_1;
             // 
             // txtBusqueda
             // 
@@ -139,6 +142,7 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(203, 27);
             txtBusqueda.TabIndex = 1;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lblTitulo
             // 
@@ -170,6 +174,7 @@
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
             flowLayoutPanelPanelProductos.Size = new Size(828, 503);
             flowLayoutPanelPanelProductos.TabIndex = 2;
+            flowLayoutPanelPanelProductos.Paint += flowLayoutPanelPanelProductos_Paint;
             // 
             // dgvCarrito
             // 
