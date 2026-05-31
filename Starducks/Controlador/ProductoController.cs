@@ -95,38 +95,38 @@ namespace Starducks.Controlador
         }
         public DataTable BuscarProductos(string categoria)
         {
+            System.Windows.Forms.MessageBox.Show("Buscando en BD la categoría: [" + categoria + "]");
             DataTable tabla = new DataTable();
-            using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
+            try
             {
-                string query = "";
-
-                if (categoria == "TODOS")
+                using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
                 {
-                    query = "SELECT * FROM productos";
-                }
-                else
-                {
-                    // Usamos un JOIN para conectar la tabla productos con categorias_producto
-                    // Filtramos por el nombre de la categoría, no por una columna inexistente
-                    query = @"SELECT p.* FROM productos p 
-                      INNER JOIN categorias_producto c ON p.id_categoria = c.id_categoria 
-                      WHERE c.nombre = @cat";
-                }
+                    string query = (categoria == "TODOS")
+                        ? "SELECT * FROM productos"
+        : @"SELECT p.* FROM productos p 
+            INNER JOIN categorias_producto c ON p.id_categoria = c.id_categoria 
+            WHERE c.nombre COLLATE utf8mb4_unicode_ci = @cat COLLATE utf8mb4_unicode_ci";
 
-                using (MySqlCommand cmd = new MySqlCommand(query, conexion))
-                {
-                    if (categoria != "TODOS")
-                        cmd.Parameters.AddWithValue("@cat", categoria);
-
-                    using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                    using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
-                        da.Fill(tabla);
+                        if (categoria != "TODOS")
+                            cmd.Parameters.AddWithValue("@cat", categoria);
+
+                        using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                        {
+                            da.Fill(tabla);
+                        }
                     }
                 }
             }
-            return tabla;
+            catch (Exception ex)
+            {
+                // Es vital que si falla, al menos devuelva la tabla vacía o maneje el error
+                System.Windows.Forms.MessageBox.Show("Error: " + ex.Message);
+            }
+            return tabla; // <--- ESTO DEBE ESTAR SIEMPRE AQUÍ, FUERA DEL TRY/CATCH
         }
-    }  
-    
+    }
 }
+
 

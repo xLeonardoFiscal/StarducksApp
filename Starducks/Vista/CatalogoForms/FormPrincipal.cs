@@ -13,7 +13,8 @@ namespace Starducks.Vista.CatalogoForms
     public partial class FormPrincipal : Form
 
     {
-        public List<Starducks.Vista.CatalogoForms.ItemCarrito> listaCarrito = new List<Starducks.Vista.CatalogoForms.ItemCarrito>();
+        private Starducks.Controlador.ProductoController controlador = new Starducks.Controlador.ProductoController();
+        private List<Starducks.Vista.CatalogoForms.ItemCarrito> listaCarrito = new List<Starducks.Vista.CatalogoForms.ItemCarrito>();
         public FormPrincipal()
         {
             InitializeComponent();
@@ -132,17 +133,18 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnCafesFrios_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Botón presionado, intentando cargar: Cafés fríos");
             CargarCatalogo("Cafés fríos");
         }
 
         private void btnCafesCalientes_Click(object sender, EventArgs e)
         {
-            CargarCatalogo("CAFES CALIENTES");
+            CargarCatalogo("Cafés calientes");
         }
 
         private void btnPostres_Click(object sender, EventArgs e)
         {
-            CargarCatalogo("POSTRES");
+            CargarCatalogo("Postres");
         }
         private void BuscarCatalogo(string textoBusqueda)
         {

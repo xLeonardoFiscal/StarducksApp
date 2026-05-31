@@ -80,7 +80,7 @@
             btnCafefrio.TabIndex = 1;
             btnCafefrio.Text = "CAFES FRIOS";
             btnCafefrio.UseVisualStyleBackColor = true;
-            btnCafefrio.Click += btnCafefrio_Click;
+            
             // 
             // btnCafecaliente
             // 
@@ -91,7 +91,7 @@
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = true;
-            btnCafecaliente.Click += btnCafecaliente_Click;
+            
             // 
             // btnTodos
             // 
