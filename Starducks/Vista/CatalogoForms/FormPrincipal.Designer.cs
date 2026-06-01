@@ -66,9 +66,8 @@
             panelBusqueda.ForeColor = SystemColors.ControlText;
             panelBusqueda.Location = new Point(0, 0);
             panelBusqueda.Name = "panelBusqueda";
-            panelBusqueda.Size = new Size(988, 81);
+            panelBusqueda.Size = new Size(1914, 81);
             panelBusqueda.TabIndex = 0;
-            panelBusqueda.Paint += panel1_Paint;
             // 
             // pcbLogoCatalogo
             // 
@@ -92,7 +91,6 @@
             btnPostres.TabIndex = 3;
             btnPostres.Text = "POSTRES";
             btnPostres.UseVisualStyleBackColor = false;
-            btnPostres.Click += btnPostres_Click;
             // 
             // btnCafefrio
             // 
@@ -139,6 +137,7 @@
             txtBusqueda.Name = "txtBusqueda";
             txtBusqueda.Size = new Size(203, 27);
             txtBusqueda.TabIndex = 1;
+            txtBusqueda.TextChanged += txtBusqueda_TextChanged;
             // 
             // lblTitulo
             // 
@@ -157,7 +156,7 @@
             panelMenu.Dock = DockStyle.Top;
             panelMenu.Location = new Point(0, 81);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(988, 10);
+            panelMenu.Size = new Size(1914, 10);
             panelMenu.TabIndex = 1;
             // 
             // flowLayoutPanelPanelProductos
@@ -168,8 +167,9 @@
             flowLayoutPanelPanelProductos.ForeColor = Color.White;
             flowLayoutPanelPanelProductos.Location = new Point(0, 91);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(828, 503);
+            flowLayoutPanelPanelProductos.Size = new Size(828, 770);
             flowLayoutPanelPanelProductos.TabIndex = 2;
+            flowLayoutPanelPanelProductos.Paint += flowLayoutPanelPanelProductos_Paint_1;
             // 
             // dgvCarrito
             // 
@@ -234,7 +234,6 @@
             btnPagar.TabIndex = 0;
             btnPagar.Text = "Pagar";
             btnPagar.UseVisualStyleBackColor = false;
-            btnPagar.Click += btnPagar_Click;
             // 
             // lblTotalCarrito
             // 
@@ -245,16 +244,12 @@
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
             // 
-            // printDocument1
-            // 
-            printDocument1.PrintPage += printDocument1_PrintPage;
-            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(117, 159, 137);
-            ClientSize = new Size(988, 594);
+            ClientSize = new Size(1914, 861);
             Controls.Add(lblTotalCarrito);
             Controls.Add(dgvCarrito);
             Controls.Add(btnPagar);
@@ -264,7 +259,7 @@
             Controls.Add(panelBusqueda);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
-            Load += FormPrincipal_Load;
+            Load += FormPrincipal_Load_1;
             panelBusqueda.ResumeLayout(false);
             panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).EndInit();

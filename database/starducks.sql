@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: starducks
+-- Host: localhost    Database: starducks
 -- ------------------------------------------------------
 -- Server version	8.0.45
 
@@ -36,7 +36,7 @@ CREATE TABLE `categorias_producto` (
 
 LOCK TABLES `categorias_producto` WRITE;
 /*!40000 ALTER TABLE `categorias_producto` DISABLE KEYS */;
-INSERT INTO `categorias_producto` VALUES (1,'Cafés fríos','Bebidas frías'),(2,'Cafés calientes','Bebidas calientes'),(3,'Postres','Dulces');
+INSERT INTO `categorias_producto` VALUES (1,'cafes frios','Bebidas frias'),(2,'Cafes calientes','Bebidas calientes'),(3,'Postres','Dulces');
 /*!40000 ALTER TABLE `categorias_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,1,1,'2026-05-27 18:36:35','Latte Helado',130.00,'pendiente'),(2,2,2,'2026-05-27 18:36:35','Capuccino',65.00,'pendiente'),(3,3,3,'2026-05-27 18:36:35','Frappe de café',140.00,'pendiente'),(4,1,2,'2026-05-27 18:36:35','Café mocha',70.00,'pendiente'),(5,2,1,'2026-05-27 18:36:35','Cold brew',80.00,'pendiente'),(6,3,2,'2026-05-27 18:36:35','Espresso',40.00,'pendiente'),(7,1,3,'2026-05-27 18:36:35','Tiramisú',60.00,'pendiente'),(8,2,3,'2026-05-27 18:36:35','Croissant',35.00,'pendiente'),(9,3,1,'2026-05-27 18:36:35','Mocha helado',75.00,'pendiente'),(10,1,1,'2026-05-27 18:36:35','Brownie de chocolate',50.00,'pendiente'),(11,1,1,'2026-05-27 18:36:38',NULL,150.00,'pendiente');
+INSERT INTO `pedidos` VALUES (1,1,1,'2026-05-27 18:36:35','Latte Helado',130.00,'pendiente'),(2,2,2,'2026-05-27 18:36:35','Capuccino',65.00,'pendiente'),(3,3,3,'2026-05-27 18:36:35','Frappe de café',140.00,'pendiente'),(4,1,2,'2026-05-27 18:36:35','Cafe mocha',70.00,'pendiente'),(5,2,1,'2026-05-27 18:36:35','Cold brew',80.00,'pendiente'),(6,3,2,'2026-05-27 18:36:35','Espresso',40.00,'pendiente'),(7,1,3,'2026-05-27 18:36:35','Tiramisú',60.00,'pendiente'),(8,2,3,'2026-05-27 18:36:35','Croissant',35.00,'pendiente'),(9,3,1,'2026-05-27 18:36:35','Mocha helado',75.00,'pendiente'),(10,1,1,'2026-05-27 18:36:35','Brownie de chocolate',50.00,'pendiente'),(11,1,1,'2026-05-27 18:36:38',NULL,150.00,'pendiente');
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,7 @@ CREATE TABLE `productos` (
   `precio_grande` decimal(8,2) NOT NULL,
   `precio_venti` decimal(8,2) NOT NULL,
   `disponible` tinyint DEFAULT '1',
-  `foto` mediumblob,
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `fk_producto_categoria` (`id_categoria`),
   CONSTRAINT `fk_producto_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categorias_producto` (`id_categoria`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -134,7 +134,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,1,'Frappe de café','Bebida fría',60.00,70.00,80.00,1,NULL),(2,1,'Latte Helado','Café frío con leche',55.00,65.00,75.00,1,NULL),(3,1,'Mocha helado','Café frío con chocolate',65.00,75.00,85.00,1,NULL),(4,1,'Iced americano','Café frío',50.00,60.00,70.00,1,NULL),(5,1,'Cold brew','Café infusionado en frío',70.00,80.00,90.00,1,NULL),(6,2,'Espresso','Café concentrado',40.00,50.00,60.00,1,NULL),(7,2,'Capuccino','Café con espuma',55.00,65.00,75.00,1,NULL),(8,2,'Café América','Café clásico',45.00,55.00,65.00,1,NULL),(9,2,'Café mocha','Café con chocolate',60.00,70.00,80.00,1,NULL),(10,2,'Café latte','Café con leche',50.00,60.00,70.00,1,NULL),(11,3,'Cheesecake','Pastel de queso',50.00,60.00,70.00,1,NULL),(12,3,'Croissant','Pan dulce',35.00,45.00,55.00,1,NULL),(13,3,'Brownie de chocolate','Postre de chocolate',40.00,50.00,60.00,1,NULL),(14,3,'Pay de queso','Postre cremoso',45.00,55.00,65.00,1,NULL),(15,3,'Tiramisú','Postre italiano',60.00,70.00,80.00,1,NULL);
+INSERT INTO `productos` VALUES (1,1,'Frappe de cafe','Bebida fria',60.00,70.00,80.00,1,'frio_caramel.jpg'),(2,1,'Latte Helado','Cafe frio con leche',55.00,65.00,75.00,1,'frio_frappevainilla.jpg'),(3,1,'Mocha helado','Cafe frio con chocolate',65.00,75.00,85.00,1,'frio_mochahelado.png'),(4,1,'Iced americano','Cafe frio',50.00,60.00,70.00,1,'cal_americano.jpg'),(5,1,'Cold brew','Cafe infusionado en frio',70.00,80.00,90.00,1,'frio_coldbrew.jpg'),(6,2,'Espresso','Cafe concentrado',40.00,50.00,60.00,1,'cal_espresso.jpg'),(7,2,'Capuccino','Cafe con espuma',55.00,65.00,75.00,1,'cal_cappuccino.jpg'),(8,2,'Cafe America','Cafe clasico',45.00,55.00,65.00,1,'frio_icedlatte.jpg'),(9,2,'Cafe mocha','Cafe con chocolate',60.00,70.00,80.00,1,'frio_frappemocha.jpg'),(10,2,'Cafe latte','Cafe con leche',50.00,60.00,70.00,1,'cal_latte.jpg'),(11,3,'Cheesecake','Pastel de queso',50.00,60.00,70.00,1,'postre_cheesecake.jpg'),(12,3,'Croissant','Pan dulce',35.00,45.00,55.00,1,'postre_muffin.jpg'),(13,3,'Brownie de chocolate','Postre de chocolate',40.00,50.00,60.00,1,'postre_croissant.png'),(14,3,'Pay de queso','Postre cremoso',45.00,55.00,65.00,1,'postre_brownie.png'),(15,3,'Tiramisu','Postre italiano',60.00,70.00,80.00,1,'postre_pay.png');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,4 +275,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-27 18:44:55
+-- Dump completed on 2026-06-01 11:39:26

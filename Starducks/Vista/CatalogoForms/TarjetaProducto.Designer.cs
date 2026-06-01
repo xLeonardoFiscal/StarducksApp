@@ -47,6 +47,7 @@
             pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
+            pbImagen.Click += pbImagen_Click;
             // 
             // lblNombre
             // 
@@ -127,7 +128,7 @@
             Controls.Add(lblDescripcion);
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
-            Size = new Size(220, 320);
+            Size = new Size(220, 386);
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

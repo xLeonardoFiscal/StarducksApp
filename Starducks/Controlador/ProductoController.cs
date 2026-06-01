@@ -47,7 +47,7 @@ namespace Starducks.Controlador
                 }
                 catch (Exception ex)
                 {
-                    System.Windows.Forms.MessageBox.Show("Error al consultar productos: " + ex.Message);
+                    //System.Windows.Forms.MessageBox.Show("Error al consultar productos: " + ex.Message);
                 }
                 finally
                 {
@@ -73,14 +73,14 @@ namespace Starducks.Controlador
                     cmd.Parameters.AddWithValue("@precio_tall", precio);
                     cmd.Parameters.AddWithValue("@categoria", categoria);
 
-                    // Si el usuario no seleccionó imagen, guardamos un valor nulo en la BD
+
                     if (imagenBytes != null)
                         cmd.Parameters.AddWithValue("@foto", imagenBytes);
                     else
                         cmd.Parameters.AddWithValue("@foto", DBNull.Value);
 
                     int filasAfectadas = cmd.ExecuteNonQuery();
-                    return filasAfectadas > 0; // Retorna true si se guardó con éxito
+                    return filasAfectadas > 0;
                 }
             }
             catch (Exception ex)
@@ -90,27 +90,38 @@ namespace Starducks.Controlador
             }
             finally
             {
-                con.Close(); // Cerramos la conexión siempre
+                con.Close();
             }
         }
-        public DataTable BuscarProductos(string categoria)
+        public DataTable BuscarProductos(string filtro)
         {
-            System.Windows.Forms.MessageBox.Show("Buscando en BD la categoría: [" + categoria + "]");
             DataTable tabla = new DataTable();
             try
             {
                 using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
                 {
-                    string query = (categoria == "TODOS")
-                        ? "SELECT * FROM productos"
-        : @"SELECT p.* FROM productos p 
-            INNER JOIN categorias_producto c ON p.id_categoria = c.id_categoria 
-            WHERE c.nombre COLLATE utf8mb4_unicode_ci = @cat COLLATE utf8mb4_unicode_ci";
+                    string query = "";
+
+                    if (filtro == "TODOS")
+                    {
+                        query = "SELECT * FROM productos";
+                    }
+                    else
+                    {
+                        
+                        query = @"SELECT p.* FROM productos p 
+                          LEFT JOIN categorias_producto c ON p.id_categoria = c.id_categoria 
+                          WHERE c.nombre COLLATE utf8mb4_unicode_ci = @filtro 
+                          OR p.nombre LIKE @filtroBusqueda";
+                    }
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
-                        if (categoria != "TODOS")
-                            cmd.Parameters.AddWithValue("@cat", categoria);
+                        if (filtro != "TODOS")
+                        {
+                            cmd.Parameters.AddWithValue("@filtro", filtro);
+                            cmd.Parameters.AddWithValue("@filtroBusqueda", "%" + filtro + "%");
+                        }
 
                         using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
                         {
@@ -121,10 +132,9 @@ namespace Starducks.Controlador
             }
             catch (Exception ex)
             {
-                // Es vital que si falla, al menos devuelva la tabla vacía o maneje el error
                 System.Windows.Forms.MessageBox.Show("Error: " + ex.Message);
             }
-            return tabla; // <--- ESTO DEBE ESTAR SIEMPRE AQUÍ, FUERA DEL TRY/CATCH
+            return tabla;
         }
         public bool GuardarPedido(double total, List<Starducks.Vista.CatalogoForms.ItemCarrito> carrito)
         {
@@ -141,7 +151,7 @@ namespace Starducks.Controlador
                         cmdPedido.Parameters.AddWithValue("@total", total);
                         cmdPedido.ExecuteNonQuery();
 
-                        long idPedido = cmdPedido.LastInsertedId; // Obtenemos el ID del pedido recién creado
+                        long idPedido = cmdPedido.LastInsertedId; 
 
                         // 2. Guardar Detalles
                         foreach (var item in carrito)
@@ -155,12 +165,12 @@ namespace Starducks.Controlador
                             cmdDetalle.ExecuteNonQuery();
                         }
 
-                        transaccion.Commit(); // Todo salió bien
+                        transaccion.Commit(); 
                         return true;
                     }
                     catch
                     {
-                        transaccion.Rollback(); // Algo falló, cancelamos todo
+                        transaccion.Rollback();
                         return false;
                     }
                 }
