@@ -21,6 +21,7 @@ namespace Starducks.Vista.CatalogoForms
         {
             InitializeComponent();
             CargarCatalogo();
+            this.WindowState = FormWindowState.Maximized; // PANTALLA COMPLETA
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void CargarCatalogo(string filtro = "")
         {
-            
+
 
             // 1. LIMPIEZA
             flowLayoutPanelPanelProductos.Controls.Clear();
@@ -57,17 +58,22 @@ namespace Starducks.Vista.CatalogoForms
                 {
                     TarjetaProducto tarjeta = new TarjetaProducto();
 
-                    byte[] misBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
+                    // Esto ahora es un nombre de archivo, no un BLOB
+                    string nombreArchivo = fila["foto"].ToString().Trim();
 
-                    
                     tarjeta.AsignarDatos(
                         fila["nombre"].ToString(),
                         fila["descripcion"].ToString(),
-                        Convert.ToDouble(fila["precio_tall"]),  // Precio Chico
-                        Convert.ToDouble(fila["precio_grande"]),// Precio Mediano
-                        Convert.ToDouble(fila["precio_venti"]), // Precio Grande
-                        misBytes 
+                        Convert.ToDouble(fila["precio_tall"]),
+                        Convert.ToDouble(fila["precio_grande"]),
+                        Convert.ToDouble(fila["precio_venti"]),
+                        nombreArchivo // Pasamos el nombre del archivo para que la clase lo cargue
                     );
+
+                    panelMenu.Controls.Add(tarjeta);
+
+                    panelMenu.Controls.Add(tarjeta);
+
 
                     tarjeta.Margin = new Padding(12);
                     panelMenu.Controls.Add(tarjeta);
@@ -196,19 +202,20 @@ namespace Starducks.Vista.CatalogoForms
             {
                 TarjetaProducto tarjeta = new TarjetaProducto();
 
-                string nombre = fila["nombre"].ToString();
-                string desc = fila["descripcion"].ToString();
-                // Obtenemos el nombre del archivo de la base de datos
-                byte[] imagenBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
+                // Extraemos el nombre del archivo como texto (asegúrate de que en la BD 
+                // la columna 'foto' contenga el nombre, ej: 'cal_americano.jpg')
+                string nombreArchivo = fila["foto"] != DBNull.Value ? fila["foto"].ToString() : "";
 
                 tarjeta.AsignarDatos(
-                    nombre,
-                    desc,
+                    fila["nombre"].ToString(),
+                    fila["descripcion"].ToString(),
                     Convert.ToDouble(fila["precio_tall"]),
-                    Convert.ToDouble(fila["precio_mediano"]),
                     Convert.ToDouble(fila["precio_grande"]),
-                    imagenBytes
+                    Convert.ToDouble(fila["precio_venti"]),
+                    nombreArchivo // Ahora pasamos un string, no un byte[]
                 );
+
+                panelMenu.Controls.Add(tarjeta);
             }
         }
 
@@ -334,6 +341,11 @@ namespace Starducks.Vista.CatalogoForms
         }
 
         private void flowLayoutPanelPanelProductos_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void FormPrincipal_Load_1(object sender, EventArgs e)
         {
 
         }

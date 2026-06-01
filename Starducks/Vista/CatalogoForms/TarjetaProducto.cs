@@ -7,7 +7,7 @@ namespace Starducks.Vista.CatalogoForms
 {
     public partial class TarjetaProducto : UserControl
     {
-        
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double PrecioChico { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -30,35 +30,25 @@ namespace Starducks.Vista.CatalogoForms
             btnAgregar.Click += btnAgregar_Click;
         }
 
-        public void AsignarDatos(string nombre, string desc, double pChico, double pMediano, double pGrande, byte[] imagenBytes)
+        public void AsignarDatos(string nombre, string desc, double pTall, double pGrande, double pVenti, string nombreArchivo)
         {
             lblNombre.Text = nombre;
             lblDescripcion.Text = desc;
+            this.PrecioChico = pTall;
+            this.PrecioMediano = pGrande;
+            this.PrecioGrande = pVenti;
 
-            
-            this.PrecioChico = pChico;
-            this.PrecioMediano = pMediano;
-            this.PrecioGrande = pGrande;
+            // Buscamos el archivo en la carpeta "Imagenes" usando el nombre recibido
+            string rutaCompleta = Path.Combine(Application.StartupPath, "Imagenes", nombreArchivo);
 
-            /
-            if (imagenBytes != null && imagenBytes.Length > 0)
+            if (File.Exists(rutaCompleta))
             {
-                try
-                {
-                    using (MemoryStream ms = new MemoryStream(imagenBytes))
-                    {
-                        // Intentamos cargar la imagen
-                        Image img = Image.FromStream(ms);
-                        pbImagen.Image = img;
-                        pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
-                    }
-                }
-                catch (ArgumentException)
-                {
-                    
-                    pbImagen.Image = null;
-                    
-                }
+                pbImagen.Image = Image.FromFile(rutaCompleta);
+                pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else
+            {
+                pbImagen.Image = null; // O una imagen de error
             }
         }
 
@@ -74,7 +64,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void cmbTamano_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             switch (cmbTamano.SelectedItem.ToString())
             {
                 case "Chico":
@@ -91,21 +81,21 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-           
+
             OnAgregarAlCarrito?.Invoke(this, EventArgs.Empty);
         }
         private void TarjetaProducto_Load(object sender, EventArgs e)
         {
             System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            int radio = 20; 
+            int radio = 20;
 
-           
+
             path.AddArc(0, 0, radio, radio, 180, 90);
             path.AddArc(this.Width - radio, 0, radio, radio, 270, 90);
             path.AddArc(this.Width - radio, this.Height - radio, radio, radio, 0, 90);
             path.AddArc(0, this.Height - radio, radio, radio, 90, 90);
 
-            
+
             this.Region = new System.Drawing.Region(path);
         }
 
@@ -117,14 +107,17 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        private void pbImagen_Click(object sender, EventArgs e)
+        {
 
-        
+        }
+
         public string NombreSeleccionado => lblNombre.Text;
         public string TamanoSeleccionado => cmbTamano.SelectedItem.ToString();
         public string PrecioFinal => lblPrecio.Text;
 
         public string NombreProducto => lblNombre.Text;
-        public double PrecioChicoVal => PrecioChico; 
+        public double PrecioChicoVal => PrecioChico;
         public double PrecioMedianoVal => PrecioMediano;
         public double PrecioGrandeVal => PrecioGrande;
 

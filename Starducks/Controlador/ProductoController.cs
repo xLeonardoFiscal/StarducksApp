@@ -73,14 +73,15 @@ namespace Starducks.Controlador
                     cmd.Parameters.AddWithValue("@precio_tall", precio);
                     cmd.Parameters.AddWithValue("@categoria", categoria);
 
-                    
+
                     if (imagenBytes != null)
                         cmd.Parameters.AddWithValue("@foto", imagenBytes);
                     else
                         cmd.Parameters.AddWithValue("@foto", DBNull.Value);
 
                     int filasAfectadas = cmd.ExecuteNonQuery();
-                    return filasAfectadas > 0; 
+                    return filasAfectadas > 0;
+                }
             }
             catch (Exception ex)
             {
@@ -89,7 +90,7 @@ namespace Starducks.Controlador
             }
             finally
             {
-                con.Close(); 
+                con.Close();
             }
         }
         public DataTable BuscarProductos(string filtro)
