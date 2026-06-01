@@ -73,15 +73,14 @@ namespace Starducks.Controlador
                     cmd.Parameters.AddWithValue("@precio_tall", precio);
                     cmd.Parameters.AddWithValue("@categoria", categoria);
 
-                    // Si el usuario no seleccionó imagen, guardamos un valor nulo en la BD
+                    
                     if (imagenBytes != null)
                         cmd.Parameters.AddWithValue("@foto", imagenBytes);
                     else
                         cmd.Parameters.AddWithValue("@foto", DBNull.Value);
 
                     int filasAfectadas = cmd.ExecuteNonQuery();
-                    return filasAfectadas > 0; // Retorna true si se guardó con éxito
-                }
+                    return filasAfectadas > 0; 
             }
             catch (Exception ex)
             {
@@ -90,7 +89,7 @@ namespace Starducks.Controlador
             }
             finally
             {
-                con.Close(); // Cerramos la conexión siempre
+                con.Close(); 
             }
         }
         public DataTable BuscarProductos(string filtro)
@@ -108,7 +107,7 @@ namespace Starducks.Controlador
                     }
                     else
                     {
-                        // Buscamos si el filtro es una categoría O el nombre del producto
+                        
                         query = @"SELECT p.* FROM productos p 
                           LEFT JOIN categorias_producto c ON p.id_categoria = c.id_categoria 
                           WHERE c.nombre COLLATE utf8mb4_unicode_ci = @filtro 
@@ -151,7 +150,7 @@ namespace Starducks.Controlador
                         cmdPedido.Parameters.AddWithValue("@total", total);
                         cmdPedido.ExecuteNonQuery();
 
-                        long idPedido = cmdPedido.LastInsertedId; // Obtenemos el ID del pedido recién creado
+                        long idPedido = cmdPedido.LastInsertedId; 
 
                         // 2. Guardar Detalles
                         foreach (var item in carrito)
@@ -165,12 +164,12 @@ namespace Starducks.Controlador
                             cmdDetalle.ExecuteNonQuery();
                         }
 
-                        transaccion.Commit(); // Todo salió bien
+                        transaccion.Commit(); 
                         return true;
                     }
                     catch
                     {
-                        transaccion.Rollback(); // Algo falló, cancelamos todo
+                        transaccion.Rollback();
                         return false;
                     }
                 }

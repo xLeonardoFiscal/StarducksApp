@@ -20,18 +20,19 @@ namespace Starducks.Vista.CatalogoForms
         public FormPrincipal()
         {
             InitializeComponent();
-
+            CargarCatalogo();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            BuscarCatalogo("TODOS");
+            CargarCatalogo();
         }
 
         private void CargarCatalogo(string filtro = "")
         {
             
+
             // 1. LIMPIEZA
             flowLayoutPanelPanelProductos.Controls.Clear();
 
@@ -39,6 +40,14 @@ namespace Starducks.Vista.CatalogoForms
             ProductoController controlador = new ProductoController();
             DataTable dtProductos = controlador.BuscarProductos(filtro);
 
+            if (dtProductos == null)
+            {
+                MessageBox.Show("El controlador devolvió NULL (error de conexión o consulta)");
+                return; // Detiene la ejecución aquí si hay error
+            }
+
+            // Esto te dirá si el problema es que la tabla está vacía en la base de datos
+            MessageBox.Show("Cantidad de productos encontrados: " + dtProductos.Rows.Count);
 
 
             // 3. DIBUJADO
@@ -48,23 +57,20 @@ namespace Starducks.Vista.CatalogoForms
                 {
                     TarjetaProducto tarjeta = new TarjetaProducto();
 
-                    double pChico = Convert.ToDouble(fila["precio_tall"]);
-                    double pMed = Convert.ToDouble(fila["precio_grande"]);
-                    double pGra = Convert.ToDouble(fila["precio_venti"]);
+                    byte[] misBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
 
-                    // AQUÍ ESTÁ EL CAMBIO:
-                    // 1. Obtenemos el nombre del archivo como string
-                    string nombreFoto = fila["foto"].ToString();
-
-                    // 2. Pasamos el nombreFoto en lugar de la variable 'imagen' (que era byte[])
+                    
                     tarjeta.AsignarDatos(
-                    fila["nombre"].ToString(),
-                    fila["descripcion"].ToString(),
-                    Convert.ToDouble(fila["precio_tall"]),    // pChico
-                    Convert.ToDouble(fila["precio_mediano"]), // pMed
-                    Convert.ToDouble(fila["precio_grande"]),  // pGra
-                     nombreFoto
+                        fila["nombre"].ToString(),
+                        fila["descripcion"].ToString(),
+                        Convert.ToDouble(fila["precio_tall"]),  // Precio Chico
+                        Convert.ToDouble(fila["precio_grande"]),// Precio Mediano
+                        Convert.ToDouble(fila["precio_venti"]), // Precio Grande
+                        misBytes 
                     );
+
+                    tarjeta.Margin = new Padding(12);
+                    panelMenu.Controls.Add(tarjeta);
 
                     // AÑADIMOS LA LÓGICA DEL CARRITO
                     tarjeta.OnAgregarAlCarrito += (s, e) =>
@@ -193,19 +199,16 @@ namespace Starducks.Vista.CatalogoForms
                 string nombre = fila["nombre"].ToString();
                 string desc = fila["descripcion"].ToString();
                 // Obtenemos el nombre del archivo de la base de datos
-                string nombreArchivo = fila["foto"].ToString();
+                byte[] imagenBytes = fila["foto"] != DBNull.Value ? (byte[])fila["foto"] : null;
 
                 tarjeta.AsignarDatos(
                     nombre,
                     desc,
-                    Convert.ToDouble(fila["precio_tall"]),    // Precio chico
-                    Convert.ToDouble(fila["precio_mediano"]),  // Precio mediano (corregido)
-                    Convert.ToDouble(fila["precio_grande"]),   // Precio grande
-                    nombreArchivo 
+                    Convert.ToDouble(fila["precio_tall"]),
+                    Convert.ToDouble(fila["precio_mediano"]),
+                    Convert.ToDouble(fila["precio_grande"]),
+                    imagenBytes
                 );
-
-                tarjeta.Margin = new Padding(12);
-                panelMenu.Controls.Add(tarjeta);
             }
         }
 
@@ -328,6 +331,11 @@ namespace Starducks.Vista.CatalogoForms
             {
                 CargarCatalogo(txtBusqueda.Text);
             }
+        }
+
+        private void flowLayoutPanelPanelProductos_Paint_1(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

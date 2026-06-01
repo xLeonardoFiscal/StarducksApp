@@ -68,7 +68,6 @@
             panelBusqueda.Name = "panelBusqueda";
             panelBusqueda.Size = new Size(988, 81);
             panelBusqueda.TabIndex = 0;
-            panelBusqueda.Paint += panel1_Paint;
             // 
             // pcbLogoCatalogo
             // 
@@ -92,7 +91,6 @@
             btnPostres.TabIndex = 3;
             btnPostres.Text = "POSTRES";
             btnPostres.UseVisualStyleBackColor = false;
-            btnPostres.Click += btnPostres_Click;
             // 
             // btnCafefrio
             // 
@@ -106,7 +104,6 @@
             btnCafefrio.TabIndex = 1;
             btnCafefrio.Text = "CAFES FRIOS";
             btnCafefrio.UseVisualStyleBackColor = false;
-            btnCafefrio.Click += btnCafefrio_Click;
             // 
             // btnCafecaliente
             // 
@@ -120,7 +117,6 @@
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = false;
-            btnCafecaliente.Click += btnCafecaliente_Click;
             // 
             // btnTodos
             // 
@@ -134,7 +130,6 @@
             btnTodos.TabIndex = 0;
             btnTodos.Text = "TODOS";
             btnTodos.UseVisualStyleBackColor = false;
-            btnTodos.Click += btnTodos_Click_1;
             // 
             // txtBusqueda
             // 
@@ -174,7 +169,7 @@
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
             flowLayoutPanelPanelProductos.Size = new Size(828, 503);
             flowLayoutPanelPanelProductos.TabIndex = 2;
-            flowLayoutPanelPanelProductos.Paint += flowLayoutPanelPanelProductos_Paint;
+            flowLayoutPanelPanelProductos.Paint += flowLayoutPanelPanelProductos_Paint_1;
             // 
             // dgvCarrito
             // 
@@ -239,7 +234,6 @@
             btnPagar.TabIndex = 0;
             btnPagar.Text = "Pagar";
             btnPagar.UseVisualStyleBackColor = false;
-            btnPagar.Click += btnPagar_Click;
             // 
             // lblTotalCarrito
             // 
@@ -249,10 +243,6 @@
             lblTotalCarrito.Size = new Size(84, 20);
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
-            // 
-            // printDocument1
-            // 
-            printDocument1.PrintPage += printDocument1_PrintPage;
             // 
             // FormPrincipal
             // 
@@ -269,7 +259,6 @@
             Controls.Add(panelBusqueda);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
-            Load += FormPrincipal_Load;
             panelBusqueda.ResumeLayout(false);
             panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).EndInit();

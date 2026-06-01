@@ -7,7 +7,7 @@ namespace Starducks.Vista.CatalogoForms
 {
     public partial class TarjetaProducto : UserControl
     {
-        // Propiedades para los precios
+        
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double PrecioChico { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -15,7 +15,6 @@ namespace Starducks.Vista.CatalogoForms
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double PrecioGrande { get; set; }
 
-        // Evento para que el Form principal sepa cuando agregamos algo
         public event EventHandler OnAgregarAlCarrito;
 
         public TarjetaProducto()
@@ -31,27 +30,34 @@ namespace Starducks.Vista.CatalogoForms
             btnAgregar.Click += btnAgregar_Click;
         }
 
-        public void AsignarDatos(string nombre, string desc, double pChico, double pMed, double pGra, byte[] imagenBytes, string archivo)
+        public void AsignarDatos(string nombre, string desc, double pChico, double pMediano, double pGrande, byte[] imagenBytes)
         {
             lblNombre.Text = nombre;
             lblDescripcion.Text = desc;
 
-            // 2. Guardar los precios en tus propiedades públicas
+            
             this.PrecioChico = pChico;
-            this.PrecioMediano = pMed;
-            this.PrecioGrande = pGra;
+            this.PrecioMediano = pMediano;
+            this.PrecioGrande = pGrande;
 
-            // 3. Mostrar el precio inicial (por ejemplo, el mediano)
-            lblPrecio.Text = "$" + pMed.ToString("F2");
-
-            string rutaCompleta = Path.Combine(Application.StartupPath, "imagenes", archivo);
-
-            if (File.Exists(rutaCompleta))
+            /
+            if (imagenBytes != null && imagenBytes.Length > 0)
             {
-                using (FileStream fs = new FileStream(rutaCompleta, FileMode.Open, FileAccess.Read))
+                try
                 {
-                    pbImagen.Image = Image.FromStream(fs);
-                    pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+                    using (MemoryStream ms = new MemoryStream(imagenBytes))
+                    {
+                        // Intentamos cargar la imagen
+                        Image img = Image.FromStream(ms);
+                        pbImagen.Image = img;
+                        pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    
+                    pbImagen.Image = null;
+                    
                 }
             }
         }
@@ -68,7 +74,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void cmbTamano_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Dependiendo de lo que elija el usuario, cambiamos el texto del lblPrecio
+            
             switch (cmbTamano.SelectedItem.ToString())
             {
                 case "Chico":
@@ -85,21 +91,21 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            // Disparar evento para que el Form principal capture la acción
+           
             OnAgregarAlCarrito?.Invoke(this, EventArgs.Empty);
         }
         private void TarjetaProducto_Load(object sender, EventArgs e)
         {
             System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            int radio = 20; // Ajusta el número para más o menos redondeo
+            int radio = 20; 
 
-            // Crear el recorte
+           
             path.AddArc(0, 0, radio, radio, 180, 90);
             path.AddArc(this.Width - radio, 0, radio, radio, 270, 90);
             path.AddArc(this.Width - radio, this.Height - radio, radio, radio, 0, 90);
             path.AddArc(0, this.Height - radio, radio, radio, 90, 90);
 
-            // Aplicar el recorte al control
+            
             this.Region = new System.Drawing.Region(path);
         }
 
@@ -111,13 +117,14 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
-        // Propiedades de acceso rápido para cuando se presione el botón en el Form principal
+
+        
         public string NombreSeleccionado => lblNombre.Text;
         public string TamanoSeleccionado => cmbTamano.SelectedItem.ToString();
         public string PrecioFinal => lblPrecio.Text;
 
         public string NombreProducto => lblNombre.Text;
-        public double PrecioChicoVal => PrecioChico; // Cambia el nombre si es necesario
+        public double PrecioChicoVal => PrecioChico; 
         public double PrecioMedianoVal => PrecioMediano;
         public double PrecioGrandeVal => PrecioGrande;
 
