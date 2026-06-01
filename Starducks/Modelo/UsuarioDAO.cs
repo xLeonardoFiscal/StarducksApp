@@ -27,7 +27,7 @@ namespace Starducks.Modelo
                 cmd.Parameters.AddWithValue("@Direccion", usuario.Direccion);
                 cmd.Parameters.AddWithValue("@Foto", usuario.Foto);
 
-                //Guarda la ruta de la imagen temporalmente
+                //Guardar la ruta de la imagen temporalmente
                 cmd.Parameters.AddWithValue("@foto", DBNull.Value);
 
                 int filas = cmd.ExecuteNonQuery();
