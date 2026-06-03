@@ -47,6 +47,7 @@
             btnPagar = new Button();
             lblTotalCarrito = new Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
+            btnReportesForm = new Button();
             panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
@@ -55,6 +56,7 @@
             // panelBusqueda
             // 
             panelBusqueda.BackColor = Color.White;
+            panelBusqueda.Controls.Add(btnReportesForm);
             panelBusqueda.Controls.Add(pcbLogoCatalogo);
             panelBusqueda.Controls.Add(btnPostres);
             panelBusqueda.Controls.Add(btnCafefrio);
@@ -244,6 +246,20 @@
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
             // 
+            // btnReportesForm
+            // 
+            btnReportesForm.BackColor = Color.Firebrick;
+            btnReportesForm.FlatStyle = FlatStyle.Flat;
+            btnReportesForm.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReportesForm.ForeColor = Color.White;
+            btnReportesForm.Location = new Point(969, 29);
+            btnReportesForm.Name = "btnReportesForm";
+            btnReportesForm.Size = new Size(108, 29);
+            btnReportesForm.TabIndex = 5;
+            btnReportesForm.Text = "REPORTES";
+            btnReportesForm.UseVisualStyleBackColor = false;
+            btnReportesForm.Click += btnReportesForm_Click;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -288,5 +304,6 @@
         private DataGridViewTextBoxColumn colPrecio;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PictureBox pcbLogoCatalogo;
+        private Button btnReportesForm;
     }
 }

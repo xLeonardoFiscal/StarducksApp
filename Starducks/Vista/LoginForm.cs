@@ -153,6 +153,8 @@ namespace Starducks.Vista
 
             if (usuario != null)
             {
+                Sesion.UsuarioActual = usuario.Nombre;
+
                 intentos = 0;
 
                 btnRegistrarse.Enabled = false; //Deshabilitamos los botones

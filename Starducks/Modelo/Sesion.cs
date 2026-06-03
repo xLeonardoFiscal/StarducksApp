@@ -6,5 +6,6 @@ namespace Starducks.Modelo
 {
     internal class Sesion
     {
+        public static string UsuarioActual { get; set; }
     }
 }

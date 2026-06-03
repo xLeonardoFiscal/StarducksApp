@@ -341,7 +341,7 @@
             // 
             // pbStarducks
             // 
-            pbStarducks.Image = (Image)resources.GetObject("pbStarducks.Image");
+            pbStarducks.Image = Properties.Resources.WhatsApp_Image_2026_05_17_at_1_35_04_PM;
             pbStarducks.Location = new Point(50, 172);
             pbStarducks.Name = "pbStarducks";
             pbStarducks.Size = new Size(419, 416);
