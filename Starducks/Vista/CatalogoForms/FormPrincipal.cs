@@ -306,5 +306,12 @@ namespace Starducks.Vista.CatalogoForms
                                   new Font("Arial", 14, FontStyle.Bold), Brushes.Black, anchoHoja / 2, y, formatoCentro);
 
         }
+
+        private void btnReportesForm_Click(object sender, EventArgs e)
+        {
+            ReportesForm reportes = new ReportesForm();
+            reportes.Show();
+            this.Hide();
+        }
     }
 }

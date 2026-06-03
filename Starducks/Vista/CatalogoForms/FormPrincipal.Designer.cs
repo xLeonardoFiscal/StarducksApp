@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             panelBusqueda = new Panel();
+            btnReportesForm = new Button();
             pcbLogoCatalogo = new PictureBox();
             btnPostres = new Button();
             btnCafefrio = new Button();
@@ -55,6 +56,7 @@
             // panelBusqueda
             // 
             panelBusqueda.BackColor = Color.White;
+            panelBusqueda.Controls.Add(btnReportesForm);
             panelBusqueda.Controls.Add(pcbLogoCatalogo);
             panelBusqueda.Controls.Add(btnPostres);
             panelBusqueda.Controls.Add(btnCafefrio);
@@ -66,8 +68,22 @@
             panelBusqueda.ForeColor = SystemColors.ControlText;
             panelBusqueda.Location = new Point(0, 0);
             panelBusqueda.Name = "panelBusqueda";
-            panelBusqueda.Size = new Size(1914, 81);
+            panelBusqueda.Size = new Size(1924, 81);
             panelBusqueda.TabIndex = 0;
+            // 
+            // btnReportesForm
+            // 
+            btnReportesForm.BackColor = Color.Firebrick;
+            btnReportesForm.FlatStyle = FlatStyle.Flat;
+            btnReportesForm.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReportesForm.ForeColor = Color.White;
+            btnReportesForm.Location = new Point(969, 29);
+            btnReportesForm.Name = "btnReportesForm";
+            btnReportesForm.Size = new Size(108, 29);
+            btnReportesForm.TabIndex = 5;
+            btnReportesForm.Text = "REPORTES";
+            btnReportesForm.UseVisualStyleBackColor = false;
+            btnReportesForm.Click += btnReportesForm_Click;
             // 
             // pcbLogoCatalogo
             // 
@@ -156,7 +172,7 @@
             panelMenu.Dock = DockStyle.Top;
             panelMenu.Location = new Point(0, 81);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(1914, 10);
+            panelMenu.Size = new Size(1924, 10);
             panelMenu.TabIndex = 1;
             // 
             // flowLayoutPanelPanelProductos
@@ -167,7 +183,7 @@
             flowLayoutPanelPanelProductos.ForeColor = Color.White;
             flowLayoutPanelPanelProductos.Location = new Point(0, 91);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(1065, 770);
+            flowLayoutPanelPanelProductos.Size = new Size(1463, 770);
             flowLayoutPanelPanelProductos.TabIndex = 2;
             // 
             // dgvCarrito
@@ -176,15 +192,15 @@
             dgvCarrito.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarrito.Columns.AddRange(new DataGridViewColumn[] { colNombre, colTamano, colPrecio });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 98, 65);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvCarrito.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvCarrito.Location = new Point(1071, 121);
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 98, 65);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvCarrito.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvCarrito.Location = new Point(1482, 117);
             dgvCarrito.Name = "dgvCarrito";
             dgvCarrito.RowHeadersWidth = 51;
             dgvCarrito.Size = new Size(430, 405);
@@ -215,7 +231,7 @@
             // 
             lblTituloPedido.AutoSize = true;
             lblTituloPedido.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloPedido.Location = new Point(1263, 94);
+            lblTituloPedido.Location = new Point(1653, 94);
             lblTituloPedido.Name = "lblTituloPedido";
             lblTituloPedido.Size = new Size(126, 24);
             lblTituloPedido.TabIndex = 0;
@@ -227,7 +243,7 @@
             btnPagar.FlatStyle = FlatStyle.Flat;
             btnPagar.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPagar.ForeColor = Color.Gold;
-            btnPagar.Location = new Point(1240, 575);
+            btnPagar.Location = new Point(1653, 597);
             btnPagar.Name = "btnPagar";
             btnPagar.Size = new Size(94, 38);
             btnPagar.TabIndex = 0;
@@ -238,7 +254,7 @@
             // lblTotalCarrito
             // 
             lblTotalCarrito.AutoSize = true;
-            lblTotalCarrito.Location = new Point(1228, 529);
+            lblTotalCarrito.Location = new Point(1663, 561);
             lblTotalCarrito.Name = "lblTotalCarrito";
             lblTotalCarrito.Size = new Size(84, 20);
             lblTotalCarrito.TabIndex = 4;
@@ -253,7 +269,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(117, 159, 137);
-            ClientSize = new Size(1914, 861);
+            ClientSize = new Size(1924, 861);
             Controls.Add(lblTotalCarrito);
             Controls.Add(dgvCarrito);
             Controls.Add(btnPagar);
@@ -291,5 +307,6 @@
         private DataGridViewTextBoxColumn colPrecio;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PictureBox pcbLogoCatalogo;
+        private Button btnReportesForm;
     }
 }
