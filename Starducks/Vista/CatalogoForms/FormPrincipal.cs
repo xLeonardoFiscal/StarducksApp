@@ -313,5 +313,12 @@ namespace Starducks.Vista.CatalogoForms
             reportes.Show();
             this.Hide();
         }
+
+        private void btnReportesForm_Click(object sender, EventArgs e)
+        {
+            ReportesForm reportes = new ReportesForm();
+            reportes.Show();
+            this.Hide();
+        }
     }
 }
