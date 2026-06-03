@@ -17,6 +17,7 @@ namespace Starducks.Vista.CatalogoForms
 
         public event EventHandler OnAgregarAlCarrito;
 
+        // TARJETA PRODUCTO PRINCIPAL
         public TarjetaProducto()
         {
             InitializeComponent();
@@ -30,6 +31,7 @@ namespace Starducks.Vista.CatalogoForms
             btnAgregar.Click += btnAgregar_Click;
         }
 
+        //ASIGNAR DATOS DE PRINCIPAL
         public void AsignarDatos(string nombre, string desc, double pTall, double pGrande, double pVenti, string nombreArchivo)
         {
             lblNombre.Text = nombre;
@@ -52,6 +54,7 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        //ACTUALIZACION DE LOS PRECIOS AL ELEGIR EL TAMAÑO
         private void ActualizarPrecio()
         {
             switch (cmbTamano.SelectedItem.ToString())
@@ -62,6 +65,7 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        //EL BOTON DE ELEGIR LOS TAMAÑOS
         private void cmbTamano_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -79,11 +83,14 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        //BOTON DE AÑADIR 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
             OnAgregarAlCarrito?.Invoke(this, EventArgs.Empty);
         }
+
+        //LA TARJETA DEL PRODUCTO LOAD
         private void TarjetaProducto_Load(object sender, EventArgs e)
         {
             System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
@@ -98,6 +105,8 @@ namespace Starducks.Vista.CatalogoForms
 
             this.Region = new System.Drawing.Region(path);
         }
+
+        //LA IMAGEN EN BYTES
 
         private Image BytesToImagen(byte[] bytes)
         {

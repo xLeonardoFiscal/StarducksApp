@@ -93,6 +93,8 @@ namespace Starducks.Controlador
                 con.Close();
             }
         }
+
+        //LA BARRA DE BUSQUEDA 
         public DataTable BuscarProductos(string filtro)
         {
             DataTable tabla = new DataTable();
@@ -136,6 +138,8 @@ namespace Starducks.Controlador
             }
             return tabla;
         }
+
+        //GUARDAR PEDIDO EN EL CARRITO 
         public bool GuardarPedido(double total, List<Starducks.Vista.CatalogoForms.ItemCarrito> carrito)
         {
             using (MySqlConnection conexion = ConexionDB.ObtenerConexion())

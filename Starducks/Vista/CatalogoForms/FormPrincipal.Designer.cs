@@ -167,9 +167,8 @@
             flowLayoutPanelPanelProductos.ForeColor = Color.White;
             flowLayoutPanelPanelProductos.Location = new Point(0, 91);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(828, 770);
+            flowLayoutPanelPanelProductos.Size = new Size(1065, 770);
             flowLayoutPanelPanelProductos.TabIndex = 2;
-            flowLayoutPanelPanelProductos.Paint += flowLayoutPanelPanelProductos_Paint_1;
             // 
             // dgvCarrito
             // 
@@ -185,10 +184,10 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dgvCarrito.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvCarrito.Location = new Point(834, 121);
+            dgvCarrito.Location = new Point(1071, 121);
             dgvCarrito.Name = "dgvCarrito";
             dgvCarrito.RowHeadersWidth = 51;
-            dgvCarrito.Size = new Size(154, 382);
+            dgvCarrito.Size = new Size(430, 405);
             dgvCarrito.TabIndex = 1;
             // 
             // colNombre
@@ -216,7 +215,7 @@
             // 
             lblTituloPedido.AutoSize = true;
             lblTituloPedido.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloPedido.Location = new Point(850, 94);
+            lblTituloPedido.Location = new Point(1263, 94);
             lblTituloPedido.Name = "lblTituloPedido";
             lblTituloPedido.Size = new Size(126, 24);
             lblTituloPedido.TabIndex = 0;
@@ -228,21 +227,26 @@
             btnPagar.FlatStyle = FlatStyle.Flat;
             btnPagar.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPagar.ForeColor = Color.Gold;
-            btnPagar.Location = new Point(860, 544);
+            btnPagar.Location = new Point(1240, 575);
             btnPagar.Name = "btnPagar";
             btnPagar.Size = new Size(94, 38);
             btnPagar.TabIndex = 0;
             btnPagar.Text = "Pagar";
             btnPagar.UseVisualStyleBackColor = false;
+            btnPagar.Click += btnPagar_Click;
             // 
             // lblTotalCarrito
             // 
             lblTotalCarrito.AutoSize = true;
-            lblTotalCarrito.Location = new Point(860, 506);
+            lblTotalCarrito.Location = new Point(1228, 529);
             lblTotalCarrito.Name = "lblTotalCarrito";
             lblTotalCarrito.Size = new Size(84, 20);
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage_1;
             // 
             // FormPrincipal
             // 
@@ -259,7 +263,6 @@
             Controls.Add(panelBusqueda);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
-            Load += FormPrincipal_Load_1;
             panelBusqueda.ResumeLayout(false);
             panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).EndInit();
