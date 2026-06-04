@@ -340,11 +340,17 @@ namespace Starducks.Vista.CatalogoForms
         private void btnConsultas_Click(object sender, EventArgs e)
         {
             ConsultasForm consultas = new ConsultasForm();
+            consultas.Owner = this;
+            consultas.Show();
+            this.Hide();
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)
         {
             UsuariosForm formusuarios = new UsuariosForm();
+            formusuarios.Owner = this;
+            formusuarios.Show();
+            this.Hide();
         }
     }
 }
