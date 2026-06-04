@@ -154,6 +154,7 @@ namespace Starducks.Vista
             if (usuario != null)
             {
                 Sesion.UsuarioActual = usuario.Nombre;
+                Sesion.Rol = usuario.Rol;
 
                 intentos = 0;
 

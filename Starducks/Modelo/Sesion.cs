@@ -4,8 +4,11 @@ using System.Text;
 
 namespace Starducks.Modelo
 {
-    internal class Sesion
+    public class Sesion
     {
         public static string UsuarioActual { get; set; }
+        public static string Rol { get; set; }
+       
     }
 }
+

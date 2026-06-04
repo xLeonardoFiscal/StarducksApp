@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Starducks.Modelo;
+using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.ComponentModel;
 namespace Starducks.Vista.CatalogoForms
 {
     public partial class TarjetaProducto : UserControl
@@ -17,6 +18,7 @@ namespace Starducks.Vista.CatalogoForms
 
         public event EventHandler OnAgregarAlCarrito;
 
+        // TARJETA PRODUCTO PRINCIPAL
         public TarjetaProducto()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace Starducks.Vista.CatalogoForms
             btnAgregar.Click += btnAgregar_Click;
         }
 
+        //ASIGNAR DATOS DE PRINCIPAL
         public void AsignarDatos(string nombre, string desc, double pTall, double pGrande, double pVenti, string nombreArchivo)
         {
             lblNombre.Text = nombre;
@@ -52,6 +55,7 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        //ACTUALIZACION DE LOS PRECIOS AL ELEGIR EL TAMAÑO
         private void ActualizarPrecio()
         {
             switch (cmbTamano.SelectedItem.ToString())
@@ -62,6 +66,7 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        //EL BOTON DE ELEGIR LOS TAMAÑOS
         private void cmbTamano_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -79,11 +84,14 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        //BOTON DE AÑADIR 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
 
             OnAgregarAlCarrito?.Invoke(this, EventArgs.Empty);
         }
+
+        //LA TARJETA DEL PRODUCTO LOAD
         private void TarjetaProducto_Load(object sender, EventArgs e)
         {
             System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
@@ -97,7 +105,29 @@ namespace Starducks.Vista.CatalogoForms
 
 
             this.Region = new System.Drawing.Region(path);
+
+            btnAgregar.Visible = false;
+            btnEliminar.Visible = false;
+
+            // Aplicar lógica según el rol
+            switch (Sesion.Rol)
+            {
+                case "administrado":
+                    btnAgregar.Visible = true;
+                    btnEliminar.Visible = true;
+                    break;
+
+                case "usuario operador":
+                    btnAgregar.Visible = true;
+                    break;
+
+                case "consultor":
+                    btnAgregar.Visible = true; // Si el usuario normal puede agregar al carrito
+                    break;
+            }
         }
+
+        //LA IMAGEN EN BYTES
 
         private Image BytesToImagen(byte[] bytes)
         {
@@ -111,6 +141,8 @@ namespace Starducks.Vista.CatalogoForms
         {
 
         }
+
+        
 
         public string NombreSeleccionado => lblNombre.Text;
         public string TamanoSeleccionado => cmbTamano.SelectedItem.ToString();

@@ -35,6 +35,7 @@
             cmbTamano = new ComboBox();
             lblTamaño = new Label();
             btnAgregar = new Button();
+            btnEliminar = new Button();
             ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
             // 
@@ -76,7 +77,7 @@
             lblPrecio.AutoSize = true;
             lblPrecio.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPrecio.ForeColor = Color.FromArgb(0, 98, 65);
-            lblPrecio.Location = new Point(151, 247);
+            lblPrecio.Location = new Point(134, 274);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(59, 23);
             lblPrecio.TabIndex = 3;
@@ -115,11 +116,25 @@
             btnAgregar.Text = "Añadir";
             btnAgregar.UseVisualStyleBackColor = false;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.BackColor = Color.Red;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEliminar.ForeColor = Color.White;
+            btnEliminar.Location = new Point(52, 324);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(94, 29);
+            btnEliminar.TabIndex = 7;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = false;
+            // 
             // TarjetaProducto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(btnEliminar);
             Controls.Add(btnAgregar);
             Controls.Add(lblTamaño);
             Controls.Add(cmbTamano);
@@ -129,6 +144,7 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 386);
+            
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -143,5 +159,6 @@
         public ComboBox cmbTamano;
         public Label lblTamaño;
         private Button btnAgregar;
+        private Button btnEliminar;
     }
 }

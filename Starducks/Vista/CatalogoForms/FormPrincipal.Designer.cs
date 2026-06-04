@@ -30,6 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panelBusqueda = new Panel();
+            btnReportesForm = new Button();
             pcbLogoCatalogo = new PictureBox();
             btnPostres = new Button();
             btnCafefrio = new Button();
@@ -47,7 +48,7 @@
             btnPagar = new Button();
             lblTotalCarrito = new Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
-            btnReportesForm = new Button();
+            btnAgregarProducto = new Button();
             panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
@@ -56,6 +57,7 @@
             // panelBusqueda
             // 
             panelBusqueda.BackColor = Color.White;
+            panelBusqueda.Controls.Add(btnAgregarProducto);
             panelBusqueda.Controls.Add(btnReportesForm);
             panelBusqueda.Controls.Add(pcbLogoCatalogo);
             panelBusqueda.Controls.Add(btnPostres);
@@ -68,8 +70,22 @@
             panelBusqueda.ForeColor = SystemColors.ControlText;
             panelBusqueda.Location = new Point(0, 0);
             panelBusqueda.Name = "panelBusqueda";
-            panelBusqueda.Size = new Size(1914, 81);
+            panelBusqueda.Size = new Size(1924, 81);
             panelBusqueda.TabIndex = 0;
+            // 
+            // btnReportesForm
+            // 
+            btnReportesForm.BackColor = Color.Firebrick;
+            btnReportesForm.FlatStyle = FlatStyle.Flat;
+            btnReportesForm.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReportesForm.ForeColor = Color.White;
+            btnReportesForm.Location = new Point(1075, 26);
+            btnReportesForm.Name = "btnReportesForm";
+            btnReportesForm.Size = new Size(108, 29);
+            btnReportesForm.TabIndex = 5;
+            btnReportesForm.Text = "REPORTES";
+            btnReportesForm.UseVisualStyleBackColor = false;
+            btnReportesForm.Click += btnReportesForm_Click;
             // 
             // pcbLogoCatalogo
             // 
@@ -158,7 +174,7 @@
             panelMenu.Dock = DockStyle.Top;
             panelMenu.Location = new Point(0, 81);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(1914, 10);
+            panelMenu.Size = new Size(1924, 10);
             panelMenu.TabIndex = 1;
             // 
             // flowLayoutPanelPanelProductos
@@ -169,9 +185,8 @@
             flowLayoutPanelPanelProductos.ForeColor = Color.White;
             flowLayoutPanelPanelProductos.Location = new Point(0, 91);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(828, 770);
+            flowLayoutPanelPanelProductos.Size = new Size(1463, 949);
             flowLayoutPanelPanelProductos.TabIndex = 2;
-            flowLayoutPanelPanelProductos.Paint += flowLayoutPanelPanelProductos_Paint_1;
             // 
             // dgvCarrito
             // 
@@ -187,10 +202,10 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dgvCarrito.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvCarrito.Location = new Point(834, 121);
+            dgvCarrito.Location = new Point(1482, 117);
             dgvCarrito.Name = "dgvCarrito";
             dgvCarrito.RowHeadersWidth = 51;
-            dgvCarrito.Size = new Size(154, 382);
+            dgvCarrito.Size = new Size(430, 405);
             dgvCarrito.TabIndex = 1;
             // 
             // colNombre
@@ -218,7 +233,7 @@
             // 
             lblTituloPedido.AutoSize = true;
             lblTituloPedido.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloPedido.Location = new Point(850, 94);
+            lblTituloPedido.Location = new Point(1653, 94);
             lblTituloPedido.Name = "lblTituloPedido";
             lblTituloPedido.Size = new Size(126, 24);
             lblTituloPedido.TabIndex = 0;
@@ -230,42 +245,46 @@
             btnPagar.FlatStyle = FlatStyle.Flat;
             btnPagar.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPagar.ForeColor = Color.Gold;
-            btnPagar.Location = new Point(860, 544);
+            btnPagar.Location = new Point(1653, 597);
             btnPagar.Name = "btnPagar";
             btnPagar.Size = new Size(94, 38);
             btnPagar.TabIndex = 0;
             btnPagar.Text = "Pagar";
             btnPagar.UseVisualStyleBackColor = false;
+            btnPagar.Click += btnPagar_Click;
             // 
             // lblTotalCarrito
             // 
             lblTotalCarrito.AutoSize = true;
-            lblTotalCarrito.Location = new Point(860, 506);
+            lblTotalCarrito.Location = new Point(1663, 561);
             lblTotalCarrito.Name = "lblTotalCarrito";
             lblTotalCarrito.Size = new Size(84, 20);
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
             // 
-            // btnReportesForm
+            // printDocument1
             // 
-            btnReportesForm.BackColor = Color.Firebrick;
-            btnReportesForm.FlatStyle = FlatStyle.Flat;
-            btnReportesForm.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReportesForm.ForeColor = Color.White;
-            btnReportesForm.Location = new Point(969, 29);
-            btnReportesForm.Name = "btnReportesForm";
-            btnReportesForm.Size = new Size(108, 29);
-            btnReportesForm.TabIndex = 5;
-            btnReportesForm.Text = "REPORTES";
-            btnReportesForm.UseVisualStyleBackColor = false;
-            btnReportesForm.Click += btnReportesForm_Click;
+            printDocument1.PrintPage += printDocument1_PrintPage_1;
+            // 
+            // btnAgregarProducto
+            // 
+            btnAgregarProducto.BackColor = Color.FromArgb(0, 98, 65);
+            btnAgregarProducto.FlatStyle = FlatStyle.Flat;
+            btnAgregarProducto.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregarProducto.ForeColor = Color.Gold;
+            btnAgregarProducto.Location = new Point(1214, 26);
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.Size = new Size(188, 29);
+            btnAgregarProducto.TabIndex = 6;
+            btnAgregarProducto.Text = "Agregar Producto";
+            btnAgregarProducto.UseVisualStyleBackColor = false;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(117, 159, 137);
-            ClientSize = new Size(1914, 861);
+            ClientSize = new Size(1924, 1040);
             Controls.Add(lblTotalCarrito);
             Controls.Add(dgvCarrito);
             Controls.Add(btnPagar);
@@ -275,7 +294,6 @@
             Controls.Add(panelBusqueda);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
-            Load += FormPrincipal_Load_1;
             panelBusqueda.ResumeLayout(false);
             panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).EndInit();
@@ -305,5 +323,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PictureBox pcbLogoCatalogo;
         private Button btnReportesForm;
+        private Button btnAgregarProducto;
     }
 }

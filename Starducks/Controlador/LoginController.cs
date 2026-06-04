@@ -14,8 +14,12 @@ namespace Starducks.Controlador
             string usuario,
             string password)
         {
+            MySqlConnection conexion = new MySqlConnection("Server=localhost;Database=starducks;Uid=root;Pwd=Lizbethhdz17;");
+
             try
             {
+                conexion.Open();
+
                 Usuario user = null;
 
                 string query =
@@ -24,7 +28,7 @@ namespace Starducks.Controlador
                     WHERE usuario=@usuario
                     AND password=@password";
 
-                MySqlConnection con = conexion.Conectar();
+                MySqlConnection con = ConexionDB.ObtenerConexion();
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
 
