@@ -189,26 +189,28 @@
             // 
             // btnSalir
             // 
+            btnSalir.BackColor = Color.FromArgb(192, 0, 0);
             btnSalir.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSalir.ForeColor = Color.FromArgb(192, 0, 0);
+            btnSalir.ForeColor = Color.Snow;
             btnSalir.Location = new Point(1611, 899);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(171, 67);
             btnSalir.TabIndex = 13;
             btnSalir.Text = "SALIR";
-            btnSalir.UseVisualStyleBackColor = true;
+            btnSalir.UseVisualStyleBackColor = false;
             btnSalir.Click += btnSalir_Click;
             // 
             // btnRegresar
             // 
+            btnRegresar.BackColor = Color.DarkGreen;
             btnRegresar.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegresar.ForeColor = Color.DarkGreen;
+            btnRegresar.ForeColor = Color.Snow;
             btnRegresar.Location = new Point(303, 899);
             btnRegresar.Name = "btnRegresar";
             btnRegresar.Size = new Size(171, 67);
             btnRegresar.TabIndex = 12;
             btnRegresar.Text = "REGRESAR";
-            btnRegresar.UseVisualStyleBackColor = true;
+            btnRegresar.UseVisualStyleBackColor = false;
             btnRegresar.Click += btnRegresar_Click;
             // 
             // ReportesForm

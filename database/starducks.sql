@@ -199,6 +199,38 @@ INSERT INTO `usuarios` VALUES (1,'Admin','admin','123','administrador',NULL,NULL
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `vista_categorias`
+--
+
+DROP TABLE IF EXISTS `vista_categorias`;
+/*!50001 DROP VIEW IF EXISTS `vista_categorias`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vista_categorias` AS SELECT 
+ 1 AS `id_categoria`,
+ 1 AS `nombre`,
+ 1 AS `descripcion`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vista_detalle_pedidos`
+--
+
+DROP TABLE IF EXISTS `vista_detalle_pedidos`;
+/*!50001 DROP VIEW IF EXISTS `vista_detalle_pedidos`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vista_detalle_pedidos` AS SELECT 
+ 1 AS `id_detalle`,
+ 1 AS `id_pedido`,
+ 1 AS `producto`,
+ 1 AS `tamano`,
+ 1 AS `cantidad`,
+ 1 AS `precio_unitario`,
+ 1 AS `total`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `vista_pedidos`
 --
 
@@ -208,8 +240,10 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `vista_pedidos` AS SELECT 
  1 AS `id_pedido`,
- 1 AS `cliente`,
+ 1 AS `usuario`,
  1 AS `repartidor`,
+ 1 AS `fecha_hora`,
+ 1 AS `nombre_taza`,
  1 AS `total`,
  1 AS `estatus`*/;
 SET character_set_client = @saved_cs_client;
@@ -231,6 +265,76 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vista_repartidores`
+--
+
+DROP TABLE IF EXISTS `vista_repartidores`;
+/*!50001 DROP VIEW IF EXISTS `vista_repartidores`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vista_repartidores` AS SELECT 
+ 1 AS `id_repartidor`,
+ 1 AS `nombre`,
+ 1 AS `telefono`,
+ 1 AS `vehiculo`,
+ 1 AS `disponible`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vista_usuarios`
+--
+
+DROP TABLE IF EXISTS `vista_usuarios`;
+/*!50001 DROP VIEW IF EXISTS `vista_usuarios`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vista_usuarios` AS SELECT 
+ 1 AS `id_usuario`,
+ 1 AS `nombre`,
+ 1 AS `usuario`,
+ 1 AS `rol`,
+ 1 AS `telefono`,
+ 1 AS `direccion`,
+ 1 AS `activo`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `vista_categorias`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_categorias`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_categorias` AS select `categorias_producto`.`id_categoria` AS `id_categoria`,`categorias_producto`.`nombre` AS `nombre`,`categorias_producto`.`descripcion` AS `descripcion` from `categorias_producto` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_detalle_pedidos`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_detalle_pedidos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_detalle_pedidos` AS select `dp`.`id_detalle` AS `id_detalle`,`p`.`id_pedido` AS `id_pedido`,`pr`.`nombre` AS `producto`,`dp`.`tamano` AS `tamano`,`dp`.`cantidad` AS `cantidad`,`dp`.`precio_unitario` AS `precio_unitario`,(`dp`.`cantidad` * `dp`.`precio_unitario`) AS `total` from ((`detalle_pedido` `dp` join `pedidos` `p` on((`dp`.`id_pedido` = `p`.`id_pedido`))) join `productos` `pr` on((`dp`.`id_producto` = `pr`.`id_producto`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vista_pedidos`
 --
 
@@ -243,7 +347,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vista_pedidos` AS select `p`.`id_pedido` AS `id_pedido`,`u`.`nombre` AS `cliente`,`r`.`nombre` AS `repartidor`,`p`.`total` AS `total`,`p`.`estatus` AS `estatus` from ((`pedidos` `p` join `usuarios` `u` on((`p`.`id_usuario` = `u`.`id_usuario`))) left join `repartidores` `r` on((`p`.`id_repartidor` = `r`.`id_repartidor`))) */;
+/*!50001 VIEW `vista_pedidos` AS select `p`.`id_pedido` AS `id_pedido`,`u`.`nombre` AS `usuario`,`r`.`nombre` AS `repartidor`,`p`.`fecha_hora` AS `fecha_hora`,`p`.`nombre_taza` AS `nombre_taza`,`p`.`total` AS `total`,`p`.`estatus` AS `estatus` from ((`pedidos` `p` left join `usuarios` `u` on((`p`.`id_usuario` = `u`.`id_usuario`))) left join `repartidores` `r` on((`p`.`id_repartidor` = `r`.`id_repartidor`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -265,6 +369,42 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_repartidores`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_repartidores`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_repartidores` AS select `repartidores`.`id_repartidor` AS `id_repartidor`,`repartidores`.`nombre` AS `nombre`,`repartidores`.`telefono` AS `telefono`,`repartidores`.`vehiculo` AS `vehiculo`,`repartidores`.`disponible` AS `disponible` from `repartidores` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_usuarios`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_usuarios`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_usuarios` AS select `usuarios`.`id_usuario` AS `id_usuario`,`usuarios`.`nombre` AS `nombre`,`usuarios`.`usuario` AS `usuario`,`usuarios`.`rol` AS `rol`,`usuarios`.`telefono` AS `telefono`,`usuarios`.`direccion` AS `direccion`,`usuarios`.`activo` AS `activo` from `usuarios` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -275,4 +415,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-01 11:39:26
+-- Dump completed on 2026-06-04  3:51:22
