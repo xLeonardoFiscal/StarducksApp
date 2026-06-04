@@ -180,6 +180,29 @@ namespace Starducks.Controlador
                 }
             }
         }
+
+        public bool EliminarProducto(int id)
+        {
+            // Asegúrate de usar tu cadena de conexión real
+            using (MySqlConnection conexion = new MySqlConnection("Server=localhost;Database=starducks;Uid=root;Pwd=Lizbethhdz17;"))
+            {
+                try
+                {
+                    conexion.Open();
+                    string query = "DELETE FROM productos WHERE id_producto = @id"; // Asegúrate de que el nombre de la columna sea correcto
+                    MySqlCommand comando = new MySqlCommand(query, conexion);
+                    comando.Parameters.AddWithValue("@id", id);
+
+                    int filasAfectadas = comando.ExecuteNonQuery();
+                    return filasAfectadas > 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al eliminar: " + ex.Message);
+                    return false;
+                }
+            }
+        }
     }
 }
 

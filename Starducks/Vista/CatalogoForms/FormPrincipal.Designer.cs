@@ -30,6 +30,9 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panelBusqueda = new Panel();
+            btnUsuarios = new Button();
+            btnConsultas = new Button();
+            btnAgregarProducto = new Button();
             btnReportesForm = new Button();
             pcbLogoCatalogo = new PictureBox();
             btnPostres = new Button();
@@ -48,7 +51,6 @@
             btnPagar = new Button();
             lblTotalCarrito = new Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
-            btnAgregarProducto = new Button();
             panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
@@ -57,6 +59,8 @@
             // panelBusqueda
             // 
             panelBusqueda.BackColor = Color.White;
+            panelBusqueda.Controls.Add(btnUsuarios);
+            panelBusqueda.Controls.Add(btnConsultas);
             panelBusqueda.Controls.Add(btnAgregarProducto);
             panelBusqueda.Controls.Add(btnReportesForm);
             panelBusqueda.Controls.Add(pcbLogoCatalogo);
@@ -72,6 +76,47 @@
             panelBusqueda.Name = "panelBusqueda";
             panelBusqueda.Size = new Size(1924, 81);
             panelBusqueda.TabIndex = 0;
+            // 
+            // btnUsuarios
+            // 
+            btnUsuarios.BackColor = Color.Firebrick;
+            btnUsuarios.FlatStyle = FlatStyle.Flat;
+            btnUsuarios.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUsuarios.ForeColor = Color.White;
+            btnUsuarios.Location = new Point(1349, 27);
+            btnUsuarios.Name = "btnUsuarios";
+            btnUsuarios.Size = new Size(114, 29);
+            btnUsuarios.TabIndex = 8;
+            btnUsuarios.Text = "USUARIOS";
+            btnUsuarios.UseVisualStyleBackColor = false;
+            btnUsuarios.Click += btnUsuarios_Click;
+            // 
+            // btnConsultas
+            // 
+            btnConsultas.BackColor = Color.Firebrick;
+            btnConsultas.FlatStyle = FlatStyle.Flat;
+            btnConsultas.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConsultas.ForeColor = Color.White;
+            btnConsultas.Location = new Point(1207, 26);
+            btnConsultas.Name = "btnConsultas";
+            btnConsultas.Size = new Size(114, 29);
+            btnConsultas.TabIndex = 7;
+            btnConsultas.Text = "CONSULTAS";
+            btnConsultas.UseVisualStyleBackColor = false;
+            btnConsultas.Click += btnConsultas_Click;
+            // 
+            // btnAgregarProducto
+            // 
+            btnAgregarProducto.BackColor = Color.FromArgb(0, 98, 65);
+            btnAgregarProducto.FlatStyle = FlatStyle.Flat;
+            btnAgregarProducto.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregarProducto.ForeColor = Color.Gold;
+            btnAgregarProducto.Location = new Point(1559, 25);
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.Size = new Size(188, 29);
+            btnAgregarProducto.TabIndex = 6;
+            btnAgregarProducto.Text = "Agregar Producto";
+            btnAgregarProducto.UseVisualStyleBackColor = false;
             // 
             // btnReportesForm
             // 
@@ -266,19 +311,6 @@
             // 
             printDocument1.PrintPage += printDocument1_PrintPage_1;
             // 
-            // btnAgregarProducto
-            // 
-            btnAgregarProducto.BackColor = Color.FromArgb(0, 98, 65);
-            btnAgregarProducto.FlatStyle = FlatStyle.Flat;
-            btnAgregarProducto.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAgregarProducto.ForeColor = Color.Gold;
-            btnAgregarProducto.Location = new Point(1214, 26);
-            btnAgregarProducto.Name = "btnAgregarProducto";
-            btnAgregarProducto.Size = new Size(188, 29);
-            btnAgregarProducto.TabIndex = 6;
-            btnAgregarProducto.Text = "Agregar Producto";
-            btnAgregarProducto.UseVisualStyleBackColor = false;
-            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -324,5 +356,7 @@
         private PictureBox pcbLogoCatalogo;
         private Button btnReportesForm;
         private Button btnAgregarProducto;
+        private Button btnUsuarios;
+        private Button btnConsultas;
     }
 }

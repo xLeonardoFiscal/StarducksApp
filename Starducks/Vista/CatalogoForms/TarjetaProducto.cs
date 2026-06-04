@@ -1,4 +1,5 @@
-﻿using Starducks.Modelo;
+﻿using Starducks.Controlador;
+using Starducks.Modelo;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -15,6 +16,9 @@ namespace Starducks.Vista.CatalogoForms
         public double PrecioMediano { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double PrecioGrande { get; set; }
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public int IdProducto { get; set; }
 
         public event EventHandler OnAgregarAlCarrito;
 
@@ -119,10 +123,17 @@ namespace Starducks.Vista.CatalogoForms
 
                 case "usuario operador":
                     btnAgregar.Visible = true;
+                    btnEliminar.Visible = false;
                     break;
 
                 case "consultor":
-                    btnAgregar.Visible = true; // Si el usuario normal puede agregar al carrito
+                    btnAgregar.Visible = true;
+                    btnEliminar.Visible = false;
+                    break;
+
+                default: // Seguridad extra: si no coincide nada, ocultar todo
+                    btnAgregar.Visible = false;
+                    btnEliminar.Visible = false;
                     break;
             }
         }
@@ -142,7 +153,22 @@ namespace Starducks.Vista.CatalogoForms
 
         }
 
-        
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult confirmacion = MessageBox.Show("¿Eliminar este producto?", "Confirmar", MessageBoxButtons.YesNo);
+            if (confirmacion == DialogResult.Yes)
+            {
+                ProductoController control = new ProductoController();
+                // Llamas al método que borra usando el ID que guardamos
+                bool eliminado = control.EliminarProducto(this.IdProducto);
+
+                if (eliminado)
+                {
+                    this.Dispose(); // Elimina la tarjeta visualmente
+                }
+            }
+
+        }
 
         public string NombreSeleccionado => lblNombre.Text;
         public string TamanoSeleccionado => cmbTamano.SelectedItem.ToString();

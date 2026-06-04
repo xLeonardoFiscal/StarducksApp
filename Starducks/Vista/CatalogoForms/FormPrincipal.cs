@@ -137,6 +137,7 @@ namespace Starducks.Vista.CatalogoForms
         private void AgregarTarjetaAlPanel(DataRow fila)
         {
             TarjetaProducto tarjeta = new TarjetaProducto();
+            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]); // Asegúrate que el nombre de la columna coincida
 
             // 1. ASIGNACIÓN DE DATOS
             tarjeta.AsignarDatos(
@@ -196,7 +197,7 @@ namespace Starducks.Vista.CatalogoForms
                     break;
 
                 case "consultor":
-                    // Ningún botón de gestión es visible para el usuario normal
+                    btnReportesForm.Visible = false;
                     break;
             }
 
@@ -331,8 +332,19 @@ namespace Starducks.Vista.CatalogoForms
                 return;
             }
             ReportesForm reportes = new ReportesForm();
+            reportes.Owner = this;
             reportes.Show();
             this.Hide();
+        }
+
+        private void btnConsultas_Click(object sender, EventArgs e)
+        {
+            ConsultasForm consultas = new ConsultasForm();
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            UsuariosForm formusuarios = new UsuariosForm();
         }
     }
 }

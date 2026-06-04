@@ -128,6 +128,7 @@
             btnEliminar.TabIndex = 7;
             btnEliminar.Text = "Eliminar";
             btnEliminar.UseVisualStyleBackColor = false;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // TarjetaProducto
             // 
@@ -144,7 +145,6 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 386);
-            
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
