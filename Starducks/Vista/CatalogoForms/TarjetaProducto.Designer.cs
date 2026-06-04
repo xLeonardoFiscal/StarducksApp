@@ -118,10 +118,10 @@
             // 
             // btnEliminar
             // 
-            btnEliminar.BackColor = Color.Transparent;
+            btnEliminar.BackColor = Color.Red;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnEliminar.ForeColor = Color.Red;
+            btnEliminar.ForeColor = Color.White;
             btnEliminar.Location = new Point(52, 324);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(94, 29);
@@ -144,7 +144,7 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 386);
-            Load += TarjetaProducto_Load_1;
+            
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();

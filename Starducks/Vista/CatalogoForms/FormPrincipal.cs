@@ -185,17 +185,17 @@ namespace Starducks.Vista.CatalogoForms
             // 2. Aplicar permisos según el rol
             switch (Sesion.Rol)
             {
-                case "ADMIN":
+                case "administrador":
                     btnAgregarProducto.Visible = true;
                     btnReportesForm.Visible = true;
                     break;
 
-                case "OPERADOR":
+                case "usuario operador":
                     btnAgregarProducto.Visible = true; // El operador puede agregar productos nuevos
                     btnReportesForm.Visible = false;    // El operador NO ve reportes
                     break;
 
-                case "USUARIO":
+                case "consultor":
                     // Ningún botón de gestión es visible para el usuario normal
                     break;
             }
