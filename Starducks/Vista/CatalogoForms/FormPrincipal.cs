@@ -26,7 +26,7 @@ namespace Starducks.Vista.CatalogoForms
 
 
         //CATALOGO
-        private void CargarCatalogo(string filtro = "")
+        public void CargarCatalogo(string filtro = "")
         {
             // 1. LIMPIEZA
             flowLayoutPanelPanelProductos.Controls.Clear();
@@ -138,7 +138,7 @@ namespace Starducks.Vista.CatalogoForms
         private void AgregarTarjetaAlPanel(DataRow fila)
         {
             TarjetaProducto tarjeta = new TarjetaProducto();
-            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]); // Asegúrate que el nombre de la columna coincida
+            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]); 
 
             // 1. ASIGNACIÓN DE DATOS
             tarjeta.AsignarDatos(

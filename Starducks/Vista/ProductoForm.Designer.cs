@@ -30,15 +30,22 @@
         {
             lblTituloGestion = new Label();
             lblNombre = new Label();
-            lblPrecio = new Label();
+            lblPrecioTall = new Label();
             Descripcion = new Label();
             txtNombre = new TextBox();
-            txtPrecio = new TextBox();
+            txtPrecioTall = new TextBox();
             txtDescripcion = new TextBox();
             pbProducto = new PictureBox();
             btnCargarImagen = new Button();
             btnCancelar = new Button();
             btnGuardar = new Button();
+            cmbCategoria = new ComboBox();
+            lblCategoria = new Label();
+            txtId = new TextBox();
+            txtPrecioGrande = new TextBox();
+            lblPrecioGrande = new Label();
+            txtPrecioVenti = new TextBox();
+            lblPrecioVenti = new Label();
             ((System.ComponentModel.ISupportInitialize)pbProducto).BeginInit();
             SuspendLayout();
             // 
@@ -56,27 +63,27 @@
             // 
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNombre.Location = new Point(42, 55);
+            lblNombre.Location = new Point(19, 37);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(94, 28);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre:";
             // 
-            // lblPrecio
+            // lblPrecioTall
             // 
-            lblPrecio.AutoSize = true;
-            lblPrecio.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPrecio.Location = new Point(42, 140);
-            lblPrecio.Name = "lblPrecio";
-            lblPrecio.Size = new Size(76, 28);
-            lblPrecio.TabIndex = 2;
-            lblPrecio.Text = "Precio:";
+            lblPrecioTall.AutoSize = true;
+            lblPrecioTall.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrecioTall.Location = new Point(19, 267);
+            lblPrecioTall.Name = "lblPrecioTall";
+            lblPrecioTall.Size = new Size(115, 28);
+            lblPrecioTall.TabIndex = 2;
+            lblPrecioTall.Text = "Precio Tall:";
             // 
             // Descripcion
             // 
             Descripcion.AutoSize = true;
             Descripcion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Descripcion.Location = new Point(42, 231);
+            Descripcion.Location = new Point(19, 114);
             Descripcion.Name = "Descripcion";
             Descripcion.Size = new Size(128, 28);
             Descripcion.TabIndex = 3;
@@ -84,21 +91,21 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(36, 86);
+            txtNombre.Location = new Point(13, 68);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(222, 27);
             txtNombre.TabIndex = 4;
             // 
-            // txtPrecio
+            // txtPrecioTall
             // 
-            txtPrecio.Location = new Point(36, 182);
-            txtPrecio.Name = "txtPrecio";
-            txtPrecio.Size = new Size(219, 27);
-            txtPrecio.TabIndex = 5;
+            txtPrecioTall.Location = new Point(13, 309);
+            txtPrecioTall.Name = "txtPrecioTall";
+            txtPrecioTall.Size = new Size(219, 27);
+            txtPrecioTall.TabIndex = 5;
             // 
             // txtDescripcion
             // 
-            txtDescripcion.Location = new Point(36, 277);
+            txtDescripcion.Location = new Point(13, 160);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(216, 27);
             txtDescripcion.TabIndex = 6;
@@ -127,46 +134,112 @@
             // btnCancelar
             // 
             btnCancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancelar.Location = new Point(303, 349);
+            btnCancelar.Location = new Point(408, 349);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(135, 29);
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCargarImagen_Click;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
             // 
             btnGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnGuardar.Location = new Point(123, 349);
+            btnGuardar.Location = new Point(267, 349);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(135, 29);
             btnGuardar.TabIndex = 10;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnCargarImagen_Click;
+            btnGuardar.Click += btnGuardar_Click;
+            // 
+            // cmbCategoria
+            // 
+            cmbCategoria.FormattingEnabled = true;
+            cmbCategoria.Items.AddRange(new object[] { "CAFES FRIOS", "CAFES CALIENTES", "POSTRES" });
+            cmbCategoria.Location = new Point(12, 226);
+            cmbCategoria.Name = "cmbCategoria";
+            cmbCategoria.Size = new Size(213, 28);
+            cmbCategoria.TabIndex = 11;
+            // 
+            // lblCategoria
+            // 
+            lblCategoria.AutoSize = true;
+            lblCategoria.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCategoria.Location = new Point(19, 195);
+            lblCategoria.Name = "lblCategoria";
+            lblCategoria.Size = new Size(108, 28);
+            lblCategoria.TabIndex = 12;
+            lblCategoria.Text = "Categoria:";
+            // 
+            // txtId
+            // 
+            txtId.Location = new Point(348, 50);
+            txtId.Name = "txtId";
+            txtId.Size = new Size(125, 27);
+            txtId.TabIndex = 13;
+            // 
+            // txtPrecioGrande
+            // 
+            txtPrecioGrande.Location = new Point(13, 391);
+            txtPrecioGrande.Name = "txtPrecioGrande";
+            txtPrecioGrande.Size = new Size(219, 27);
+            txtPrecioGrande.TabIndex = 15;
+            // 
+            // lblPrecioGrande
+            // 
+            lblPrecioGrande.AutoSize = true;
+            lblPrecioGrande.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrecioGrande.Location = new Point(19, 349);
+            lblPrecioGrande.Name = "lblPrecioGrande";
+            lblPrecioGrande.Size = new Size(150, 28);
+            lblPrecioGrande.TabIndex = 14;
+            lblPrecioGrande.Text = "Precio Grande:";
+            // 
+            // txtPrecioVenti
+            // 
+            txtPrecioVenti.Location = new Point(13, 463);
+            txtPrecioVenti.Name = "txtPrecioVenti";
+            txtPrecioVenti.Size = new Size(219, 27);
+            txtPrecioVenti.TabIndex = 17;
+            // 
+            // lblPrecioVenti
+            // 
+            lblPrecioVenti.AutoSize = true;
+            lblPrecioVenti.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrecioVenti.Location = new Point(19, 421);
+            lblPrecioVenti.Name = "lblPrecioVenti";
+            lblPrecioVenti.Size = new Size(131, 28);
+            lblPrecioVenti.TabIndex = 16;
+            lblPrecioVenti.Text = "Precio Venti:";
             // 
             // ProductoForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(582, 403);
+            ClientSize = new Size(582, 585);
+            Controls.Add(txtPrecioVenti);
+            Controls.Add(lblPrecioVenti);
+            Controls.Add(txtPrecioGrande);
+            Controls.Add(lblPrecioGrande);
+            Controls.Add(txtId);
+            Controls.Add(lblCategoria);
+            Controls.Add(cmbCategoria);
             Controls.Add(btnGuardar);
             Controls.Add(btnCancelar);
             Controls.Add(btnCargarImagen);
             Controls.Add(pbProducto);
             Controls.Add(txtDescripcion);
-            Controls.Add(txtPrecio);
+            Controls.Add(txtPrecioTall);
             Controls.Add(txtNombre);
             Controls.Add(Descripcion);
-            Controls.Add(lblPrecio);
+            Controls.Add(lblPrecioTall);
             Controls.Add(lblNombre);
             Controls.Add(lblTituloGestion);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "ProductoForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ProductoForm";
-            
             ((System.ComponentModel.ISupportInitialize)pbProducto).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -176,14 +249,21 @@
 
         private Label lblTituloGestion;
         private Label lblNombre;
-        private Label lblPrecio;
+        private Label lblPrecioTall;
         private Label Descripcion;
         private TextBox txtNombre;
-        private TextBox txtPrecio;
+        private TextBox txtPrecioTall;
         private TextBox txtDescripcion;
         private PictureBox pbProducto;
         private Button btnCargarImagen;
         private Button btnCancelar;
         private Button btnGuardar;
+        private ComboBox cmbCategoria;
+        private Label lblCategoria;
+        private TextBox txtId;
+        private TextBox txtPrecioGrande;
+        private Label lblPrecioGrande;
+        private TextBox txtPrecioVenti;
+        private Label lblPrecioVenti;
     }
 }

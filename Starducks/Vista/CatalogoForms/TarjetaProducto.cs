@@ -22,12 +22,17 @@ namespace Starducks.Vista.CatalogoForms
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public int IdProducto { get; set; }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string NombreArchivoImagen { get; set; }
+
         public event EventHandler OnAgregarAlCarrito;
 
         // TARJETA PRODUCTO PRINCIPAL
         public TarjetaProducto()
         {
             InitializeComponent();
+            cmbTamano.SelectedIndexChanged += cmbTamano_SelectedIndexChanged;
 
             // Configurar el ComboBox
             cmbTamano.Items.AddRange(new string[] { "Chico", "Mediano", "Grande" });
@@ -46,6 +51,7 @@ namespace Starducks.Vista.CatalogoForms
             this.PrecioChico = pTall;
             this.PrecioMediano = pGrande;
             this.PrecioGrande = pVenti;
+            this.NombreArchivoImagen = nombreArchivo;
 
             // Buscamos el archivo en la carpeta "Imagenes" usando el nombre recibido
             string rutaCompleta = Path.Combine(Application.StartupPath, "Imagenes", nombreArchivo);
@@ -114,22 +120,26 @@ namespace Starducks.Vista.CatalogoForms
 
             btnAgregar.Visible = false;
             btnEliminar.Visible = false;
+            btnEditar.Visible = false;
 
             // Comparar contra lo que realmente está en la BD
             if (Sesion.Rol == "administrador")
             {
                 btnAgregar.Visible = true;
                 btnEliminar.Visible = true;
+                btnEditar.Visible = true;
             }
             else if (Sesion.Rol == "usuario operador")
             {
                 btnAgregar.Visible = true;
                 btnEliminar.Visible = false;
+                btnEditar.Visible = false;
             }
             else if (Sesion.Rol == "consultor")
             {
                 btnAgregar.Visible = true;
                 btnEliminar.Visible = false;
+                btnEditar.Visible = false;
             }
         }
 
@@ -163,6 +173,33 @@ namespace Starducks.Vista.CatalogoForms
                 }
             }
 
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            ProductoForm form = new ProductoForm();
+
+            // Aquí es donde ocurre la magia: le inyectas la info antes de mostrarlo
+            form.CargarDatosParaEditar(
+            this.IdProducto,
+            this.lblNombre.Text,
+            this.lblDescripcion.Text,
+            this.PrecioChico.ToString(),   // Asumiendo que guardas estos valores en la tarjeta
+            this.PrecioMediano.ToString(),
+            this.PrecioGrande.ToString(),
+            this.NombreArchivoImagen
+            );
+            form.ShowDialog();
+            Form formularioPadre = this.FindForm();
+            if (formularioPadre != null)
+            {
+                // IMPORTANTE: Cambia "FormPrincipal" por el nombre real de tu formulario (ej. Form1)
+                // Puedes ver ese nombre en la parte de arriba de tu archivo FormPrincipal.cs
+                if (formularioPadre is FormPrincipal)
+                {
+                    ((FormPrincipal)formularioPadre).CargarCatalogo();
+                }
+            }
         }
 
         public string NombreSeleccionado => lblNombre.Text;
