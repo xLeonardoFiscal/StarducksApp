@@ -23,11 +23,6 @@ namespace Starducks.Vista.CatalogoForms
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-            CargarCatalogo();
-        }
 
         //CATALOGO
         private void CargarCatalogo(string filtro = "")
@@ -184,6 +179,27 @@ namespace Starducks.Vista.CatalogoForms
         //FORMPRINCIPAL LOAD
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
+            btnAgregarProducto.Visible = false;
+            btnReportesForm.Visible = false;
+
+            // 2. Aplicar permisos según el rol
+            switch (Sesion.Rol)
+            {
+                case "ADMIN":
+                    btnAgregarProducto.Visible = true;
+                    btnReportesForm.Visible = true;
+                    break;
+
+                case "OPERADOR":
+                    btnAgregarProducto.Visible = true; // El operador puede agregar productos nuevos
+                    btnReportesForm.Visible = false;    // El operador NO ve reportes
+                    break;
+
+                case "USUARIO":
+                    // Ningún botón de gestión es visible para el usuario normal
+                    break;
+            }
+
             panelMenu.Controls.Clear();
 
             CargarCatalogo("TODOS");
@@ -309,13 +325,11 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnReportesForm_Click(object sender, EventArgs e)
         {
-            ReportesForm reportes = new ReportesForm();
-            reportes.Show();
-            this.Hide();
-        }
-
-        private void btnReportesForm_Click(object sender, EventArgs e)
-        {
+            if (Sesion.Rol != "ADMIN")
+            {
+                MessageBox.Show("Acceso denegado. Solo administradores pueden ver reportes.");
+                return;
+            }
             ReportesForm reportes = new ReportesForm();
             reportes.Show();
             this.Hide();

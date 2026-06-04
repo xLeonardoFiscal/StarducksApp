@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Starducks.Modelo;
+using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using System.ComponentModel;
 namespace Starducks.Vista.CatalogoForms
 {
     public partial class TarjetaProducto : UserControl
@@ -119,6 +120,30 @@ namespace Starducks.Vista.CatalogoForms
         private void pbImagen_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TarjetaProducto_Load_1(object sender, EventArgs e)
+
+        {
+            btnAgregar.Visible = false;
+            btnEliminar.Visible = false;
+
+            // Aplicar lógica según el rol
+            switch (Sesion.Rol)
+            {
+                case "ADMIN":
+                    btnAgregar.Visible = true;
+                    btnEliminar.Visible = true;
+                    break;
+
+                case "OPERADOR":
+                    btnAgregar.Visible = true;
+                    break;
+
+                case "USUARIO":
+                    btnAgregar.Visible = true; // Si el usuario normal puede agregar al carrito
+                    break;
+            }
         }
 
         public string NombreSeleccionado => lblNombre.Text;

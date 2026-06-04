@@ -14,5 +14,11 @@ namespace Starducks.Vista
         {
             InitializeComponent();
         }
+
+        public class Usuario
+        {
+            public string Nombre { get; set; }
+            public string Rol { get; set; } 
+        }
     }
 }

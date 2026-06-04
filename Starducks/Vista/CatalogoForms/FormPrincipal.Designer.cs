@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panelBusqueda = new Panel();
             btnReportesForm = new Button();
             pcbLogoCatalogo = new PictureBox();
@@ -48,7 +48,7 @@
             btnPagar = new Button();
             lblTotalCarrito = new Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
-            btnReportesForm = new Button();
+            btnAgregarProducto = new Button();
             panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
@@ -57,6 +57,7 @@
             // panelBusqueda
             // 
             panelBusqueda.BackColor = Color.White;
+            panelBusqueda.Controls.Add(btnAgregarProducto);
             panelBusqueda.Controls.Add(btnReportesForm);
             panelBusqueda.Controls.Add(pcbLogoCatalogo);
             panelBusqueda.Controls.Add(btnPostres);
@@ -78,7 +79,7 @@
             btnReportesForm.FlatStyle = FlatStyle.Flat;
             btnReportesForm.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnReportesForm.ForeColor = Color.White;
-            btnReportesForm.Location = new Point(969, 29);
+            btnReportesForm.Location = new Point(1075, 26);
             btnReportesForm.Name = "btnReportesForm";
             btnReportesForm.Size = new Size(108, 29);
             btnReportesForm.TabIndex = 5;
@@ -184,7 +185,7 @@
             flowLayoutPanelPanelProductos.ForeColor = Color.White;
             flowLayoutPanelPanelProductos.Location = new Point(0, 91);
             flowLayoutPanelPanelProductos.Name = "flowLayoutPanelPanelProductos";
-            flowLayoutPanelPanelProductos.Size = new Size(1463, 770);
+            flowLayoutPanelPanelProductos.Size = new Size(1463, 949);
             flowLayoutPanelPanelProductos.TabIndex = 2;
             // 
             // dgvCarrito
@@ -193,14 +194,14 @@
             dgvCarrito.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvCarrito.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarrito.Columns.AddRange(new DataGridViewColumn[] { colNombre, colTamano, colPrecio });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(0, 98, 65);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvCarrito.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(0, 98, 65);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvCarrito.DefaultCellStyle = dataGridViewCellStyle1;
             dgvCarrito.Location = new Point(1482, 117);
             dgvCarrito.Name = "dgvCarrito";
             dgvCarrito.RowHeadersWidth = 51;
@@ -261,26 +262,29 @@
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
             // 
-            // btnReportesForm
+            // printDocument1
             // 
-            btnReportesForm.BackColor = Color.Firebrick;
-            btnReportesForm.FlatStyle = FlatStyle.Flat;
-            btnReportesForm.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReportesForm.ForeColor = Color.White;
-            btnReportesForm.Location = new Point(969, 29);
-            btnReportesForm.Name = "btnReportesForm";
-            btnReportesForm.Size = new Size(108, 29);
-            btnReportesForm.TabIndex = 5;
-            btnReportesForm.Text = "REPORTES";
-            btnReportesForm.UseVisualStyleBackColor = false;
-            btnReportesForm.Click += btnReportesForm_Click;
+            printDocument1.PrintPage += printDocument1_PrintPage_1;
+            // 
+            // btnAgregarProducto
+            // 
+            btnAgregarProducto.BackColor = Color.FromArgb(0, 98, 65);
+            btnAgregarProducto.FlatStyle = FlatStyle.Flat;
+            btnAgregarProducto.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgregarProducto.ForeColor = Color.Gold;
+            btnAgregarProducto.Location = new Point(1214, 26);
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.Size = new Size(188, 29);
+            btnAgregarProducto.TabIndex = 6;
+            btnAgregarProducto.Text = "Agregar Producto";
+            btnAgregarProducto.UseVisualStyleBackColor = false;
             // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(117, 159, 137);
-            ClientSize = new Size(1924, 861);
+            ClientSize = new Size(1924, 1040);
             Controls.Add(lblTotalCarrito);
             Controls.Add(dgvCarrito);
             Controls.Add(btnPagar);
@@ -319,5 +323,6 @@
         private System.Drawing.Printing.PrintDocument printDocument1;
         private PictureBox pcbLogoCatalogo;
         private Button btnReportesForm;
+        private Button btnAgregarProducto;
     }
 }
