@@ -111,12 +111,13 @@
             btnAgregarProducto.FlatStyle = FlatStyle.Flat;
             btnAgregarProducto.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgregarProducto.ForeColor = Color.Gold;
-            btnAgregarProducto.Location = new Point(1559, 25);
+            btnAgregarProducto.Location = new Point(1572, 31);
             btnAgregarProducto.Name = "btnAgregarProducto";
             btnAgregarProducto.Size = new Size(188, 29);
             btnAgregarProducto.TabIndex = 6;
             btnAgregarProducto.Text = "Agregar Producto";
             btnAgregarProducto.UseVisualStyleBackColor = false;
+            btnAgregarProducto.Click += btnAgregarProducto_Click;
             // 
             // btnReportesForm
             // 
@@ -148,12 +149,13 @@
             btnPostres.FlatStyle = FlatStyle.Flat;
             btnPostres.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPostres.ForeColor = Color.White;
-            btnPostres.Location = new Point(850, 29);
+            btnPostres.Location = new Point(865, 29);
             btnPostres.Name = "btnPostres";
             btnPostres.Size = new Size(94, 29);
             btnPostres.TabIndex = 3;
             btnPostres.Text = "POSTRES";
             btnPostres.UseVisualStyleBackColor = false;
+            btnPostres.Click += btnPostres_Click;
             // 
             // btnCafefrio
             // 
@@ -167,6 +169,7 @@
             btnCafefrio.TabIndex = 1;
             btnCafefrio.Text = "CAFES FRIOS";
             btnCafefrio.UseVisualStyleBackColor = false;
+            btnCafefrio.Click += btnCafesFrios_Click;
             // 
             // btnCafecaliente
             // 
@@ -180,6 +183,7 @@
             btnCafecaliente.TabIndex = 2;
             btnCafecaliente.Text = "CAFE CALIENTES";
             btnCafecaliente.UseVisualStyleBackColor = false;
+            btnCafecaliente.Click += btnCafesCalientes_Click;
             // 
             // btnTodos
             // 
@@ -193,6 +197,7 @@
             btnTodos.TabIndex = 0;
             btnTodos.Text = "TODOS";
             btnTodos.UseVisualStyleBackColor = false;
+            btnTodos.Click += btnTodos_Click;
             // 
             // txtBusqueda
             // 
@@ -326,6 +331,7 @@
             Controls.Add(panelBusqueda);
             Name = "FormPrincipal";
             Text = "FormPrincipal";
+            Load += FormPrincipal_Load_1;
             panelBusqueda.ResumeLayout(false);
             panelBusqueda.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).EndInit();

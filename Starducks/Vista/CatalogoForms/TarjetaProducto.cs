@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using Starducks.Controlador;
+
 namespace Starducks.Vista.CatalogoForms
 {
     public partial class TarjetaProducto : UserControl
@@ -113,28 +115,21 @@ namespace Starducks.Vista.CatalogoForms
             btnAgregar.Visible = false;
             btnEliminar.Visible = false;
 
-            // Aplicar lógica según el rol
-            switch (Sesion.Rol)
+            // Comparar contra lo que realmente está en la BD
+            if (Sesion.Rol == "administrador")
             {
-                case "administrado":
-                    btnAgregar.Visible = true;
-                    btnEliminar.Visible = true;
-                    break;
-
-                case "usuario operador":
-                    btnAgregar.Visible = true;
-                    btnEliminar.Visible = false;
-                    break;
-
-                case "consultor":
-                    btnAgregar.Visible = true;
-                    btnEliminar.Visible = false;
-                    break;
-
-                default: // Seguridad extra: si no coincide nada, ocultar todo
-                    btnAgregar.Visible = false;
-                    btnEliminar.Visible = false;
-                    break;
+                btnAgregar.Visible = true;
+                btnEliminar.Visible = true;
+            }
+            else if (Sesion.Rol == "usuario operador")
+            {
+                btnAgregar.Visible = true;
+                btnEliminar.Visible = false;
+            }
+            else if (Sesion.Rol == "consultor")
+            {
+                btnAgregar.Visible = true;
+                btnEliminar.Visible = false;
             }
         }
 

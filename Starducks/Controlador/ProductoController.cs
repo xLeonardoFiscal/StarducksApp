@@ -5,6 +5,8 @@ using System;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Starducks.Modelo;
+using Starducks.Vista.CatalogoForms;
+
 
 namespace Starducks.Controlador
 {
@@ -102,6 +104,7 @@ namespace Starducks.Controlador
             {
                 using (MySqlConnection conexion = ConexionDB.ObtenerConexion())
                 {
+                    
                     string query = "";
 
                     if (filtro == "TODOS")

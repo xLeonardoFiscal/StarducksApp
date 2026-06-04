@@ -145,6 +145,7 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 386);
+            Load += TarjetaProducto_Load;
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
