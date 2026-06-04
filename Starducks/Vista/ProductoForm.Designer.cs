@@ -58,6 +58,7 @@
             lblTituloGestion.Size = new Size(354, 38);
             lblTituloGestion.TabIndex = 0;
             lblTituloGestion.Text = "GESTIÓN DE PRODUCTOS";
+            lblTituloGestion.Click += lblTituloGestion_Click;
             // 
             // lblNombre
             // 
