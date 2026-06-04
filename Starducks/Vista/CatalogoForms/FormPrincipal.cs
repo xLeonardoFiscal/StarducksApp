@@ -19,13 +19,14 @@ namespace Starducks.Vista.CatalogoForms
         {
             InitializeComponent();
             CargarCatalogo();
+            this.Load += FormPrincipal_Load;
             this.WindowState = FormWindowState.Maximized; // PANTALLA COMPLETA
         }
 
 
 
         //CATALOGO
-        private void CargarCatalogo(string filtro = "")
+        public void CargarCatalogo(string filtro = "")
         {
             // 1. LIMPIEZA
             flowLayoutPanelPanelProductos.Controls.Clear();
@@ -40,7 +41,7 @@ namespace Starducks.Vista.CatalogoForms
             }
 
             // Esto te dirá si el problema es que la tabla está vacía en la base de datos
-            MessageBox.Show("Cantidad de productos encontrados: " + dtProductos.Rows.Count);
+
 
 
             // 3. DIBUJADO
@@ -137,7 +138,7 @@ namespace Starducks.Vista.CatalogoForms
         private void AgregarTarjetaAlPanel(DataRow fila)
         {
             TarjetaProducto tarjeta = new TarjetaProducto();
-            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]); // Asegúrate que el nombre de la columna coincida
+            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]); 
 
             // 1. ASIGNACIÓN DE DATOS
             tarjeta.AsignarDatos(
@@ -180,30 +181,22 @@ namespace Starducks.Vista.CatalogoForms
         //FORMPRINCIPAL LOAD
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
-            btnAgregarProducto.Visible = false;
-            btnReportesForm.Visible = false;
-
-            // 2. Aplicar permisos según el rol
-            switch (Sesion.Rol)
-            {
-                case "administrador":
-                    btnAgregarProducto.Visible = true;
-                    btnReportesForm.Visible = true;
-                    break;
-
-                case "usuario operador":
-                    btnAgregarProducto.Visible = true; // El operador puede agregar productos nuevos
-                    btnReportesForm.Visible = false;    // El operador NO ve reportes
-                    break;
-
-                case "consultor":
-                    btnReportesForm.Visible = false;
-                    break;
-            }
+            AplicarPermisos();
 
             panelMenu.Controls.Clear();
 
             CargarCatalogo("TODOS");
+        }
+
+        private void AplicarPermisos()
+        {
+            string rol = Sesion.Rol != null ? Sesion.Rol.Trim().ToLower() : "";
+
+            // Aseguramos el estado de cada uno
+            btnReportesForm.Visible = (rol == "administrador");
+            btnConsultas.Visible = (rol == "administrador" || rol == "usuario operador");
+            btnUsuarios.Visible = (rol == "administrador");
+            btnAgregarProducto.Visible = (rol == "administrador");
         }
 
         //BTN PAGAR
@@ -351,6 +344,24 @@ namespace Starducks.Vista.CatalogoForms
             formusuarios.Owner = this;
             formusuarios.Show();
             this.Hide();
+        }
+
+        private void FormPrincipal_Load_1(object sender, EventArgs e)
+        {
+            AplicarPermisos();
+
+            panelMenu.Controls.Clear();
+
+            CargarCatalogo("TODOS");
+
+        }
+
+        private void btnAgregarProducto_Click(object sender, EventArgs e)
+        {
+            ProductoForm form = new ProductoForm();
+            form.ShowDialog();
+            CargarCatalogo("TODOS");
+
         }
     }
 }

@@ -36,16 +36,18 @@
             lblTamaño = new Label();
             btnAgregar = new Button();
             btnEliminar = new Button();
+            btnEditar = new Button();
             ((System.ComponentModel.ISupportInitialize)pbImagen).BeginInit();
             SuspendLayout();
             // 
             // pbImagen
             // 
             pbImagen.Dock = DockStyle.Top;
+            pbImagen.Image = Properties.Resources.CafePruebas;
             pbImagen.Location = new Point(0, 0);
             pbImagen.Name = "pbImagen";
             pbImagen.Size = new Size(220, 140);
-            pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
             pbImagen.Click += pbImagen_Click;
@@ -122,7 +124,7 @@
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(52, 324);
+            btnEliminar.Location = new Point(114, 326);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(94, 29);
             btnEliminar.TabIndex = 7;
@@ -130,11 +132,26 @@
             btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
+            // btnEditar
+            // 
+            btnEditar.BackColor = Color.Green;
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Location = new Point(3, 326);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(94, 29);
+            btnEditar.TabIndex = 8;
+            btnEditar.Text = "EDITAR";
+            btnEditar.UseVisualStyleBackColor = false;
+            btnEditar.Click += btnEditar_Click;
+            // 
             // TarjetaProducto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            Controls.Add(btnEditar);
             Controls.Add(btnEliminar);
             Controls.Add(btnAgregar);
             Controls.Add(lblTamaño);
@@ -145,6 +162,7 @@
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
             Size = new Size(220, 386);
+            Load += TarjetaProducto_Load;
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -160,5 +178,6 @@
         public Label lblTamaño;
         private Button btnAgregar;
         private Button btnEliminar;
+        private Button btnEditar;
     }
 }
