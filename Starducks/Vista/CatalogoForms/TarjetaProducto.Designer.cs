@@ -43,10 +43,11 @@
             // pbImagen
             // 
             pbImagen.Dock = DockStyle.Top;
+            pbImagen.Image = Properties.Resources.CafePruebas;
             pbImagen.Location = new Point(0, 0);
             pbImagen.Name = "pbImagen";
             pbImagen.Size = new Size(220, 140);
-            pbImagen.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
             pbImagen.Click += pbImagen_Click;
