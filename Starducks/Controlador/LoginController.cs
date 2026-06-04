@@ -14,11 +14,11 @@ namespace Starducks.Controlador
             string usuario,
             string password)
         {
-            MySqlConnection conexion = new MySqlConnection("Server=localhost;Database=starducks;Uid=root;Pwd=Lizbethhdz17;");
+            //MySqlConnection conexion = new MySqlConnection("Server=localhost;Database=starducks;Uid=root;Pwd=Lizbethhdz17;");
 
             try
             {
-                conexion.Open();
+                //conexion.Open();
 
                 Usuario user = null;
 
