@@ -8,17 +8,6 @@ namespace Starducks.Controlador
     public class RegistroController
     {
         internal bool RegistroUsuario(
-            string text1,
-            string text2, 
-            string text3, 
-            string text4, 
-            string text5, 
-            string rutaFoto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RegistrarUsuario(
              string nombre,
              string usuario,
              string password,
@@ -38,6 +27,7 @@ namespace Starducks.Controlador
             UsuarioDAO dao = new UsuarioDAO();
 
             return dao.Insertar(nuevoUsuario);
+            throw new NotImplementedException();
         }
     }
 }
