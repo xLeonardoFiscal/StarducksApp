@@ -17,7 +17,7 @@ namespace Starducks.Vista.CatalogoForms
         private List<Starducks.Vista.CatalogoForms.ItemCarrito> listaCarrito = new List<Starducks.Vista.CatalogoForms.ItemCarrito>();
 
 
-           
+
         public FormPrincipal()
         {
             InitializeComponent();
@@ -140,7 +140,7 @@ namespace Starducks.Vista.CatalogoForms
         private void AgregarTarjetaAlPanel(DataRow fila)
         {
             TarjetaProducto tarjeta = new TarjetaProducto();
-            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]); 
+            tarjeta.IdProducto = Convert.ToInt32(fila["id_producto"]);
 
             // 1. ASIGNACIÓN DE DATOS
             tarjeta.AsignarDatos(
@@ -356,6 +356,31 @@ namespace Starducks.Vista.CatalogoForms
             form.ShowDialog();
             CargarCatalogo("TODOS");
 
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnCerrarSeccion_Click(object sender, EventArgs e)
+        {
+            
+            DialogResult resultado = MessageBox.Show("¿Estás seguro que deseas cerrar sesión?",
+                                                     "Cerrar Sesión",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                Sesion.Rol = null;
+                
+                LoginForm login = new LoginForm();
+                login.Show();
+
+               
+                this.Close();
+            }
         }
     }
 }

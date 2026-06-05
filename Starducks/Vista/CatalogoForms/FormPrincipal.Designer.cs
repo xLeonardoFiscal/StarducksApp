@@ -51,6 +51,8 @@
             btnPagar = new Button();
             lblTotalCarrito = new Label();
             printDocument1 = new System.Drawing.Printing.PrintDocument();
+            btnCerrarSeccion = new Button();
+            btnSalir = new Button();
             panelBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogoCatalogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarrito).BeginInit();
@@ -293,11 +295,11 @@
             // 
             btnPagar.BackColor = Color.FromArgb(0, 98, 65);
             btnPagar.FlatStyle = FlatStyle.Flat;
-            btnPagar.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPagar.Font = new Font("Rockwell", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnPagar.ForeColor = Color.Gold;
-            btnPagar.Location = new Point(1653, 597);
+            btnPagar.Location = new Point(1642, 597);
             btnPagar.Name = "btnPagar";
-            btnPagar.Size = new Size(94, 38);
+            btnPagar.Size = new Size(138, 68);
             btnPagar.TabIndex = 0;
             btnPagar.Text = "Pagar";
             btnPagar.UseVisualStyleBackColor = false;
@@ -306,9 +308,10 @@
             // lblTotalCarrito
             // 
             lblTotalCarrito.AutoSize = true;
-            lblTotalCarrito.Location = new Point(1663, 561);
+            lblTotalCarrito.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalCarrito.Location = new Point(1642, 544);
             lblTotalCarrito.Name = "lblTotalCarrito";
-            lblTotalCarrito.Size = new Size(84, 20);
+            lblTotalCarrito.Size = new Size(137, 31);
             lblTotalCarrito.TabIndex = 4;
             lblTotalCarrito.Text = "Total: $0.00";
             // 
@@ -316,12 +319,42 @@
             // 
             printDocument1.PrintPage += printDocument1_PrintPage_1;
             // 
+            // btnCerrarSeccion
+            // 
+            btnCerrarSeccion.BackColor = Color.FromArgb(0, 98, 65);
+            btnCerrarSeccion.FlatStyle = FlatStyle.Flat;
+            btnCerrarSeccion.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCerrarSeccion.ForeColor = Color.Gold;
+            btnCerrarSeccion.Location = new Point(1482, 961);
+            btnCerrarSeccion.Name = "btnCerrarSeccion";
+            btnCerrarSeccion.Size = new Size(173, 38);
+            btnCerrarSeccion.TabIndex = 5;
+            btnCerrarSeccion.Text = "Cerrar Sección";
+            btnCerrarSeccion.UseVisualStyleBackColor = false;
+            btnCerrarSeccion.Click += btnCerrarSeccion_Click;
+            // 
+            // btnSalir
+            // 
+            btnSalir.BackColor = Color.FromArgb(0, 98, 65);
+            btnSalir.FlatStyle = FlatStyle.Flat;
+            btnSalir.Font = new Font("Rockwell", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSalir.ForeColor = Color.Gold;
+            btnSalir.Location = new Point(1707, 961);
+            btnSalir.Name = "btnSalir";
+            btnSalir.Size = new Size(173, 38);
+            btnSalir.TabIndex = 6;
+            btnSalir.Text = "Salir";
+            btnSalir.UseVisualStyleBackColor = false;
+            btnSalir.Click += btnSalir_Click;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(117, 159, 137);
             ClientSize = new Size(1924, 1040);
+            Controls.Add(btnSalir);
+            Controls.Add(btnCerrarSeccion);
             Controls.Add(lblTotalCarrito);
             Controls.Add(dgvCarrito);
             Controls.Add(btnPagar);
@@ -364,5 +397,7 @@
         private Button btnAgregarProducto;
         private Button btnUsuarios;
         private Button btnConsultas;
+        private Button btnCerrarSeccion;
+        private Button btnSalir;
     }
 }
