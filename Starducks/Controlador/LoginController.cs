@@ -46,6 +46,7 @@ namespace Starducks.Controlador
 
                     user.Activo = Convert.ToInt32(lector["activo"]);
 
+                    user.Foto = lector["foto"].ToString();
                 }
 
                 con.Close();

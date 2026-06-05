@@ -36,16 +36,18 @@
             lblPorcentaje = new Label();
             panelProgreso = new Panel();
             panelBarraBg = new Panel();
+            pbFotoUsuario = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             panelBarraBg.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbFotoUsuario).BeginInit();
             SuspendLayout();
             // 
             // picLogo
             // 
             picLogo.Image = Properties.Resources.LogoPato;
-            picLogo.Location = new Point(41, 94);
+            picLogo.Location = new Point(26, 22);
             picLogo.Name = "picLogo";
-            picLogo.Size = new Size(229, 224);
+            picLogo.Size = new Size(96, 97);
             picLogo.SizeMode = PictureBoxSizeMode.Zoom;
             picLogo.TabIndex = 0;
             picLogo.TabStop = false;
@@ -57,11 +59,11 @@
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(244, 241, 231);
-            lblTitulo.Location = new Point(315, 144);
+            lblTitulo.Location = new Point(41, 151);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(349, 47);
+            lblTitulo.Size = new Size(504, 47);
             lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "¡BIENVENIDOS A ";
+            lblTitulo.Text = "¡Bienvenido, [Nombre]";
             lblTitulo.Click += lblTitulo_Click;
             // 
             // timerCarg
@@ -75,11 +77,12 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(244, 241, 231);
-            label1.Location = new Point(339, 191);
+            label1.Location = new Point(65, 198);
             label1.Name = "label1";
             label1.Size = new Size(499, 47);
             label1.TabIndex = 4;
             label1.Text = "CAFETERIA STARDUCKS!";
+            label1.Click += label1_Click;
             // 
             // lblPorcentaje
             // 
@@ -109,12 +112,22 @@
             panelBarraBg.TabIndex = 6;
             panelBarraBg.Paint += panelBarraBg_Paint;
             // 
+            // pbFotoUsuario
+            // 
+            pbFotoUsuario.Location = new Point(596, 91);
+            pbFotoUsuario.Name = "pbFotoUsuario";
+            pbFotoUsuario.Size = new Size(159, 171);
+            pbFotoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
+            pbFotoUsuario.TabIndex = 7;
+            pbFotoUsuario.TabStop = false;
+            // 
             // BienvenidaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(11, 59, 46);
             ClientSize = new Size(850, 500);
+            Controls.Add(pbFotoUsuario);
             Controls.Add(panelBarraBg);
             Controls.Add(lblPorcentaje);
             Controls.Add(label1);
@@ -127,6 +140,7 @@
             Load += BienvenidaForm_Load;
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             panelBarraBg.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbFotoUsuario).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -140,5 +154,6 @@
         private Label lblPorcentaje;
         private Panel panelProgreso;
         private Panel panelBarraBg;
+        private PictureBox pbFotoUsuario;
     }
 }

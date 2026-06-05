@@ -42,6 +42,7 @@ namespace Starducks.Vista
         {
             public string Nombre { get; set; }
             public string Rol { get; set; }
+            public string Foto { get; set; }
         }
 
         private void UsuariosForm_Load(object sender, EventArgs e)

@@ -202,6 +202,11 @@ namespace Starducks.Vista.CatalogoForms
             }
         }
 
+        private void lblPrecio_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public string NombreSeleccionado => lblNombre.Text;
         public string TamanoSeleccionado => cmbTamano.SelectedItem.ToString();
         public string PrecioFinal => lblPrecio.Text;

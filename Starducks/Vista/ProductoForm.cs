@@ -14,7 +14,7 @@ namespace Starducks.Vista
 
         private int idProductoActual = 0;
         private string nombreImagenActual = "";
-        
+
 
         public ProductoForm()
         {
@@ -101,7 +101,7 @@ namespace Starducks.Vista
                       WHERE id_producto = @id";
                 }
 
-                
+
                 string conexionString = "server=localhost;database=starducks;uid=root;pwd=Lizbethhdz17 ; AllowPublicKeyRetrieval=True;";
 
                 using (MySqlConnection con = new MySqlConnection(conexionString))
@@ -171,6 +171,9 @@ namespace Starducks.Vista
             this.Close();
         }
 
-        
+        private void lblTituloGestion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
