@@ -82,6 +82,7 @@
             label1.Size = new Size(499, 47);
             label1.TabIndex = 4;
             label1.Text = "CAFETERIA STARDUCKS!";
+            label1.Click += label1_Click;
             // 
             // lblPorcentaje
             // 
@@ -116,6 +117,7 @@
             pbFotoUsuario.Location = new Point(596, 91);
             pbFotoUsuario.Name = "pbFotoUsuario";
             pbFotoUsuario.Size = new Size(159, 171);
+            pbFotoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
             pbFotoUsuario.TabIndex = 7;
             pbFotoUsuario.TabStop = false;
             // 

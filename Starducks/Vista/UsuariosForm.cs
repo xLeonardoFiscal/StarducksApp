@@ -18,7 +18,8 @@ namespace Starducks.Vista
         public class Usuario
         {
             public string Nombre { get; set; }
-            public string Rol { get; set; } 
+            public string Rol { get; set; }
+            public string Foto { get; set; }
         }
     }
 }

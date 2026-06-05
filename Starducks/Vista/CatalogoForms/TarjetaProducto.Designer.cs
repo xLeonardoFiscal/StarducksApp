@@ -46,8 +46,8 @@
             pbImagen.Image = Properties.Resources.CafePruebas;
             pbImagen.Location = new Point(0, 0);
             pbImagen.Name = "pbImagen";
-            pbImagen.Size = new Size(220, 140);
-            pbImagen.SizeMode = PictureBoxSizeMode.Zoom;
+            pbImagen.Size = new Size(244, 225);
+            pbImagen.SizeMode = PictureBoxSizeMode.CenterImage;
             pbImagen.TabIndex = 0;
             pbImagen.TabStop = false;
             pbImagen.Click += pbImagen_Click;
@@ -57,7 +57,7 @@
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNombre.ForeColor = Color.Black;
-            lblNombre.Location = new Point(3, 159);
+            lblNombre.Location = new Point(0, 228);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(81, 25);
             lblNombre.TabIndex = 1;
@@ -68,7 +68,7 @@
             // 
             lblDescripcion.AutoSize = true;
             lblDescripcion.ForeColor = Color.FromArgb(102, 102, 102);
-            lblDescripcion.Location = new Point(3, 193);
+            lblDescripcion.Location = new Point(3, 253);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(87, 20);
             lblDescripcion.TabIndex = 2;
@@ -79,16 +79,17 @@
             lblPrecio.AutoSize = true;
             lblPrecio.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPrecio.ForeColor = Color.FromArgb(0, 98, 65);
-            lblPrecio.Location = new Point(134, 274);
+            lblPrecio.Location = new Point(22, 326);
             lblPrecio.Name = "lblPrecio";
             lblPrecio.Size = new Size(59, 23);
             lblPrecio.TabIndex = 3;
             lblPrecio.Text = "Precio";
+            lblPrecio.Click += lblPrecio_Click;
             // 
             // cmbTamano
             // 
             cmbTamano.FormattingEnabled = true;
-            cmbTamano.Location = new Point(84, 216);
+            cmbTamano.Location = new Point(95, 288);
             cmbTamano.Name = "cmbTamano";
             cmbTamano.Size = new Size(133, 28);
             cmbTamano.TabIndex = 4;
@@ -98,7 +99,7 @@
             lblTamaño.AutoSize = true;
             lblTamaño.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTamaño.ForeColor = SystemColors.ActiveCaptionText;
-            lblTamaño.Location = new Point(0, 219);
+            lblTamaño.Location = new Point(5, 288);
             lblTamaño.Name = "lblTamaño";
             lblTamaño.Size = new Size(79, 25);
             lblTamaño.TabIndex = 5;
@@ -111,7 +112,7 @@
             btnAgregar.FlatStyle = FlatStyle.Flat;
             btnAgregar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgregar.ForeColor = Color.FromArgb(0, 98, 65);
-            btnAgregar.Location = new Point(3, 274);
+            btnAgregar.Location = new Point(134, 324);
             btnAgregar.Name = "btnAgregar";
             btnAgregar.Size = new Size(94, 29);
             btnAgregar.TabIndex = 6;
@@ -124,7 +125,7 @@
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(114, 326);
+            btnEliminar.Location = new Point(134, 359);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(94, 29);
             btnEliminar.TabIndex = 7;
@@ -138,7 +139,7 @@
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEditar.ForeColor = Color.White;
-            btnEditar.Location = new Point(3, 326);
+            btnEditar.Location = new Point(5, 359);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(94, 29);
             btnEditar.TabIndex = 8;
@@ -161,7 +162,7 @@
             Controls.Add(lblDescripcion);
             Controls.Add(pbImagen);
             Name = "TarjetaProducto";
-            Size = new Size(220, 386);
+            Size = new Size(244, 406);
             Load += TarjetaProducto_Load;
             ((System.ComponentModel.ISupportInitialize)pbImagen).EndInit();
             ResumeLayout(false);

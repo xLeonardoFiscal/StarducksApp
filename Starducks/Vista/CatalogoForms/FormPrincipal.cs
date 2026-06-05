@@ -18,7 +18,6 @@ namespace Starducks.Vista.CatalogoForms
         public FormPrincipal()
         {
             InitializeComponent();
-            CargarCatalogo();
             this.Load += FormPrincipal_Load;
             this.WindowState = FormWindowState.Maximized; // PANTALLA COMPLETA
         }
@@ -352,7 +351,6 @@ namespace Starducks.Vista.CatalogoForms
 
             panelMenu.Controls.Clear();
 
-            CargarCatalogo("TODOS");
 
         }
 

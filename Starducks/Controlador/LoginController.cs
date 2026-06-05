@@ -54,6 +54,7 @@ namespace Starducks.Controlador
 
                     user.Rol = lector["rol"].ToString();
 
+                    user.Foto = lector["foto"].ToString();
                 }
 
                 con.Close();

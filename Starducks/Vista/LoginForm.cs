@@ -1,18 +1,21 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using Starducks.Controlador;
+using Starducks.Modelo;
+using Starducks.Vista.CatalogoForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
-using Starducks.Modelo;
-using Starducks.Controlador;
 
 namespace Starducks.Vista
 {
     public partial class LoginForm : Form
     {
+        private Usuario usuario;
         public LoginForm()
         {
             InitializeComponent();
@@ -153,22 +156,25 @@ namespace Starducks.Vista
 
             if (usuario != null)
             {
-                Sesion.UsuarioActual = usuario.Nombre;
-                Sesion.Rol = usuario.Rol;
-
-                intentos = 0;
-
-                btnRegistrarse.Enabled = false; //Deshabilitamos los botones
                 btnSesion.Enabled = false;
 
-                progressBar1.Value = 0;
+                // 2. Iniciamos el timer SOLO para la barra
                 timer1.Start();
-                lblPorcentaje.Text = "0%";
 
+                // 3. Abrimos la bienvenida de forma MODAL
+                // ShowDialog es la clave: detiene el Login hasta que BienvenidaForm se cierre
+                BienvenidaForm frm = new BienvenidaForm();
+                frm.nombreUsuario = usuario.Nombre;
+                frm.FotoUsuarios = usuario.Foto;
 
-                MessageBox.Show(
-                    "Bienvenido " + usuario.Nombre);
+                this.Hide();
+                // Mostramos la ventana
+                frm.ShowDialog();
 
+                // 4. Solo al cerrar BienvenidaForm, continuamos
+                FormPrincipal principal = new FormPrincipal();
+                principal.Show();
+                
 
             }
             else
@@ -197,7 +203,9 @@ namespace Starducks.Vista
                     timerBloqueo.Start();
                 }
             }
+          
         }
+
 
 
 
@@ -258,9 +266,6 @@ namespace Starducks.Vista
             if (progressBar1.Value >= 100)
             {
                 timer1.Stop();
-                BienvenidaForm bienvenida = new BienvenidaForm();
-                bienvenida.Show(); //Muestra la BienvenidaForm
-                this.Hide();
 
             }
         }

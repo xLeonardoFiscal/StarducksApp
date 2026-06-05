@@ -7,7 +7,7 @@ namespace Starducks.Modelo
 {
     public class ConexionDB
     {
-        private static string cadena = "Server=localhost;Database=starducks;Uid=root;Pwd=014281850026Lv*;";
+        private static string cadena = "Server=localhost;Database=starducks;Uid=root;Pwd=Lizbethhdz17;";
 
         public MySqlConnection Conectar()
         {
