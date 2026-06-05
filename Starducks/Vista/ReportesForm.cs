@@ -73,6 +73,13 @@ namespace Starducks.Vista
             Detalles.Nodes.Add("Cantidad vendida por tamaño");
             Detalles.Nodes.Add("Detalle de registro");
 
+            // Auditoria
+            TreeNode auditoria = treeReportes.Nodes.Add("Auditoria");
+
+            auditoria.Nodes.Add("Listado General de Auditoria");
+            auditoria.Nodes.Add("Cambios Ultimos 10 Dias");
+            auditoria.Nodes.Add("Cantidad de Updates y Deletes");
+
             lblFiltro.Visible = false;
             cmbFiltro.Visible = false;  // Ocultar al inicio
             txtFiltro.Visible = false;
@@ -329,6 +336,31 @@ namespace Starducks.Vista
 
 
 
+        // AUDITORIAS
+        private void CargarAuditoriaGeneral()
+        {
+            ReporteController reporte = new ReporteController();
+
+            dgvReporte.DataSource = reporte.ObtenerAuditoriaGeneral();
+        }
+
+        private void CargarAuditoriaUltimos10Dias()
+        {
+            ReporteController reporte = new ReporteController();
+
+            dgvReporte.DataSource = reporte.ObtenerAuditoriaUltimos10Dias();
+        }
+
+        private void CargarAuditoriaCantidad()
+        {
+            ReporteController reporte = new ReporteController();
+
+            dgvReporte.DataSource = reporte.ObtenerAuditoriaCantidad();
+        }
+
+
+
+
         private string reporteSeleccionado = ""; //variable global
 
         private void treeReportes_AfterSelect(object sender, TreeViewEventArgs e)
@@ -564,6 +596,18 @@ namespace Starducks.Vista
                     btnGenerar.Visible = true;
 
                     lblFiltro.Text = "Ingrese el ID del detalle del producto a buscar";
+                    break;
+                    //Auditoria
+                case "Listado General de Auditoria":
+                    CargarAuditoriaGeneral();
+                    break;
+
+                case "Cambios Ultimos 10 Dias":
+                    CargarAuditoriaUltimos10Dias();
+                    break;
+
+                case "Cantidad de Updates y Deletes":
+                    CargarAuditoriaCantidad();
                     break;
             }
         }

@@ -16,6 +16,8 @@ namespace Starducks.Modelo
         public string Direccion { get; set; }
 
         public string Foto { get; set; }
-    
+
+        public int Activo { get; set; }
+
     }
 }

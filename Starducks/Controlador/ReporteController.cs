@@ -180,5 +180,22 @@ namespace Starducks.Controlador
             return helper.DetallesRegistro(id);
         }
 
+
+
+        // SECCION AUDITORIAS 
+        public DataTable ObtenerAuditoriaGeneral()
+        {
+            return helper.AuditoriaGeneral();
+        }
+
+        public DataTable ObtenerAuditoriaUltimos10Dias()
+        {
+            return helper.AuditoriaUltimos10Dias();
+        }
+
+        public DataTable ObtenerAuditoriaCantidad()
+        {
+            return helper.AuditoriaCantidad();
+        }
     }
 }

@@ -631,6 +631,64 @@ namespace Starducks.Modelo
             return tabla;
         }
 
+
+
+        // REPORTES DE AUDITORIAS 
+        public DataTable AuditoriaGeneral()
+        {
+            DataTable tabla = new DataTable();
+
+            using (MySqlConnection con = ConexionDB.ObtenerConexion())
+            {
+                MySqlCommand cmd = new MySqlCommand("sp_auditoria_general", con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+                da.Fill(tabla);
+            }
+
+            return tabla;
+        }
+
+        // Ultimos 10 dias
+        public DataTable AuditoriaUltimos10Dias()
+        {
+            DataTable tabla = new DataTable();
+
+            using (MySqlConnection con = ConexionDB.ObtenerConexion())
+            {
+                MySqlCommand cmd = new MySqlCommand("sp_auditoria_ultimos_10_dias", con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+                da.Fill(tabla);
+            }
+
+            return tabla;
+        }
+
+        // Cantidad por tipo de operacion DELETE / UPDATE
+        public DataTable AuditoriaCantidad()
+        {
+            DataTable tabla = new DataTable();
+
+            using (MySqlConnection con = ConexionDB.ObtenerConexion())
+            {
+                MySqlCommand cmd = new MySqlCommand("sp_auditoria_estadistica", con);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+                da.Fill(tabla);
+            }
+
+            return tabla;
+        }
     }
 
 }
