@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BienvenidaForm));
             picLogo = new PictureBox();
             lblTitulo = new Label();
             timerCarg = new System.Windows.Forms.Timer(components);
@@ -59,7 +60,7 @@
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(244, 241, 231);
-            lblTitulo.Location = new Point(41, 151);
+            lblTitulo.Location = new Point(21, 187);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(504, 47);
             lblTitulo.TabIndex = 1;
@@ -77,7 +78,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Stencil", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(244, 241, 231);
-            label1.Location = new Point(65, 198);
+            label1.Location = new Point(45, 234);
             label1.Name = "label1";
             label1.Size = new Size(499, 47);
             label1.TabIndex = 4;
@@ -114,7 +115,7 @@
             // 
             // pbFotoUsuario
             // 
-            pbFotoUsuario.Location = new Point(596, 91);
+            pbFotoUsuario.Location = new Point(560, 134);
             pbFotoUsuario.Name = "pbFotoUsuario";
             pbFotoUsuario.Size = new Size(159, 171);
             pbFotoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
@@ -126,6 +127,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(11, 59, 46);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(850, 500);
             Controls.Add(pbFotoUsuario);
             Controls.Add(panelBarraBg);

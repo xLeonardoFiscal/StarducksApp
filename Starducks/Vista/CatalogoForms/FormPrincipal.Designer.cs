@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPrincipal));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             panelBusqueda = new Panel();
             btnUsuarios = new Button();
@@ -61,6 +62,7 @@
             // panelBusqueda
             // 
             panelBusqueda.BackColor = Color.White;
+            panelBusqueda.BackgroundImage = (Image)resources.GetObject("panelBusqueda.BackgroundImage");
             panelBusqueda.Controls.Add(btnUsuarios);
             panelBusqueda.Controls.Add(btnConsultas);
             panelBusqueda.Controls.Add(btnAgregarProducto);
