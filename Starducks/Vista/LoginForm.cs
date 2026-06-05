@@ -139,10 +139,7 @@ namespace Starducks.Vista
         {
             LoginController login = new LoginController();
 
-            Usuario usuario =
-                login.IniciarSesion(
-                txtUsuario.Text,
-                txtContra.Text);
+            Usuario usuario = login.IniciarSesion(txtUsuario.Text, txtContra.Text);
             string contra = txtContra.Text;
 
             if (contra == "")
@@ -153,8 +150,19 @@ namespace Starducks.Vista
 
             if (usuario != null)
             {
+                // COMPROBRAR QUE LA CUENTA DEL USUARIO NO ESTE DESACTIVADA POR EL ADMIN
+                if (usuario.Activo == 0)
+                {
+                    MessageBox.Show(
+                        "Tu cuenta ha sido dada de baja. No puedes acceder al sistema.");
+
+                    return;
+                }
+
+                Sesion.IdUsuario = usuario.IdUsuario;
                 Sesion.UsuarioActual = usuario.Nombre;
                 Sesion.Rol = usuario.Rol;
+
 
                 intentos = 0;
 

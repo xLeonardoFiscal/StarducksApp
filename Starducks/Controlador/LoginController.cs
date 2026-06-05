@@ -10,9 +10,7 @@ namespace Starducks.Controlador
     {
         ConexionDB conexion = new ConexionDB();
 
-        public Usuario IniciarSesion(
-            string usuario,
-            string password)
+        public Usuario IniciarSesion(string usuario, string password)
         {
             //MySqlConnection conexion = new MySqlConnection("Server=localhost;Database=starducks;Uid=root;Pwd=Lizbethhdz17;");
 
@@ -22,21 +20,15 @@ namespace Starducks.Controlador
 
                 Usuario user = null;
 
-                string query =
-                    @"SELECT * 
-                    FROM usuarios
-                    WHERE usuario=@usuario
-                    AND password=@password";
+                string query = @"SELECT * FROM usuarios WHERE usuario=@usuario AND password=@password";
 
                 MySqlConnection con = ConexionDB.ObtenerConexion();
 
                 MySqlCommand cmd = new MySqlCommand(query, con);
 
-                cmd.Parameters.AddWithValue(
-                    "@usuario", usuario);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
 
-                cmd.Parameters.AddWithValue(
-                    "@password", password);
+                cmd.Parameters.AddWithValue("@password", password);
 
                 MySqlDataReader lector = cmd.ExecuteReader();
 
@@ -44,15 +36,15 @@ namespace Starducks.Controlador
                 {
                     user = new Usuario();
 
-                    user.IdUsuario =
-                        lector.GetInt32(
-                           "id_usuario");
+                    user.IdUsuario = lector.GetInt32("id_usuario");
 
                     user.Nombre = lector["nombre"].ToString();
 
                     user.User = lector["usuario"].ToString();
 
                     user.Rol = lector["rol"].ToString();
+
+                    user.Activo = Convert.ToInt32(lector["activo"]);
 
                 }
 
