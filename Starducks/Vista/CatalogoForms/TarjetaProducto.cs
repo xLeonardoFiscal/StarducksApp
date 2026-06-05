@@ -13,11 +13,11 @@ namespace Starducks.Vista.CatalogoForms
     {
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double PrecioChico { get; set; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double PrecioMediano { get; set; }
+        public double PrecioTall { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public double PrecioGrande { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public double PrecioVenti { get; set; }
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public int IdProducto { get; set; }
@@ -32,13 +32,12 @@ namespace Starducks.Vista.CatalogoForms
         public TarjetaProducto()
         {
             InitializeComponent();
-            cmbTamano.SelectedIndexChanged += cmbTamano_SelectedIndexChanged;
-
-            // Configurar el ComboBox
-            cmbTamano.Items.AddRange(new string[] { "Chico", "Mediano", "Grande" });
-            cmbTamano.SelectedIndex = 1; // Mediano por defecto
+            // Configura el ComboBox solo una vez
+            cmbTamano.Items.Clear();
+            cmbTamano.Items.AddRange(new string[] { "Tall", "Grande", "Venti" });
             cmbTamano.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTamano.SelectedIndexChanged += cmbTamano_SelectedIndexChanged;
+            cmbTamano.SelectedIndex = 0; // Selecciona el primero
+            cmbTamano.SelectedIndexChanged += cmbTamano_SelectedIndexChanged_1;
 
             btnAgregar.Click += btnAgregar_Click;
         }
@@ -48,9 +47,9 @@ namespace Starducks.Vista.CatalogoForms
         {
             lblNombre.Text = nombre;
             lblDescripcion.Text = desc;
-            this.PrecioChico = pTall;
-            this.PrecioMediano = pGrande;
-            this.PrecioGrande = pVenti;
+            this.PrecioTall = pTall;
+            this.PrecioGrande = pGrande;
+            this.PrecioVenti = pVenti;
             this.NombreArchivoImagen = nombreArchivo;
 
             // Buscamos el archivo en la carpeta "Imagenes" usando el nombre recibido
@@ -65,6 +64,8 @@ namespace Starducks.Vista.CatalogoForms
             {
                 pbImagen.Image = null; // O una imagen de error
             }
+            cmbTamano.SelectedIndex = 0; // Ahora que ya cargó, seleccionamos "Tall"
+            ActualizarPrecio();
         }
 
         //ACTUALIZACION DE LOS PRECIOS AL ELEGIR EL TAMAÑO
@@ -72,29 +73,20 @@ namespace Starducks.Vista.CatalogoForms
         {
             switch (cmbTamano.SelectedItem.ToString())
             {
-                case "Chico": lblPrecio.Text = "$" + PrecioChico.ToString("F2"); break;
-                case "Mediano": lblPrecio.Text = "$" + PrecioMediano.ToString("F2"); break;
-                case "Grande": lblPrecio.Text = "$" + PrecioGrande.ToString("F2"); break;
-            }
-        }
-
-        //EL BOTON DE ELEGIR LOS TAMAÑOS
-        private void cmbTamano_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            switch (cmbTamano.SelectedItem.ToString())
-            {
-                case "Chico":
-                    lblPrecio.Text = "$" + PrecioChico.ToString("F2");
-                    break;
-                case "Mediano":
-                    lblPrecio.Text = "$" + PrecioMediano.ToString("F2");
+                case "Tall":
+                    lblPrecio.Text = "$" + PrecioTall.ToString("F2");
                     break;
                 case "Grande":
                     lblPrecio.Text = "$" + PrecioGrande.ToString("F2");
                     break;
+                case "Venti":
+                    lblPrecio.Text = "$" + PrecioVenti.ToString("F2");
+                    break;
             }
         }
+
+        //EL BOTON DE ELEGIR LOS TAMAÑOS
+        
 
         //BOTON DE AÑADIR 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -184,9 +176,9 @@ namespace Starducks.Vista.CatalogoForms
             this.IdProducto,
             this.lblNombre.Text,
             this.lblDescripcion.Text,
-            this.PrecioChico.ToString(),   // Asumiendo que guardas estos valores en la tarjeta
-            this.PrecioMediano.ToString(),
+            this.PrecioTall.ToString(),   // Asumiendo que guardas estos valores en la tarjeta
             this.PrecioGrande.ToString(),
+            this.PrecioVenti.ToString(),
             this.NombreArchivoImagen
             );
             form.ShowDialog();
@@ -207,14 +199,20 @@ namespace Starducks.Vista.CatalogoForms
 
         }
 
+        private void cmbTamano_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+            ActualizarPrecio();
+        }
+
         public string NombreSeleccionado => lblNombre.Text;
         public string TamanoSeleccionado => cmbTamano.SelectedItem.ToString();
         public string PrecioFinal => lblPrecio.Text;
 
         public string NombreProducto => lblNombre.Text;
-        public double PrecioChicoVal => PrecioChico;
-        public double PrecioMedianoVal => PrecioMediano;
-        public double PrecioGrandeVal => PrecioGrande;
+        public double PrecioChicoVal => PrecioTall;
+        public double PrecioMedianoVal => PrecioGrande;
+        public double PrecioGrandeVal => PrecioVenti;
 
     }
 }

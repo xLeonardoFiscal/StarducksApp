@@ -15,10 +15,13 @@ namespace Starducks.Vista.CatalogoForms
     {
         private Starducks.Controlador.ProductoController controlador = new Starducks.Controlador.ProductoController();
         private List<Starducks.Vista.CatalogoForms.ItemCarrito> listaCarrito = new List<Starducks.Vista.CatalogoForms.ItemCarrito>();
+
+
+           
         public FormPrincipal()
         {
             InitializeComponent();
-            this.Load += FormPrincipal_Load;
+            this.Load += FormPrincipal_Load_1;
             this.WindowState = FormWindowState.Maximized; // PANTALLA COMPLETA
         }
 
@@ -155,10 +158,10 @@ namespace Starducks.Vista.CatalogoForms
                 TarjetaProducto t = (TarjetaProducto)s;
                 double precio = 0;
 
-                // Asegúrate de que cmbTamano sea el nombre real en tu TarjetaProducto
-                if (t.cmbTamano.Text == "Chico") precio = t.PrecioChico;
-                else if (t.cmbTamano.Text == "Mediano") precio = t.PrecioMediano;
-                else precio = t.PrecioGrande;
+
+                if (t.cmbTamano.Text == "Tall") precio = t.PrecioTall;
+                else if (t.cmbTamano.Text == "Grande") precio = t.PrecioGrande;
+                else if (t.cmbTamano.Text == "Venti") precio = t.PrecioVenti;
 
                 // Agregar a la lista del carrito
                 var nuevoItem = new Starducks.Vista.CatalogoForms.ItemCarrito();
@@ -177,15 +180,6 @@ namespace Starducks.Vista.CatalogoForms
         }
 
 
-        //FORMPRINCIPAL LOAD
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-            AplicarPermisos();
-
-            panelMenu.Controls.Clear();
-
-            CargarCatalogo("TODOS");
-        }
 
         private void AplicarPermisos()
         {
@@ -318,7 +312,7 @@ namespace Starducks.Vista.CatalogoForms
 
         private void btnReportesForm_Click(object sender, EventArgs e)
         {
-            if (Sesion.Rol != "ADMIN")
+            if (Sesion.Rol != "administrador")
             {
                 MessageBox.Show("Acceso denegado. Solo administradores pueden ver reportes.");
                 return;
@@ -350,6 +344,8 @@ namespace Starducks.Vista.CatalogoForms
             AplicarPermisos();
 
             panelMenu.Controls.Clear();
+
+            CargarCatalogo("TODOS");
 
 
         }

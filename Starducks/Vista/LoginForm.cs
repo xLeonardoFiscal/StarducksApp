@@ -156,23 +156,23 @@ namespace Starducks.Vista
 
             if (usuario != null)
             {
+                
                 btnSesion.Enabled = false;
 
-                // 2. Iniciamos el timer SOLO para la barra
+               
                 timer1.Start();
-
-                // 3. Abrimos la bienvenida de forma MODAL
-                // ShowDialog es la clave: detiene el Login hasta que BienvenidaForm se cierre
+                Sesion.Rol = usuario.Rol;
+                
                 BienvenidaForm frm = new BienvenidaForm();
                 frm.nombreUsuario = usuario.Nombre;
                 frm.FotoUsuarios = usuario.Foto;
-
                 this.Hide();
-                // Mostramos la ventana
+
                 frm.ShowDialog();
 
-                // 4. Solo al cerrar BienvenidaForm, continuamos
+              
                 FormPrincipal principal = new FormPrincipal();
+               
                 principal.Show();
                 
 

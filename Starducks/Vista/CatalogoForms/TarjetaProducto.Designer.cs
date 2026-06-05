@@ -88,11 +88,13 @@
             // 
             // cmbTamano
             // 
+            cmbTamano.Font = new Font("Rockwell", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cmbTamano.FormattingEnabled = true;
             cmbTamano.Location = new Point(95, 288);
             cmbTamano.Name = "cmbTamano";
             cmbTamano.Size = new Size(133, 28);
             cmbTamano.TabIndex = 4;
+            cmbTamano.SelectedIndexChanged += cmbTamano_SelectedIndexChanged_1;
             // 
             // lblTamaño
             // 
