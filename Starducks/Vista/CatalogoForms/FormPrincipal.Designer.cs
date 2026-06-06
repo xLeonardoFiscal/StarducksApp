@@ -364,6 +364,7 @@
             Controls.Add(lblTituloPedido);
             Controls.Add(panelMenu);
             Controls.Add(panelBusqueda);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPrincipal";
             Text = "FormPrincipal";
             Load += FormPrincipal_Load_1;

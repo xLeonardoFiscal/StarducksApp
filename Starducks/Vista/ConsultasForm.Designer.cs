@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultasForm));
             lbltxt = new Label();
             txtFiltro = new TextBox();
             cmbFiltro = new ComboBox();
@@ -288,6 +289,7 @@
             Controls.Add(txtFiltro);
             Controls.Add(lbltxt);
             ForeColor = Color.Black;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ConsultasForm";
             Text = "ConsultasForm";
             ((System.ComponentModel.ISupportInitialize)dgvConsulta).EndInit();

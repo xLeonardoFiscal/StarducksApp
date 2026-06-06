@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductoForm));
             lblTituloGestion = new Label();
             lblNombre = new Label();
             lblPrecioTall = new Label();
@@ -238,6 +239,7 @@
             Controls.Add(lblNombre);
             Controls.Add(lblTituloGestion);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ProductoForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ProductoForm";

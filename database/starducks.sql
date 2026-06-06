@@ -416,3 +416,354 @@ SET character_set_client = @saved_cs_client;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-06-04  3:51:22
+
+ -- =========================== CREACION DE DISPARADOR (TRIGGER) ================================
+ 
+CREATE TABLE auditoria (
+    id_auditoria INT AUTO_INCREMENT PRIMARY KEY,
+
+    id_usuario_admin INT NOT NULL,
+    id_usuario_afectado INT NOT NULL,
+
+    tabla_afectada VARCHAR(50),
+    accion VARCHAR(20),
+
+    descripcion VARCHAR(255),
+
+    fecha DATETIME DEFAULT NOW(),
+
+    FOREIGN KEY (id_usuario_admin)
+        REFERENCES usuarios(id_usuario),
+
+    FOREIGN KEY (id_usuario_afectado)
+        REFERENCES usuarios(id_usuario)
+);
+
+
+
+ -- PROCEDIMIENTOS PARA REALIZAR REPORTES CON EL TRIGGER
+ 
+ -- Muestra todos los cambios
+ DELIMITER $$
+
+CREATE PROCEDURE sp_auditoria_general()
+BEGIN
+
+    SELECT
+        a.id_auditoria,
+        admin.nombre AS administrador,
+        afectado.nombre AS usuario_afectado,
+        a.tabla_afectada,
+        a.accion,
+        a.descripcion,
+        a.fecha
+    FROM auditoria a
+
+    INNER JOIN usuarios admin
+        ON a.id_usuario_admin = admin.id_usuario
+
+    INNER JOIN usuarios afectado
+        ON a.id_usuario_afectado = afectado.id_usuario
+
+    ORDER BY a.fecha DESC;
+
+END $$
+
+DELIMITER ;
+
+
+-- Cambios en los ultimos 10 dias
+DELIMITER $$
+
+CREATE PROCEDURE sp_auditoria_ultimos_10_dias()
+BEGIN
+
+    SELECT
+        a.id_auditoria,
+        admin.nombre AS administrador,
+        afectado.nombre AS usuario_afectado,
+        a.accion,
+        a.descripcion,
+        a.fecha
+    FROM auditoria a
+
+    INNER JOIN usuarios admin
+        ON a.id_usuario_admin = admin.id_usuario
+
+    INNER JOIN usuarios afectado
+        ON a.id_usuario_afectado = afectado.id_usuario
+
+    WHERE a.fecha >= DATE_SUB(NOW(), INTERVAL 10 DAY)
+
+    ORDER BY a.fecha DESC;
+
+END $$
+
+DELIMITER ;
+
+
+-- Cantidad de cambios hechos
+DELIMITER $$
+
+CREATE PROCEDURE sp_auditoria_estadistica()
+BEGIN
+
+    SELECT
+        accion,
+        COUNT(*) AS cantidad
+    FROM auditoria
+
+    GROUP BY accion;
+
+END $$
+
+DELIMITER ;
+
+-- Amplio campo de descripcion.
+ALTER TABLE auditoria
+MODIFY descripcion VARCHAR(500);
+
+
+
+-- TRIGGER PARA UDPATE DE USUARIOS 
+DELIMITER $$
+
+CREATE TRIGGER trg_auditoria_update_usuario
+AFTER UPDATE ON usuarios
+FOR EACH ROW
+BEGIN
+    IF OLD.rol <> NEW.rol THEN
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'UPDATE',
+            CONCAT(
+                'Cambio de rol de ',
+                OLD.rol,
+                ' a ',
+                NEW.rol
+            ),
+            NOW()
+        );
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+
+
+
+update usuarios 
+set rol='consultor'
+where id_usuario=2;
+
+ -- Se Elimino la FK de usuario afectado ya que no deja eliminarlo por ser una FK
+show create table auditoria;
+ALTER TABLE auditoria
+DROP FOREIGN KEY auditoria_ibfk_2;
+
+-- Se inserta un usuario nuevo solo de pruebas
+INSERT INTO usuarios(nombre, usuario, password, rol, telefono, direccion, activo)
+VALUES(
+'Prueba',
+'prueba',
+'123',
+'consultor',
+'123456789',
+'Reynosa',
+1
+);
+
+Delete from usuarios where usuario = "prueba";
+
+call sp_auditoria_ultimos_10_dias();
+
+show create table usuarios;
+
+-- USUARIOS
+INSERT INTO usuarios (nombre, usuario, password, rol, telefono, direccion, foto, activo) VALUES
+('Mateo Villanueva', 'mateo_v', 'pass888', 'administrador', '8996662233', 'Calle Olmos #302', '424c4f4244415441', 1),
+('Mariana Leyva', 'mari_leyva', 'pass333', 'usuario operador', '8996668899', 'Calle Ignacio Allende #9', '424c4f4244415441', 1),
+('Valentina Rios', 'val_rios', 'pass999', 'consultor', '8997773344', 'Privada del Sol #14', '424c4f4244415441', 1),
+('Daniela Sosa', 'dani_sosa', 'pass456', 'consultor', '8994445566', 'Calle Sexta #405', '424c4f4244415441', 1),
+('Santiago Ortiz', 'santi_ortiz', 'pass789', 'consultor', '8992223344', 'Av. Central #12', '424c4f4244415441', 1),
+('Gabriela Juarez', 'gaby_j', 'pass123', 'consultor', '8999998877', 'Blvd. Las Garzas #88', '424c4f4244415441', 1);
+
+
+-- REPARTIDORES
+INSERT INTO repartidores (nombre, telefono, vehiculo, foto, disponible) VALUES
+('Juan Carlos Peña', '8991112233', 'Motocicleta Suzuki', '424c4f4244415441', 1),
+('Berenice Lugo', '8994445566', 'Automóvil Nissan March', '424c4f4244415441', 1),
+('Roberto Palacios', '8997778899', 'Motocicleta Italika', '424c4f4244415441', 1),
+('Diana Laura Cruz', '8992223344', 'Bicicleta de Ruta', '424c4f4244415441', 1),
+('Christian Chavez', '8995556677', 'Scooter Eléctrico', '424c4f4244415441', 0),
+('Carlos Mendoza', '8991234567', 'Motocicleta Honda', '424c4f4244415441', 1),
+('Ana Rodriguez', '8997654321', 'Scooter Eléctrico', '424c4f4244415441', 1),
+('Luis Fuentes', '8995554433', 'Automóvil Chevrolet', '424c4f4244415441', 1),
+('Sofia Castro', '8991112233', 'Motocicleta Yamaha', '424c4f4244415441', 0),
+('Diego Gomez', '8998889900', 'Bicicleta', '424c4f4244415441', 1);
+
+-- PEDIDOS
+INSERT INTO pedidos (id_usuario, id_repartidor, nombre_taza, total, estatus) VALUES
+(1, 1, 'Latte Helado', 130.00, 'entregado'),
+(2, 2, 'Capuccino', 65.00, 'preparando'),
+(3, 3, 'Frappe de cafe', 140.00, 'en camino'),
+(1, 2, 'Cafe mocha', 70.00, 'pendiente'),
+(2, 1, 'Cold brew', 80.00, 'entregado'),
+(3, 2, 'Espresso', 40.00, 'pendiente'),
+(1, 3, 'Tiramisu', 60.00, 'entregado'),
+(2, 3, 'Croissant', 35.00, 'preparando'),
+(3, 1, 'Mocha helado', 75.00, 'en camino'),
+(1, 1, 'Brownie de chocolate', 50.00, 'entregado'),
+(4, 4, 'Latte Grande', 105.00, 'preparando'),
+(5, 5, 'Combo Postre', 125.00, 'en camino'),
+(6, 6, 'Espresso doble', 40.00, 'entregado'),
+(4, 7, 'Iced Americano', 60.00, 'pendiente'),
+(2, 8, 'Frappe Mocha', 155.00, 'en camino');
+
+
+
+
+select * from auditoria;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_auditoria_update_usuario
+AFTER UPDATE ON usuarios
+FOR EACH ROW
+BEGIN
+
+    IF OLD.rol <> NEW.rol THEN
+
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'UPDATE',
+            CONCAT(
+                'Cambio de rol de ',
+                OLD.rol,
+                ' a ',
+                NEW.rol
+            ),
+            NOW()
+        );
+
+    END IF;
+
+    IF OLD.activo = 1
+       AND NEW.activo = 0 THEN
+
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'BAJA',
+            'Usuario dado de baja',
+            NOW()
+        );
+
+    END IF;
+
+    IF OLD.activo = 0
+       AND NEW.activo = 1 THEN
+
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'REACTIVACION',
+            'Usuario reactivado',
+            NOW()
+        );
+    END IF;
+END $$
+
+DELIMITER ;
+
+
+
+
+-- PEDIDOS
+INSERT INTO pedidos (id_usuario, id_repartidor, fecha_hora, nombre_taza, total, estatus) VALUES
+(1, 1, '2026-05-15 08:30:00', 'Latte Helado', 130.00, 'entregado'),
+(2, 2, '2026-05-18 10:15:22', 'Capuccino', 65.00, 'preparando'),
+(3, 3, '2026-05-20 14:40:05', 'Frappe de cafe', 140.00, 'en camino'),
+(1, 2, '2026-05-22 17:12:00', 'Cafe mocha', 70.00, 'pendiente'),
+(2, 1, '2026-05-25 09:05:43', 'Cold brew', 80.00, 'entregado'),
+(3, 2, '2026-05-27 11:36:10', 'Espresso', 40.00, 'pendiente'),
+(1, 3, '2026-05-29 16:22:15', 'Tiramisu', 60.00, 'entregado'),
+(2, 3, '2026-06-01 12:00:00', 'Croissant', 35.00, 'preparando'),
+(3, 1, '2026-06-02 15:45:30', 'Mocha helado', 75.00, 'en camino'),
+(1, 1, '2026-06-03 18:10:12', 'Brownie de chocolate', 50.00, 'entregado'),
+(10, 4, '2026-06-04 08:20:00', 'Latte Grande', 105.00, 'preparando'),
+(5, 5, '2026-06-04 09:11:15', 'Combo Postre', 125.00, 'en camino'),
+(6, 4, '2026-06-04 10:05:22', 'Espresso doble', 40.00, 'entregado'),
+(7, 5, '2026-06-04 11:30:00', 'Iced Americano', 60.00, 'pendiente'),
+(2, 5, '2026-06-04 13:15:45', 'Frappe Mocha', 155.00, 'en camino');
+
+-- DETALLE_PEDIDO
+INSERT INTO detalle_pedido (id_pedido, id_producto, tamano, cantidad, precio_unitario) VALUES
+(1, 2, 'grande', 2, 65),
+(2, 7, 'grande', 1, 65),
+(3, 1, 'venti', 2, 70),
+(4, 9, 'grande', 1, 70),
+(5, 5, 'venti', 1, 80),
+(6, 6, 'tall', 1, 40),
+(7, 15, 'grande', 1, 70),
+(8, 12, 'tall', 1, 35),
+(9, 3, 'grande', 1, 75),
+(10, 13, 'tall', 1, 50),
+(11, 10, 'grande', 1, 60.00),
+(11, 12, 'grande', 1, 45.00),
+(72, 5, 'grande', 1, 80.00),
+(73, 6, 'tall', 1, 40.00),
+(74, 4, 'grande', 1, 60.00),
+(75, 1, 'venti', 1, 80.00),
+(75, 15, 'grande', 1, 75.00);
+
+select id_pedido from pedidos;
+
+

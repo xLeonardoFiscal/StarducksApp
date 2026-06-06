@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsuariosForm));
             dgvUsuarios = new DataGridView();
             txtNombre = new TextBox();
             txtUsuario = new TextBox();
@@ -207,6 +208,7 @@
             Controls.Add(txtUsuario);
             Controls.Add(txtNombre);
             Controls.Add(dgvUsuarios);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "UsuariosForm";
             Text = "UsuariosForm";
             Load += UsuariosForm_Load;
