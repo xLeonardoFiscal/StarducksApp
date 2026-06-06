@@ -16,6 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `auditoria`
+--
+
+DROP TABLE IF EXISTS `auditoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auditoria` (
+  `id_auditoria` int NOT NULL AUTO_INCREMENT,
+  `id_usuario_admin` int NOT NULL,
+  `id_usuario_afectado` int NOT NULL,
+  `tabla_afectada` varchar(50) DEFAULT NULL,
+  `accion` varchar(20) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_auditoria`),
+  KEY `id_usuario_admin` (`id_usuario_admin`),
+  KEY `id_usuario_afectado` (`id_usuario_afectado`),
+  CONSTRAINT `auditoria_ibfk_1` FOREIGN KEY (`id_usuario_admin`) REFERENCES `usuarios` (`id_usuario`),
+  CONSTRAINT `auditoria_ibfk_2` FOREIGN KEY (`id_usuario_afectado`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auditoria`
+--
+
+LOCK TABLES `auditoria` WRITE;
+/*!40000 ALTER TABLE `auditoria` DISABLE KEYS */;
+INSERT INTO `auditoria` VALUES (1,1,4,'usuarios','BAJA','Usuario dado de baja','2026-06-05 19:29:39'),(2,1,4,'usuarios','REACTIVACION','Usuario reactivado','2026-06-05 19:29:44'),(3,1,9,'usuarios','UPDATE','Cambio de rol de consultor a usuario operador','2026-06-05 20:52:05'),(4,1,9,'usuarios','BAJA','Usuario dado de baja','2026-06-05 20:52:22'),(5,1,9,'usuarios','REACTIVACION','Usuario reactivado','2026-06-05 20:54:14'),(6,1,4,'usuarios','UPDATE','Cambio de rol de administrador a consultor','2026-06-05 20:55:32'),(7,1,6,'usuarios','BAJA','Usuario dado de baja','2026-06-05 21:41:34'),(8,1,9,'usuarios','BAJA','Usuario dado de baja','2026-06-05 21:41:50'),(9,1,6,'usuarios','REACTIVACION','Usuario reactivado','2026-06-05 21:42:39'),(10,1,6,'usuarios','UPDATE','Cambio de rol de consultor a usuario operador','2026-06-05 21:42:44');
+/*!40000 ALTER TABLE `auditoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categorias_producto`
 --
 
@@ -92,7 +125,7 @@ CREATE TABLE `pedidos` (
   KEY `fk_pedido_repartidor` (`id_repartidor`),
   CONSTRAINT `fk_pedido_repartidor` FOREIGN KEY (`id_repartidor`) REFERENCES `repartidores` (`id_repartidor`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_pedido_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +134,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,1,1,'2026-05-27 18:36:35','Latte Helado',130.00,'pendiente'),(2,2,2,'2026-05-27 18:36:35','Capuccino',65.00,'pendiente'),(3,3,3,'2026-05-27 18:36:35','Frappe de café',140.00,'pendiente'),(4,1,2,'2026-05-27 18:36:35','Cafe mocha',70.00,'pendiente'),(5,2,1,'2026-05-27 18:36:35','Cold brew',80.00,'pendiente'),(6,3,2,'2026-05-27 18:36:35','Espresso',40.00,'pendiente'),(7,1,3,'2026-05-27 18:36:35','Tiramisú',60.00,'pendiente'),(8,2,3,'2026-05-27 18:36:35','Croissant',35.00,'pendiente'),(9,3,1,'2026-05-27 18:36:35','Mocha helado',75.00,'pendiente'),(10,1,1,'2026-05-27 18:36:35','Brownie de chocolate',50.00,'pendiente'),(11,1,1,'2026-05-27 18:36:38',NULL,150.00,'pendiente');
+INSERT INTO `pedidos` VALUES (1,1,1,'2026-05-27 18:36:35','Latte Helado',130.00,'pendiente'),(2,2,2,'2026-05-27 18:36:35','Capuccino',65.00,'pendiente'),(3,3,3,'2026-05-27 18:36:35','Frappe de café',140.00,'pendiente'),(4,1,2,'2026-05-27 18:36:35','Cafe mocha',70.00,'pendiente'),(5,2,1,'2026-05-27 18:36:35','Cold brew',80.00,'pendiente'),(6,3,2,'2026-05-27 18:36:35','Espresso',40.00,'pendiente'),(7,1,3,'2026-05-27 18:36:35','Tiramisú',60.00,'pendiente'),(8,2,3,'2026-05-27 18:36:35','Croissant',35.00,'pendiente'),(9,3,1,'2026-05-27 18:36:35','Mocha helado',75.00,'pendiente'),(10,1,1,'2026-05-27 18:36:35','Brownie de chocolate',50.00,'pendiente'),(11,1,1,'2026-05-27 18:36:38',NULL,150.00,'pendiente'),(12,1,1,'2026-06-05 18:20:15','Latte Helado',130.00,'entregado'),(13,2,2,'2026-06-05 18:20:15','Capuccino',65.00,'preparando'),(14,3,3,'2026-06-05 18:20:15','Frappe de cafe',140.00,'en camino'),(15,1,2,'2026-06-05 18:20:15','Cafe mocha',70.00,'pendiente'),(16,2,1,'2026-06-05 18:20:15','Cold brew',80.00,'entregado'),(17,3,2,'2026-06-05 18:20:15','Espresso',40.00,'pendiente'),(18,1,3,'2026-06-05 18:20:15','Tiramisu',60.00,'entregado'),(19,2,3,'2026-06-05 18:20:15','Croissant',35.00,'preparando'),(20,3,1,'2026-06-05 18:20:15','Mocha helado',75.00,'en camino'),(21,1,1,'2026-06-05 18:20:15','Brownie de chocolate',50.00,'entregado'),(22,4,4,'2026-06-05 18:20:15','Latte Grande',105.00,'preparando'),(23,5,5,'2026-06-05 18:20:15','Combo Postre',125.00,'en camino'),(24,6,6,'2026-06-05 18:20:15','Espresso doble',40.00,'entregado'),(25,4,7,'2026-06-05 18:20:15','Iced Americano',60.00,'pendiente'),(26,2,8,'2026-06-05 18:20:15','Frappe Mocha',155.00,'en camino'),(27,1,1,'2026-06-05 18:20:15','Latte Helado',130.00,'entregado'),(28,2,2,'2026-06-05 18:20:15','Capuccino',65.00,'preparando'),(29,3,3,'2026-06-05 18:20:15','Frappe de cafe',140.00,'en camino'),(30,1,2,'2026-06-05 18:20:15','Cafe mocha',70.00,'pendiente'),(31,2,1,'2026-06-05 18:20:15','Cold brew',80.00,'entregado'),(32,3,2,'2026-06-05 18:20:15','Espresso',40.00,'pendiente'),(33,1,3,'2026-06-05 18:20:15','Tiramisu',60.00,'entregado'),(34,2,3,'2026-06-05 18:20:15','Croissant',35.00,'preparando'),(35,3,1,'2026-06-05 18:20:15','Mocha helado',75.00,'en camino'),(36,1,1,'2026-06-05 18:20:15','Brownie de chocolate',50.00,'entregado'),(37,4,4,'2026-06-05 18:20:15','Latte Grande',105.00,'preparando'),(38,5,5,'2026-06-05 18:20:15','Combo Postre',125.00,'en camino'),(39,6,6,'2026-06-05 18:20:15','Espresso doble',40.00,'entregado'),(40,4,7,'2026-06-05 18:20:15','Iced Americano',60.00,'pendiente'),(41,2,8,'2026-06-05 18:20:15','Frappe Mocha',155.00,'en camino');
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +186,7 @@ CREATE TABLE `repartidores` (
   `foto` mediumblob,
   `disponible` tinyint DEFAULT '1',
   PRIMARY KEY (`id_repartidor`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +195,7 @@ CREATE TABLE `repartidores` (
 
 LOCK TABLES `repartidores` WRITE;
 /*!40000 ALTER TABLE `repartidores` DISABLE KEYS */;
-INSERT INTO `repartidores` VALUES (1,'Repartidor 1',NULL,NULL,NULL,1),(2,'Repartidor 2',NULL,NULL,NULL,1),(3,'Repartidor 3',NULL,NULL,NULL,1);
+INSERT INTO `repartidores` VALUES (1,'Repartidor 1',NULL,NULL,NULL,1),(2,'Repartidor 2',NULL,NULL,NULL,1),(3,'Repartidor 3',NULL,NULL,NULL,1),(4,'Juan Carlos Peña','8991112233','Motocicleta Suzuki',_binary '424c4f4244415441',1),(5,'Berenice Lugo','8994445566','Automóvil Nissan March',_binary '424c4f4244415441',1),(6,'Roberto Palacios','8997778899','Motocicleta Italika',_binary '424c4f4244415441',1),(7,'Diana Laura Cruz','8992223344','Bicicleta de Ruta',_binary '424c4f4244415441',1),(8,'Christian Chavez','8995556677','Scooter Eléctrico',_binary '424c4f4244415441',0),(9,'Carlos Mendoza','8991234567','Motocicleta Honda',_binary '424c4f4244415441',1),(10,'Ana Rodriguez','8997654321','Scooter Eléctrico',_binary '424c4f4244415441',1),(11,'Luis Fuentes','8995554433','Automóvil Chevrolet',_binary '424c4f4244415441',1),(12,'Sofia Castro','8991112233','Motocicleta Yamaha',_binary '424c4f4244415441',0),(13,'Diego Gomez','8998889900','Bicicleta',_binary '424c4f4244415441',1),(14,'Juan Carlos Peña','8991112233','Motocicleta Suzuki',_binary '424c4f4244415441',1),(15,'Berenice Lugo','8994445566','Automóvil Nissan March',_binary '424c4f4244415441',1),(16,'Roberto Palacios','8997778899','Motocicleta Italika',_binary '424c4f4244415441',1),(17,'Diana Laura Cruz','8992223344','Bicicleta de Ruta',_binary '424c4f4244415441',1),(18,'Christian Chavez','8995556677','Scooter Eléctrico',_binary '424c4f4244415441',0),(19,'Carlos Mendoza','8991234567','Motocicleta Honda',_binary '424c4f4244415441',1),(20,'Ana Rodriguez','8997654321','Scooter Eléctrico',_binary '424c4f4244415441',1),(21,'Luis Fuentes','8995554433','Automóvil Chevrolet',_binary '424c4f4244415441',1),(22,'Sofia Castro','8991112233','Motocicleta Yamaha',_binary '424c4f4244415441',0),(23,'Diego Gomez','8998889900','Bicicleta',_binary '424c4f4244415441',1);
 /*!40000 ALTER TABLE `repartidores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +218,7 @@ CREATE TABLE `usuarios` (
   `activo` tinyint DEFAULT '1',
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `usuario` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,9 +227,100 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Admin','admin','123','administrador',NULL,NULL,NULL,1),(2,'Operador','operador','123','usuario operador',NULL,NULL,NULL,1),(3,'Consultor','consultor','123','consultor',NULL,NULL,NULL,1);
+INSERT INTO `usuarios` VALUES (1,'Admin','admin','123','administrador',NULL,NULL,NULL,1),(2,'Operador','operador','123','usuario operador',NULL,NULL,NULL,1),(3,'Consultor','consultor','123','consultor',NULL,NULL,NULL,1),(4,'Mateo Villanueva','mateo_v','pass888','consultor','8996662233','Calle Olmos #302',_binary '424c4f4244415441',1),(5,'Mariana Leyva','mari_leyva','pass333','usuario operador','8996668899','Calle Ignacio Allende #9',_binary '424c4f4244415441',1),(6,'Valentina Rios','val_rios','pass999','usuario operador','8997773344','Privada del Sol #14',_binary '424c4f4244415441',1),(7,'Daniela Sosa','dani_sosa','pass456','consultor','8994445566','Calle Sexta #405',_binary '424c4f4244415441',1),(8,'Santiago Ortiz','santi_ortiz','pass789','consultor','8992223344','Av. Central #12',_binary '424c4f4244415441',1),(9,'Gabriela Juarez','gaby_j','pass123','usuario operador','8999998877','Blvd. Las Garzas #88',_binary '424c4f4244415441',0);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `trg_auditoria_update_usuario` AFTER UPDATE ON `usuarios` FOR EACH ROW BEGIN
+
+    IF OLD.rol <> NEW.rol THEN
+
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'UPDATE',
+            CONCAT(
+                'Cambio de rol de ',
+                OLD.rol,
+                ' a ',
+                NEW.rol
+            ),
+            NOW()
+        );
+
+    END IF;
+
+    IF OLD.activo = 1
+       AND NEW.activo = 0 THEN
+
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'BAJA',
+            'Usuario dado de baja',
+            NOW()
+        );
+
+    END IF;
+
+    IF OLD.activo = 0
+       AND NEW.activo = 1 THEN
+
+        INSERT INTO auditoria
+        (
+            id_usuario_admin,
+            id_usuario_afectado,
+            tabla_afectada,
+            accion,
+            descripcion,
+            fecha
+        )
+        VALUES
+        (
+            1,
+            NEW.id_usuario,
+            'usuarios',
+            'REACTIVACION',
+            'Usuario reactivado',
+            NOW()
+        );
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Temporary view structure for view `vista_categorias`
@@ -297,6 +421,1172 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `direccion`,
  1 AS `activo`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping events for database 'starducks'
+--
+
+--
+-- Dumping routines for database 'starducks'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `sp_auditoria_estadistica` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_auditoria_estadistica`()
+BEGIN
+
+    SELECT
+        accion,
+        COUNT(*) AS cantidad
+    FROM auditoria
+
+    GROUP BY accion;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_auditoria_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_auditoria_general`()
+BEGIN
+
+    SELECT
+        a.id_auditoria,
+        admin.nombre AS administrador,
+        afectado.nombre AS usuario_afectado,
+        a.tabla_afectada,
+        a.accion,
+        a.descripcion,
+        a.fecha
+    FROM auditoria a
+
+    INNER JOIN usuarios admin
+        ON a.id_usuario_admin = admin.id_usuario
+
+    INNER JOIN usuarios afectado
+        ON a.id_usuario_afectado = afectado.id_usuario
+
+    ORDER BY a.fecha DESC;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_auditoria_ultimos_10_dias` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_auditoria_ultimos_10_dias`()
+BEGIN
+
+    SELECT
+        a.id_auditoria,
+        admin.nombre AS administrador,
+        afectado.nombre AS usuario_afectado,
+        a.accion,
+        a.descripcion,
+        a.fecha
+    FROM auditoria a
+
+    INNER JOIN usuarios admin
+        ON a.id_usuario_admin = admin.id_usuario
+
+    INNER JOIN usuarios afectado
+        ON a.id_usuario_afectado = afectado.id_usuario
+
+    WHERE a.fecha >= DATE_SUB(NOW(), INTERVAL 10 DAY)
+
+    ORDER BY a.fecha DESC;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_buscar_categoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_categoria`(
+    IN p_nombre VARCHAR(80)
+)
+BEGIN
+    SELECT
+        id_categoria,
+        nombre,
+        descripcion
+    FROM categorias_producto
+    WHERE nombre LIKE CONCAT('%', p_nombre, '%');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_buscar_detalle_producto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_detalle_producto`(
+    IN p_producto VARCHAR(150)
+)
+BEGIN
+    SELECT
+        dp.id_detalle,
+        pr.nombre AS producto,
+        dp.tamano,
+        dp.cantidad,
+        dp.precio_unitario
+
+    FROM detalle_pedido dp
+
+    INNER JOIN productos pr
+        ON dp.id_producto = pr.id_producto
+
+    WHERE pr.nombre LIKE CONCAT('%', p_producto, '%');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_buscar_producto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_producto`(
+    IN p_busqueda VARCHAR(150)
+)
+BEGIN
+    SELECT
+        p.id_producto,
+        p.nombre,
+        c.nombre AS categoria,
+        p.precio_tall,
+        p.precio_grande,
+        p.precio_venti,
+        p.disponible
+    FROM productos p
+    INNER JOIN categorias_producto c
+        ON p.id_categoria = c.id_categoria
+    WHERE p.nombre LIKE CONCAT('%', p_busqueda, '%');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_buscar_repartidor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_repartidor`(
+    IN p_nombre VARCHAR(100)
+)
+BEGIN
+    SELECT
+        id_repartidor,
+        nombre,
+        telefono,
+        vehiculo,
+        disponible
+    FROM repartidores
+    WHERE nombre LIKE CONCAT('%', p_nombre, '%');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_buscar_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_buscar_usuario`( IN p_busqueda VARCHAR(100) )
+BEGIN 
+SELECT 
+id_usuario, 
+nombre, 
+usuario, 
+rol, 
+telefono, 
+direccion 
+FROM usuarios 
+WHERE nombre LIKE CONCAT('%', p_busqueda, '%') 
+OR usuario LIKE CONCAT('%', p_busqueda, '%'); 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_categorias_disponibles` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_categorias_disponibles`()
+BEGIN
+    SELECT DISTINCT
+        c.id_categoria,
+        c.nombre,
+        c.descripcion
+
+    FROM categorias_producto c
+
+    INNER JOIN productos p
+        ON c.id_categoria = p.id_categoria
+
+    WHERE p.disponible = 1;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_categorias_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_categorias_general`()
+BEGIN
+    SELECT
+        id_categoria,
+        nombre,
+        descripcion
+    FROM categorias_producto;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consulta_categorias` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta_categorias`(
+    IN p_nombre VARCHAR(80)
+)
+BEGIN
+    SELECT *
+    FROM vista_categorias
+    WHERE (p_nombre IS NULL OR nombre LIKE CONCAT('%', p_nombre, '%'));
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consulta_detalle_pedido` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta_detalle_pedido`(
+    IN p_producto VARCHAR(150),
+    IN p_tamano VARCHAR(20)
+)
+BEGIN
+    SELECT *
+    FROM vista_detalle_pedidos
+    WHERE (p_producto IS NULL OR producto LIKE CONCAT('%', p_producto, '%'))
+      AND (p_tamano IS NULL OR tamano = p_tamano);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consulta_pedidos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta_pedidos`(
+    IN p_fecha_inicio DATE,
+    IN p_fecha_fin DATE,
+    IN p_estatus VARCHAR(20)
+)
+BEGIN
+    SELECT *
+    FROM vista_pedidos
+    WHERE (p_fecha_inicio IS NULL OR DATE(fecha_hora) >= p_fecha_inicio)
+      AND (p_fecha_fin IS NULL OR DATE(fecha_hora) <= p_fecha_fin)
+      AND (p_estatus IS NULL OR estatus = p_estatus);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consulta_productos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta_productos`(
+    IN p_nombre VARCHAR(150),
+    IN p_categoria VARCHAR(80)
+)
+BEGIN
+    SELECT *
+    FROM vista_productos
+    WHERE (p_nombre IS NULL OR nombre LIKE CONCAT('%', p_nombre, '%'))
+      AND (p_categoria IS NULL OR categoria = p_categoria);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consulta_repartidores` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta_repartidores`(
+    IN p_nombre VARCHAR(100),
+    IN p_disponible TINYINT
+)
+BEGIN
+    SELECT *
+    FROM vista_repartidores
+    WHERE (p_nombre IS NULL OR nombre LIKE CONCAT('%', p_nombre, '%'))
+      AND (p_disponible IS NULL OR disponible = p_disponible);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_consulta_usuarios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_consulta_usuarios`(
+    IN p_nombre VARCHAR(100),
+    IN p_rol VARCHAR(50)
+)
+BEGIN
+    SELECT *
+    FROM vista_usuarios
+    WHERE (p_nombre IS NULL OR nombre LIKE CONCAT('%', p_nombre, '%'))
+      AND (p_rol IS NULL OR rol = p_rol);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalles_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalles_general`()
+BEGIN
+    SELECT
+        id_detalle,
+        id_pedido,
+        id_producto,
+        tamano,
+        cantidad,
+        precio_unitario
+    FROM detalle_pedido;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalles_tamano` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalles_tamano`(
+    IN p_tamano VARCHAR(20)
+)
+BEGIN
+    SELECT
+        id_detalle,
+        id_pedido,
+        id_producto,
+        tamano,
+        cantidad,
+        precio_unitario
+    FROM detalle_pedido
+    WHERE tamano = p_tamano;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalle_categoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalle_categoria`(
+    IN p_id_categoria INT
+)
+BEGIN
+    SELECT
+        c.id_categoria,
+        c.nombre AS categoria,
+        c.descripcion,
+
+        p.id_producto,
+        p.nombre AS producto,
+        p.precio_tall,
+        p.precio_grande,
+        p.precio_venti,
+        p.disponible
+
+    FROM categorias_producto c
+
+    LEFT JOIN productos p
+        ON c.id_categoria = p.id_categoria
+
+    WHERE c.id_categoria = p_id_categoria;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalle_pedido` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalle_pedido`(
+    IN p_id_pedido INT
+)
+BEGIN
+    SELECT
+        p.id_pedido,
+        p.fecha_hora,
+        p.nombre_taza,
+        p.total,
+        p.estatus,
+
+        u.nombre AS cliente,
+
+        r.nombre AS repartidor,
+
+        pr.nombre AS producto,
+
+        dp.tamano,
+        dp.cantidad,
+        dp.precio_unitario
+
+    FROM pedidos p
+
+    INNER JOIN usuarios u
+        ON p.id_usuario = u.id_usuario
+
+    LEFT JOIN repartidores r
+        ON p.id_repartidor = r.id_repartidor
+
+    INNER JOIN detalle_pedido dp
+        ON p.id_pedido = dp.id_pedido
+
+    INNER JOIN productos pr
+        ON dp.id_producto = pr.id_producto
+
+    WHERE p.id_pedido = p_id_pedido;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalle_producto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalle_producto`(
+    IN p_id_producto INT
+)
+BEGIN
+    SELECT
+        p.id_producto,
+        p.nombre,
+        p.descripcion,
+        c.nombre AS categoria,
+        c.descripcion AS descripcion_categoria,
+        p.precio_tall,
+        p.precio_grande,
+        p.precio_venti,
+        p.disponible,
+        p.foto
+    FROM productos p
+    INNER JOIN categorias_producto c
+        ON p.id_categoria = c.id_categoria
+    WHERE p.id_producto = p_id_producto;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalle_registro` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalle_registro`(
+    IN p_id_detalle INT
+)
+BEGIN
+    SELECT
+        dp.id_detalle,
+
+        p.id_pedido,
+        p.fecha_hora,
+        p.estatus,
+
+        pr.nombre AS producto,
+
+        dp.tamano,
+        dp.cantidad,
+        dp.precio_unitario,
+
+        (dp.cantidad * dp.precio_unitario) AS total
+
+    FROM detalle_pedido dp
+
+    INNER JOIN pedidos p
+        ON dp.id_pedido = p.id_pedido
+
+    INNER JOIN productos pr
+        ON dp.id_producto = pr.id_producto
+
+    WHERE dp.id_detalle = p_id_detalle;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalle_repartidor` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalle_repartidor`(
+    IN p_id_repartidor INT
+)
+BEGIN
+    SELECT
+        r.id_repartidor,
+        r.nombre,
+        r.telefono,
+        r.vehiculo,
+        r.disponible,
+
+        p.id_pedido,
+        p.fecha_hora,
+        p.total,
+        p.estatus
+
+    FROM repartidores r
+
+    LEFT JOIN pedidos p
+        ON r.id_repartidor = p.id_repartidor
+
+    WHERE r.id_repartidor = p_id_repartidor;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_detalle_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_detalle_usuario`( IN p_id_usuario INT )
+BEGIN 
+SELECT 
+u.id_usuario, 
+u.nombre, 
+u.usuario, 
+u.rol, 
+u.telefono, 
+u.direccion, 
+
+p.id_pedido,
+p.fecha_hora, 
+p.total, 
+p.estatus 
+FROM usuarios u 
+
+LEFT JOIN pedidos p 
+ON u.id_usuario = p.id_usuario 
+
+WHERE u.id_usuario = p_id_usuario; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_estadistica_categorias` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_estadistica_categorias`()
+BEGIN
+    SELECT
+        c.id_categoria,
+        c.nombre,
+
+        COUNT(p.id_producto) AS cantidad_productos
+
+    FROM categorias_producto c
+
+    LEFT JOIN productos p
+        ON c.id_categoria = p.id_categoria
+
+    GROUP BY c.id_categoria, c.nombre;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_estadistica_pedidos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_estadistica_pedidos`()
+BEGIN
+    SELECT
+        estatus,
+        COUNT(*) AS cantidad_pedidos,
+        SUM(total) AS monto_total
+    FROM pedidos
+    GROUP BY estatus;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_estadistica_productos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_estadistica_productos`()
+BEGIN
+    SELECT
+        c.nombre AS categoria,
+        COUNT(*) AS cantidad_productos
+    FROM productos p
+    INNER JOIN categorias_producto c
+        ON p.id_categoria = c.id_categoria
+    GROUP BY c.nombre;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_estadistica_repartidores` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_estadistica_repartidores`()
+BEGIN
+    SELECT
+        r.id_repartidor,
+        r.nombre,
+
+        COUNT(p.id_pedido) AS pedidos_asignados
+
+    FROM repartidores r
+
+    LEFT JOIN pedidos p
+        ON r.id_repartidor = p.id_repartidor
+
+    GROUP BY r.id_repartidor, r.nombre;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_estadistica_tamanos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_estadistica_tamanos`()
+BEGIN
+    SELECT
+        tamano,
+        SUM(cantidad) AS cantidad_vendida
+    FROM detalle_pedido
+    GROUP BY tamano;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_estadistica_usuarios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_estadistica_usuarios`()
+BEGIN 
+SELECT 
+rol, 
+COUNT(*) AS cantidad 
+FROM usuarios 
+GROUP BY rol; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_pedidos_estatus` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_pedidos_estatus`(
+    IN p_estatus VARCHAR(20)
+)
+BEGIN
+    SELECT
+        id_pedido,
+        id_usuario,
+        id_repartidor,
+        fecha_hora,
+        nombre_taza,
+        total,
+        estatus
+    FROM pedidos
+    WHERE estatus = p_estatus;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_pedidos_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_pedidos_general`()
+BEGIN
+    SELECT
+        id_pedido,
+        id_usuario,
+        id_repartidor,
+        fecha_hora,
+        nombre_taza,
+        total,
+        estatus
+    FROM pedidos;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_pedidos_hoy` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_pedidos_hoy`()
+BEGIN
+    SELECT
+        id_pedido,
+        id_usuario,
+        id_repartidor,
+        fecha_hora,
+        nombre_taza,
+        total,
+        estatus
+    FROM pedidos
+    WHERE DATE(fecha_hora) = CURDATE();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_productos_categoria` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_productos_categoria`(
+    IN p_categoria VARCHAR(80)
+)
+BEGIN
+    SELECT
+        p.id_producto,
+        p.nombre,
+        p.descripcion,
+        c.nombre AS categoria,
+        p.precio_tall,
+        p.precio_grande,
+        p.precio_venti,
+        p.disponible
+    FROM productos p
+    INNER JOIN categorias_producto c
+        ON p.id_categoria = c.id_categoria
+    WHERE c.nombre = p_categoria;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_productos_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_productos_general`()
+BEGIN
+    SELECT
+        p.id_producto,
+        p.nombre,
+        p.descripcion,
+        c.nombre AS categoria,
+        p.precio_tall,
+        p.precio_grande,
+        p.precio_venti,
+        p.disponible
+    FROM productos p
+    INNER JOIN categorias_producto c
+        ON p.id_categoria = c.id_categoria;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_repartidores_disponibilidad` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_repartidores_disponibilidad`(
+    IN p_disponible TINYINT
+)
+BEGIN
+    SELECT
+        id_repartidor,
+        nombre,
+        telefono,
+        vehiculo,
+        disponible
+    FROM repartidores
+    WHERE disponible = p_disponible;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_repartidores_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_repartidores_general`()
+BEGIN
+    SELECT
+        id_repartidor,
+        nombre,
+        telefono,
+        vehiculo,
+        disponible
+    FROM repartidores;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_usuarios_general` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuarios_general`()
+BEGIN 
+SELECT 
+id_usuario, 
+nombre, 
+usuario, 
+rol, 
+telefono, 
+direccion, 
+activo 
+FROM usuarios; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_usuarios_por_rol` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuarios_por_rol`( IN p_rol VARCHAR(50) )
+BEGIN 
+SELECT 
+id_usuario, 
+nombre, 
+usuario, 
+rol,
+telefono, 
+activo 
+FROM usuarios 
+WHERE rol = p_rol; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `vista_categorias`
@@ -415,355 +1705,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-04  3:51:22
-
- -- =========================== CREACION DE DISPARADOR (TRIGGER) ================================
- 
-CREATE TABLE auditoria (
-    id_auditoria INT AUTO_INCREMENT PRIMARY KEY,
-
-    id_usuario_admin INT NOT NULL,
-    id_usuario_afectado INT NOT NULL,
-
-    tabla_afectada VARCHAR(50),
-    accion VARCHAR(20),
-
-    descripcion VARCHAR(255),
-
-    fecha DATETIME DEFAULT NOW(),
-
-    FOREIGN KEY (id_usuario_admin)
-        REFERENCES usuarios(id_usuario),
-
-    FOREIGN KEY (id_usuario_afectado)
-        REFERENCES usuarios(id_usuario)
-);
-
-
-
- -- PROCEDIMIENTOS PARA REALIZAR REPORTES CON EL TRIGGER
- 
- -- Muestra todos los cambios
- DELIMITER $$
-
-CREATE PROCEDURE sp_auditoria_general()
-BEGIN
-
-    SELECT
-        a.id_auditoria,
-        admin.nombre AS administrador,
-        afectado.nombre AS usuario_afectado,
-        a.tabla_afectada,
-        a.accion,
-        a.descripcion,
-        a.fecha
-    FROM auditoria a
-
-    INNER JOIN usuarios admin
-        ON a.id_usuario_admin = admin.id_usuario
-
-    INNER JOIN usuarios afectado
-        ON a.id_usuario_afectado = afectado.id_usuario
-
-    ORDER BY a.fecha DESC;
-
-END $$
-
-DELIMITER ;
-
-
--- Cambios en los ultimos 10 dias
-DELIMITER $$
-
-CREATE PROCEDURE sp_auditoria_ultimos_10_dias()
-BEGIN
-
-    SELECT
-        a.id_auditoria,
-        admin.nombre AS administrador,
-        afectado.nombre AS usuario_afectado,
-        a.accion,
-        a.descripcion,
-        a.fecha
-    FROM auditoria a
-
-    INNER JOIN usuarios admin
-        ON a.id_usuario_admin = admin.id_usuario
-
-    INNER JOIN usuarios afectado
-        ON a.id_usuario_afectado = afectado.id_usuario
-
-    WHERE a.fecha >= DATE_SUB(NOW(), INTERVAL 10 DAY)
-
-    ORDER BY a.fecha DESC;
-
-END $$
-
-DELIMITER ;
-
-
--- Cantidad de cambios hechos
-DELIMITER $$
-
-CREATE PROCEDURE sp_auditoria_estadistica()
-BEGIN
-
-    SELECT
-        accion,
-        COUNT(*) AS cantidad
-    FROM auditoria
-
-    GROUP BY accion;
-
-END $$
-
-DELIMITER ;
-
--- Amplio campo de descripcion.
-ALTER TABLE auditoria
-MODIFY descripcion VARCHAR(500);
-
-
-
--- TRIGGER PARA UDPATE DE USUARIOS 
-DELIMITER $$
-
-CREATE TRIGGER trg_auditoria_update_usuario
-AFTER UPDATE ON usuarios
-FOR EACH ROW
-BEGIN
-    IF OLD.rol <> NEW.rol THEN
-        INSERT INTO auditoria
-        (
-            id_usuario_admin,
-            id_usuario_afectado,
-            tabla_afectada,
-            accion,
-            descripcion,
-            fecha
-        )
-        VALUES
-        (
-            1,
-            NEW.id_usuario,
-            'usuarios',
-            'UPDATE',
-            CONCAT(
-                'Cambio de rol de ',
-                OLD.rol,
-                ' a ',
-                NEW.rol
-            ),
-            NOW()
-        );
-    END IF;
-END $$
-
-DELIMITER ;
-
-
-
-
-
-update usuarios 
-set rol='consultor'
-where id_usuario=2;
-
- -- Se Elimino la FK de usuario afectado ya que no deja eliminarlo por ser una FK
-show create table auditoria;
-ALTER TABLE auditoria
-DROP FOREIGN KEY auditoria_ibfk_2;
-
--- Se inserta un usuario nuevo solo de pruebas
-INSERT INTO usuarios(nombre, usuario, password, rol, telefono, direccion, activo)
-VALUES(
-'Prueba',
-'prueba',
-'123',
-'consultor',
-'123456789',
-'Reynosa',
-1
-);
-
-Delete from usuarios where usuario = "prueba";
-
-call sp_auditoria_ultimos_10_dias();
-
-show create table usuarios;
-
--- USUARIOS
-INSERT INTO usuarios (nombre, usuario, password, rol, telefono, direccion, foto, activo) VALUES
-('Mateo Villanueva', 'mateo_v', 'pass888', 'administrador', '8996662233', 'Calle Olmos #302', '424c4f4244415441', 1),
-('Mariana Leyva', 'mari_leyva', 'pass333', 'usuario operador', '8996668899', 'Calle Ignacio Allende #9', '424c4f4244415441', 1),
-('Valentina Rios', 'val_rios', 'pass999', 'consultor', '8997773344', 'Privada del Sol #14', '424c4f4244415441', 1),
-('Daniela Sosa', 'dani_sosa', 'pass456', 'consultor', '8994445566', 'Calle Sexta #405', '424c4f4244415441', 1),
-('Santiago Ortiz', 'santi_ortiz', 'pass789', 'consultor', '8992223344', 'Av. Central #12', '424c4f4244415441', 1),
-('Gabriela Juarez', 'gaby_j', 'pass123', 'consultor', '8999998877', 'Blvd. Las Garzas #88', '424c4f4244415441', 1);
-
-
--- REPARTIDORES
-INSERT INTO repartidores (nombre, telefono, vehiculo, foto, disponible) VALUES
-('Juan Carlos Peña', '8991112233', 'Motocicleta Suzuki', '424c4f4244415441', 1),
-('Berenice Lugo', '8994445566', 'Automóvil Nissan March', '424c4f4244415441', 1),
-('Roberto Palacios', '8997778899', 'Motocicleta Italika', '424c4f4244415441', 1),
-('Diana Laura Cruz', '8992223344', 'Bicicleta de Ruta', '424c4f4244415441', 1),
-('Christian Chavez', '8995556677', 'Scooter Eléctrico', '424c4f4244415441', 0),
-('Carlos Mendoza', '8991234567', 'Motocicleta Honda', '424c4f4244415441', 1),
-('Ana Rodriguez', '8997654321', 'Scooter Eléctrico', '424c4f4244415441', 1),
-('Luis Fuentes', '8995554433', 'Automóvil Chevrolet', '424c4f4244415441', 1),
-('Sofia Castro', '8991112233', 'Motocicleta Yamaha', '424c4f4244415441', 0),
-('Diego Gomez', '8998889900', 'Bicicleta', '424c4f4244415441', 1);
-
--- PEDIDOS
-INSERT INTO pedidos (id_usuario, id_repartidor, nombre_taza, total, estatus) VALUES
-(1, 1, 'Latte Helado', 130.00, 'entregado'),
-(2, 2, 'Capuccino', 65.00, 'preparando'),
-(3, 3, 'Frappe de cafe', 140.00, 'en camino'),
-(1, 2, 'Cafe mocha', 70.00, 'pendiente'),
-(2, 1, 'Cold brew', 80.00, 'entregado'),
-(3, 2, 'Espresso', 40.00, 'pendiente'),
-(1, 3, 'Tiramisu', 60.00, 'entregado'),
-(2, 3, 'Croissant', 35.00, 'preparando'),
-(3, 1, 'Mocha helado', 75.00, 'en camino'),
-(1, 1, 'Brownie de chocolate', 50.00, 'entregado'),
-(4, 4, 'Latte Grande', 105.00, 'preparando'),
-(5, 5, 'Combo Postre', 125.00, 'en camino'),
-(6, 6, 'Espresso doble', 40.00, 'entregado'),
-(4, 7, 'Iced Americano', 60.00, 'pendiente'),
-(2, 8, 'Frappe Mocha', 155.00, 'en camino');
-
-
-
-
-select * from auditoria;
-
-DELIMITER $$
-
-CREATE TRIGGER trg_auditoria_update_usuario
-AFTER UPDATE ON usuarios
-FOR EACH ROW
-BEGIN
-
-    IF OLD.rol <> NEW.rol THEN
-
-        INSERT INTO auditoria
-        (
-            id_usuario_admin,
-            id_usuario_afectado,
-            tabla_afectada,
-            accion,
-            descripcion,
-            fecha
-        )
-        VALUES
-        (
-            1,
-            NEW.id_usuario,
-            'usuarios',
-            'UPDATE',
-            CONCAT(
-                'Cambio de rol de ',
-                OLD.rol,
-                ' a ',
-                NEW.rol
-            ),
-            NOW()
-        );
-
-    END IF;
-
-    IF OLD.activo = 1
-       AND NEW.activo = 0 THEN
-
-        INSERT INTO auditoria
-        (
-            id_usuario_admin,
-            id_usuario_afectado,
-            tabla_afectada,
-            accion,
-            descripcion,
-            fecha
-        )
-        VALUES
-        (
-            1,
-            NEW.id_usuario,
-            'usuarios',
-            'BAJA',
-            'Usuario dado de baja',
-            NOW()
-        );
-
-    END IF;
-
-    IF OLD.activo = 0
-       AND NEW.activo = 1 THEN
-
-        INSERT INTO auditoria
-        (
-            id_usuario_admin,
-            id_usuario_afectado,
-            tabla_afectada,
-            accion,
-            descripcion,
-            fecha
-        )
-        VALUES
-        (
-            1,
-            NEW.id_usuario,
-            'usuarios',
-            'REACTIVACION',
-            'Usuario reactivado',
-            NOW()
-        );
-    END IF;
-END $$
-
-DELIMITER ;
-
-
-
-
--- PEDIDOS
-INSERT INTO pedidos (id_usuario, id_repartidor, fecha_hora, nombre_taza, total, estatus) VALUES
-(1, 1, '2026-05-15 08:30:00', 'Latte Helado', 130.00, 'entregado'),
-(2, 2, '2026-05-18 10:15:22', 'Capuccino', 65.00, 'preparando'),
-(3, 3, '2026-05-20 14:40:05', 'Frappe de cafe', 140.00, 'en camino'),
-(1, 2, '2026-05-22 17:12:00', 'Cafe mocha', 70.00, 'pendiente'),
-(2, 1, '2026-05-25 09:05:43', 'Cold brew', 80.00, 'entregado'),
-(3, 2, '2026-05-27 11:36:10', 'Espresso', 40.00, 'pendiente'),
-(1, 3, '2026-05-29 16:22:15', 'Tiramisu', 60.00, 'entregado'),
-(2, 3, '2026-06-01 12:00:00', 'Croissant', 35.00, 'preparando'),
-(3, 1, '2026-06-02 15:45:30', 'Mocha helado', 75.00, 'en camino'),
-(1, 1, '2026-06-03 18:10:12', 'Brownie de chocolate', 50.00, 'entregado'),
-(10, 4, '2026-06-04 08:20:00', 'Latte Grande', 105.00, 'preparando'),
-(5, 5, '2026-06-04 09:11:15', 'Combo Postre', 125.00, 'en camino'),
-(6, 4, '2026-06-04 10:05:22', 'Espresso doble', 40.00, 'entregado'),
-(7, 5, '2026-06-04 11:30:00', 'Iced Americano', 60.00, 'pendiente'),
-(2, 5, '2026-06-04 13:15:45', 'Frappe Mocha', 155.00, 'en camino');
-
--- DETALLE_PEDIDO
-INSERT INTO detalle_pedido (id_pedido, id_producto, tamano, cantidad, precio_unitario) VALUES
-(1, 2, 'grande', 2, 65),
-(2, 7, 'grande', 1, 65),
-(3, 1, 'venti', 2, 70),
-(4, 9, 'grande', 1, 70),
-(5, 5, 'venti', 1, 80),
-(6, 6, 'tall', 1, 40),
-(7, 15, 'grande', 1, 70),
-(8, 12, 'tall', 1, 35),
-(9, 3, 'grande', 1, 75),
-(10, 13, 'tall', 1, 50),
-(11, 10, 'grande', 1, 60.00),
-(11, 12, 'grande', 1, 45.00),
-(72, 5, 'grande', 1, 80.00),
-(73, 6, 'tall', 1, 40.00),
-(74, 4, 'grande', 1, 60.00),
-(75, 1, 'venti', 1, 80.00),
-(75, 15, 'grande', 1, 75.00);
-
-select id_pedido from pedidos;
-
-
+-- Dump completed on 2026-06-05 22:47:11

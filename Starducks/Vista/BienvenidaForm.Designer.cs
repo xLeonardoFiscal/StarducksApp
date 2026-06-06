@@ -115,7 +115,7 @@
             // 
             // pbFotoUsuario
             // 
-            pbFotoUsuario.Location = new Point(560, 134);
+            pbFotoUsuario.Location = new Point(568, 128);
             pbFotoUsuario.Name = "pbFotoUsuario";
             pbFotoUsuario.Size = new Size(159, 171);
             pbFotoUsuario.SizeMode = PictureBoxSizeMode.Zoom;
