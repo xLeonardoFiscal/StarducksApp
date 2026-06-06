@@ -14,12 +14,19 @@ VALERO MONTERO FATIMA                           24580029
 
 # INSTRUCCIONES DE INSTALACIÓN
 PASO 1: Ingresar al link del repositorio de github donde se encuentra el proyecto.
+
 PASO 2: Darle click al boton verde “Code” y copiar el link que te brinda.
+
 PASO 3: Abrir visual studio
+
 PASO 4: Dar click en clonar un repositorio
+
 PASO 5: Pegar el link que previamente copiamos y dar click en el boton inferior a la derecha llamado “Clonar”.
+
 PASO 6: Hacer pull para confirmar que tenemos todas las carpetas del repositorio de github.
+
 PASO 7: Entramos a MySQL
+
 PASO 8: En la parte inferior darle click en server y despues a Data Import
 PASO 9: Seleccionar Import from Self-Contained File y damos click en los “...”
 PASO 10: Al hacer pull, se debio generar la carpeta del proyecto, ahi encontrar una carpeta llamda ‘’database” y dentro de ella, debe estar el script de la BD llamado “starducks”, seleccionalo.
