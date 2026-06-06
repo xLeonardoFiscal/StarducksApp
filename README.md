@@ -3,9 +3,13 @@ El sistema Starducks ha sido diseñado bajo una arquitectura modular. Esto signi
 
 # NOMBRE DE LOS INTEGRANTES
 HERNANDEZ FISCAL LEONARDO VALENTIN              24580015
+
 HERNANDEZ JASSO DULCE LIZBETH                   24580016
+
 PESINA GONZALEZ BELINDA INES                    24580023
+
 RAMOS HERNANDEZ AXEL MANUEL                     24580026
+
 VALERO MONTERO FATIMA                           24580029
 
 # INSTRUCCIONES DE INSTALACIÓN
