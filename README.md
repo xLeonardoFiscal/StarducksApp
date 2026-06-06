@@ -52,8 +52,11 @@ PASO 15: En visual studio, Solution Explorer, Carpeta Modelo, abrimos la clase C
  
 
  # VIDEO DE DEMOSTRACIÓN 
+https://youtu.be/YGVBaFfdIl4?si=7axrB-5Jkm2kAWEK
 
  # DIAGRAMA ER 
+
+<img width="1232" height="798" alt="Captura de pantalla 2026-06-05 230112" src="https://github.com/user-attachments/assets/0450e1b0-3b68-4ade-ac1f-fce1abc2c744" />
 
 
 
